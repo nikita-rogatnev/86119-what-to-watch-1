@@ -2,10 +2,6 @@ import React from "react";
 import ReactDOM from 'react-dom';
 import App from './components/app/app.jsx';
 
-const appContainer = document.querySelector(`.main`);
-const settings = {
-  gameTime: 55,
-  errorCount: 3,
-};
+const appContainer = document.querySelector(`#root`);
 
-ReactDOM.render(<App errorCount={settings.errorCount} gameTime={settings.gameTime}/>, appContainer);
+ReactDOM.render(<App/>, appContainer);

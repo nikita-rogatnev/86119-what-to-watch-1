@@ -1,14 +1,13 @@
 import React from 'react';
-import WelcomeScreen from '../welcome-screen/welcome-screen.jsx';
+import MovieCard from '../movie-card/movie-card.jsx';
+import PageContent from '../page-content/page-content.jsx';
 
-const App = (props) => {
-  const {gameTime, errorCount} = props; // eslint-disable-line
-
+const App = () => {
   return (
-    <WelcomeScreen
-      time={gameTime}
-      errorCount={errorCount}
-    />
+    <React.Fragment>
+      <MovieCard/>
+      <PageContent/>
+    </React.Fragment>
   );
 };
 
