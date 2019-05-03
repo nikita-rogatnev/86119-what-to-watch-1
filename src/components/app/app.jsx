@@ -1,6 +1,6 @@
 import React from 'react';
-import MovieCard from '../movie-card/movie-card.jsx';
-import PageContent from '../page-content/page-content.jsx';
+import MovieCard from '../movie-card/movie-card';
+import PageContent from '../page-content/page-content';
 
 const App = () => {
   return (
