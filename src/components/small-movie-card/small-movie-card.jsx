@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 const SmallMovieCard = (props) => {
   const {movieName, movieLink} = props;
 
-  const convertedMovieName = movieName.replace(/\s+/g, `-`).toLowerCase() + `.jpg`;
+  const convertedMovieName = movieName
+    .replace(/\s+/g, `-`)
+    .replace(/:/g, ``)
+    .toLowerCase() + `.jpg`;
 
   return (
     <article className="small-movie-card catalog__movies-card">
