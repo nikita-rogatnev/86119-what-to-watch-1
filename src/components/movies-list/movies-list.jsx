@@ -107,8 +107,9 @@ const moviesList = [
 
 const MoviesList = () => {
   const movieLinkClick = () => {
-    console.log(`Heading click`);
+    event.preventDefault();
   };
+
   return (
     <div className="catalog__movies-list">
       {moviesList.map((item) =>
