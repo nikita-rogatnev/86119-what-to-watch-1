@@ -106,6 +106,9 @@ const moviesList = [
 ];
 
 const MoviesList = () => {
+  const movieLinkClick = () => {
+    console.log(`Heading click`);
+  };
   return (
     <div className="catalog__movies-list">
       {moviesList.map((item) =>
@@ -113,6 +116,7 @@ const MoviesList = () => {
           key={item.id}
           movieName={item.name}
           movieLink={item.link}
+          movieLinkClick={movieLinkClick}
         />
       )}
     </div>

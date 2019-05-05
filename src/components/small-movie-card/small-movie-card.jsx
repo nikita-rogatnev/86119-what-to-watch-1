@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 const SmallMovieCard = (props) => {
-  const {movieName, movieLink} = props;
+  const {movieName, movieLink, movieLinkClick} = props;
 
   const convertedMovieName = movieName
     .replace(/\s+/g, `-`)
@@ -16,7 +16,7 @@ const SmallMovieCard = (props) => {
         <img src={`img/${convertedMovieName}`} alt={movieName} width="280" height="175"/>
       </div>
       <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href={movieLink}>{movieName}</a>
+        <a className="small-movie-card__link" onClick={movieLinkClick} href={movieLink}>{movieName}</a>
       </h3>
     </article>
   );
@@ -25,6 +25,7 @@ const SmallMovieCard = (props) => {
 SmallMovieCard.propTypes = {
   movieName: PropTypes.string.isRequired,
   movieLink: PropTypes.string.isRequired,
+  movieLinkClick: PropTypes.func.isRequired,
 };
 
 export default SmallMovieCard;
