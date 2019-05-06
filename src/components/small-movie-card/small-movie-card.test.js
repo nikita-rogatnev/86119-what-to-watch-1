@@ -8,9 +8,10 @@ it(`SmallMovieCard renders correctly`, () => {
 
   const tree = renderer
     .create(<SmallMovieCard
+      key={0}
       movieName={`Test name`}
       movieLink={`http://test-link.com/`}
-      onClick={clickHandler}
+      movieLinkClick={clickHandler}
     />).toJSON();
 
   expect(tree).toMatchSnapshot();
