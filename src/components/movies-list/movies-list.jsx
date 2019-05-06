@@ -106,6 +106,10 @@ const moviesList = [
 ];
 
 const MoviesList = () => {
+  const movieLinkClick = () => {
+    event.preventDefault();
+  };
+
   return (
     <div className="catalog__movies-list">
       {moviesList.map((item) =>
@@ -113,6 +117,7 @@ const MoviesList = () => {
           key={item.id}
           movieName={item.name}
           movieLink={item.link}
+          movieLinkClick={movieLinkClick}
         />
       )}
     </div>

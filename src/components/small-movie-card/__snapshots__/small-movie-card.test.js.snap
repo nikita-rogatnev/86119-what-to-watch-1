@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SmallMovieCard renders correctly 1`] = `
+<article
+  className="small-movie-card catalog__movies-card"
+>
+  <button
+    className="small-movie-card__play-btn"
+    type="button"
+  >
+    Play
+  </button>
+  <div
+    className="small-movie-card__image"
+  >
+    <img
+      alt="Test name"
+      height="175"
+      src="img/test-name.jpg"
+      width="280"
+    />
+  </div>
+  <h3
+    className="small-movie-card__title"
+  >
+    <a
+      className="small-movie-card__link"
+      href="http://test-link.com/"
+      onClick={[MockFunction]}
+    >
+      Test name
+    </a>
+  </h3>
+</article>
+`;
