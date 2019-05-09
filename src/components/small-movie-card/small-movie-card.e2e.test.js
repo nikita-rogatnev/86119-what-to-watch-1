@@ -8,12 +8,14 @@ Enzyme.configure({adapter: new Adapter()});
 
 describe(`SmallMovieCard`, () => {
   it(`Card heading link click handles`, () => {
-    const clickHandler = jest.fn();
+    const movieButtonClickHandler = jest.fn();
+    const movieLinkClickHandler = jest.fn();
 
     const smallMovieCard = shallow(<SmallMovieCard
       movieName={`Test name`}
       movieLink={`http://test-link.com/`}
-      movieLinkClick={clickHandler}
+      movieButtonClick={movieButtonClickHandler}
+      movieLinkClick={movieLinkClickHandler}
     />);
 
     const movieLink = smallMovieCard.find(`.small-movie-card__link`);
@@ -23,6 +25,27 @@ describe(`SmallMovieCard`, () => {
       }
     });
 
-    expect(clickHandler).toHaveBeenCalledTimes(1);
+    expect(movieLinkClickHandler).toHaveBeenCalledTimes(1);
+  });
+
+  it(`Card play button click handles`, () => {
+    const movieButtonClickHandler = jest.fn();
+    const movieLinkClickHandler = jest.fn();
+
+    const smallMovieCard = shallow(<SmallMovieCard
+      movieName={`Test name`}
+      movieLink={`http://test-link.com/`}
+      movieButtonClick={movieButtonClickHandler}
+      movieLinkClick={movieLinkClickHandler}
+    />);
+
+    const movieLink = smallMovieCard.find(`.small-movie-card__play-btn`);
+
+    movieLink.simulate(`click`, {
+      preventDefault() {
+      }
+    });
+
+    expect(movieButtonClickHandler).toHaveBeenCalledTimes(1);
   });
 });

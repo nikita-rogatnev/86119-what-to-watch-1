@@ -7,7 +7,7 @@ class SmallMovieCard extends Component {
   }
 
   render() {
-    const {movieName, movieLink, movieLinkClick} = this.props;
+    const {movieName, movieLink, movieButtonClick, movieLinkClick} = this.props;
 
     const convertedMovieName = movieName
       .replace(/\s+/g, `-`)
@@ -16,7 +16,7 @@ class SmallMovieCard extends Component {
 
     return (
       <article className="small-movie-card catalog__movies-card">
-        <button className="small-movie-card__play-btn" type="button">Play</button>
+        <button className="small-movie-card__play-btn" onClick={movieButtonClick} type="button">Play</button>
         <div className="small-movie-card__image">
           <img src={`img/${convertedMovieName}`} alt={movieName} width="280" height="175"/>
         </div>
@@ -31,6 +31,7 @@ class SmallMovieCard extends Component {
 SmallMovieCard.propTypes = {
   movieName: PropTypes.string.isRequired,
   movieLink: PropTypes.string.isRequired,
+  movieButtonClick: PropTypes.func.isRequired,
   movieLinkClick: PropTypes.func.isRequired,
 };
 

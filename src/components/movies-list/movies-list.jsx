@@ -11,6 +11,10 @@ class MoviesList extends Component {
   render() {
     const {films} = this.props;
 
+    const movieButtonClick = () => {
+      event.preventDefault();
+    };
+
     const movieLinkClick = () => {
       event.preventDefault();
     };
@@ -22,6 +26,7 @@ class MoviesList extends Component {
             key={item.id}
             movieName={item.name}
             movieLink={item.link}
+            movieButtonClick={movieButtonClick}
             movieLinkClick={movieLinkClick}
           />
         )}

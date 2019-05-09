@@ -192,6 +192,7 @@ Array [
         >
           <button
             className="small-movie-card__play-btn"
+            onClick={[Function]}
             type="button"
           >
             Play
@@ -223,6 +224,7 @@ Array [
         >
           <button
             className="small-movie-card__play-btn"
+            onClick={[Function]}
             type="button"
           >
             Play
@@ -254,6 +256,7 @@ Array [
         >
           <button
             className="small-movie-card__play-btn"
+            onClick={[Function]}
             type="button"
           >
             Play
