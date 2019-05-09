@@ -39,9 +39,9 @@ describe(`SmallMovieCard`, () => {
       movieLinkClick={movieLinkClickHandler}
     />);
 
-    const movieLink = smallMovieCard.find(`.small-movie-card__play-btn`);
+    const movieButton = smallMovieCard.find(`.small-movie-card__play-btn`);
 
-    movieLink.simulate(`click`, {
+    movieButton.simulate(`click`, {
       preventDefault() {
       }
     });
