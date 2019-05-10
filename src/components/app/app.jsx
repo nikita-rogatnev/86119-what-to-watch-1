@@ -2,7 +2,8 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
 import MovieCard from '../movie-card/movie-card';
-import PageContent from '../page-content/page-content';
+import Catalog from "../catalog/catalog";
+import PageFooter from "../page-footer/page-footer";
 
 class App extends PureComponent {
   render() {
@@ -11,7 +12,10 @@ class App extends PureComponent {
     return (
       <React.Fragment>
         <MovieCard/>
-        <PageContent films={films} genres={genres}/>
+        <div className="page-content">
+          <Catalog films={films} genres={genres}/>
+          <PageFooter/>
+        </div>÷`
       </React.Fragment>
     );
   }
