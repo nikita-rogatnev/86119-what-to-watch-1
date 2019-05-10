@@ -1,17 +1,12 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
 import MovieCard from '../movie-card/movie-card';
 import PageContent from '../page-content/page-content';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
+class App extends PureComponent {
   render() {
-    const {films} = this.props;
-    const {genres} = this.props;
+    const {films, genres} = this.props;
 
     return (
       <React.Fragment>

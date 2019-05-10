@@ -4,20 +4,16 @@ import PropTypes from 'prop-types';
 import SmallMovieCard from '../small-movie-card/small-movie-card';
 
 class MoviesList extends Component {
-  constructor(props) {
-    super(props);
+  static movieButtonClick() {
+    event.preventDefault();
+  }
+
+  static movieLinkClick() {
+    event.preventDefault();
   }
 
   render() {
     const {films} = this.props;
-
-    const movieButtonClick = () => {
-      event.preventDefault();
-    };
-
-    const movieLinkClick = () => {
-      event.preventDefault();
-    };
 
     return (
       <div className="catalog__movies-list">
@@ -26,8 +22,8 @@ class MoviesList extends Component {
             key={item.id}
             movieName={item.name}
             movieLink={item.link}
-            movieButtonClick={movieButtonClick}
-            movieLinkClick={movieLinkClick}
+            movieButtonClick={MoviesList.movieButtonClick}
+            movieLinkClick={MoviesList.movieLinkClick}
           />
         )}
       </div>

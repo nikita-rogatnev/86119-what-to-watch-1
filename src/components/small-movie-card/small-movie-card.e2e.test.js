@@ -7,10 +7,10 @@ import SmallMovieCard from './small-movie-card';
 Enzyme.configure({adapter: new Adapter()});
 
 describe(`SmallMovieCard`, () => {
-  it(`Card heading link click handles`, () => {
-    const movieButtonClickHandler = jest.fn();
-    const movieLinkClickHandler = jest.fn();
+  const movieButtonClickHandler = jest.fn();
+  const movieLinkClickHandler = jest.fn();
 
+  it(`Card heading link click handles`, () => {
     const smallMovieCard = shallow(<SmallMovieCard
       movieName={`Test name`}
       movieLink={`http://test-link.com/`}
@@ -29,9 +29,6 @@ describe(`SmallMovieCard`, () => {
   });
 
   it(`Card play button click handles`, () => {
-    const movieButtonClickHandler = jest.fn();
-    const movieLinkClickHandler = jest.fn();
-
     const smallMovieCard = shallow(<SmallMovieCard
       movieName={`Test name`}
       movieLink={`http://test-link.com/`}
