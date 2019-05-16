@@ -8,8 +8,8 @@ it(`SmallMovieCard renders correctly`, () => {
     .create(<SmallMovieCard
       key={0}
       movieName={`Test name`}
-      movieLink={`http://test-link.com/`}
-      movieButtonClick={jest.fn()}
+      movieFile={`Test file`}
+      movieLink={`Test link`}
       movieLinkClick={jest.fn()}
     />).toJSON();
 
