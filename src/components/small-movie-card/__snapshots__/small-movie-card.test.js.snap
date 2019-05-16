@@ -3,14 +3,9 @@
 exports[`SmallMovieCard renders correctly 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
 >
-  <button
-    className="small-movie-card__play-btn"
-    onClick={[MockFunction]}
-    type="button"
-  >
-    Play
-  </button>
   <div
     className="small-movie-card__image"
   >
@@ -26,7 +21,7 @@ exports[`SmallMovieCard renders correctly 1`] = `
   >
     <a
       className="small-movie-card__link"
-      href="http://test-link.com/"
+      href="Test link"
       onClick={[MockFunction]}
     >
       Test name

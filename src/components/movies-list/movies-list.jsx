@@ -4,11 +4,7 @@ import PropTypes from 'prop-types';
 import SmallMovieCard from '../small-movie-card/small-movie-card';
 
 class MoviesList extends PureComponent {
-  movieButtonClick() {
-    event.preventDefault();
-  }
-
-  movieLinkClick() {
+  static movieLinkClick() {
     event.preventDefault();
   }
 
@@ -21,9 +17,9 @@ class MoviesList extends PureComponent {
           <SmallMovieCard
             key={item.id}
             movieName={item.name}
+            movieFile={item.teaser}
             movieLink={item.link}
-            movieButtonClick={this.movieButtonClick}
-            movieLinkClick={this.movieLinkClick}
+            movieLinkClick={MoviesList.movieLinkClick}
           />
         )}
       </div>

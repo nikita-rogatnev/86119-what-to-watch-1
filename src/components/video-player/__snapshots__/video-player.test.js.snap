@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VideoPlayer renders correctly 1`] = `
+<video
+  height="180"
+  width="280"
+>
+  <source
+    src="Test src"
+    type="video/mp4"
+  />
+</video>
+`;
