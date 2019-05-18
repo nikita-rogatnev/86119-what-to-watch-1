@@ -45,15 +45,13 @@ class SmallMovieCard extends React.PureComponent {
       <article className="small-movie-card catalog__movies-card" onMouseEnter={this._onHoverEnter} onMouseLeave={this._onHoverLeave}>
         <div className="small-movie-card__image">
           {
-            isPreviewPlaying
-              ? <VideoPlayer
-                src={movieFile}
-                poster={`img/${convertedMovieName}`}
-                muted={true}
-                autoPlay={true}
-                controls={false}
-              />
-              :
+            isPreviewPlaying ? <VideoPlayer
+              src={movieFile}
+              poster={`img/${convertedMovieName}`}
+              muted={true}
+              autoPlay={true}
+              controls={false}
+            /> :
               <img
                 src={`img/${convertedMovieName}`}
                 alt={movieName}

@@ -7,13 +7,6 @@ class VideoPlayer extends PureComponent {
     this._videoRef = React.createRef();
   }
 
-  componentWillUnmount() {
-    const video = this._videoRef.current;
-    video.onplay = null;
-    video.onpause = null;
-    video.src = ``;
-  }
-
   render() {
     const {
       poster,
