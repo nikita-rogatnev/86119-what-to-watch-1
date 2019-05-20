@@ -28,15 +28,15 @@ class SmallMovieCard extends React.PureComponent {
 
   render() {
     const {
-      movieName,
-      movieFile,
-      movieLink,
+      name,
+      teaser,
+      link,
       movieLinkClick
     } = this.props;
 
     const {isPreviewPlaying} = this.state;
 
-    const convertedMovieName = movieName
+    const convertedMovieName = name
       .replace(/\s+/g, `-`)
       .replace(/:/g, ``)
       .toLowerCase() + `.jpg`;
@@ -46,7 +46,7 @@ class SmallMovieCard extends React.PureComponent {
         <div className="small-movie-card__image">
           {
             isPreviewPlaying ? <VideoPlayer
-              src={movieFile}
+              src={teaser}
               poster={`img/${convertedMovieName}`}
               muted={true}
               autoPlay={true}
@@ -54,13 +54,13 @@ class SmallMovieCard extends React.PureComponent {
             /> :
               <img
                 src={`img/${convertedMovieName}`}
-                alt={movieName}
+                alt={name}
                 width="280"
                 height="175"/>
           }
         </div>
         <h3 className="small-movie-card__title">
-          <a className="small-movie-card__link" onClick={movieLinkClick} href={movieLink}>{movieName}</a>
+          <a className="small-movie-card__link" onClick={movieLinkClick} href={link}>{name}</a>
         </h3>
       </article>
     );
@@ -68,9 +68,9 @@ class SmallMovieCard extends React.PureComponent {
 }
 
 SmallMovieCard.propTypes = {
-  movieName: PropTypes.string.isRequired,
-  movieFile: PropTypes.string.isRequired,
-  movieLink: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  teaser: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
   movieLinkClick: PropTypes.func.isRequired,
 };
 

@@ -16,10 +16,8 @@ class MoviesList extends PureComponent {
         {films.map((item) =>
           <SmallMovieCard
             key={item.id}
-            movieName={item.name}
-            movieFile={item.teaser}
-            movieLink={item.link}
             movieLinkClick={this.movieLinkClick}
+            {...item}
           />
         )}
       </div>
