@@ -11,9 +11,9 @@ describe(`SmallMovieCard`, () => {
 
   it(`Card heading link click handles`, () => {
     const smallMovieCard = shallow(<SmallMovieCard
-      movieName={`Test name`}
-      movieFile={`Test file`}
-      movieLink={`Test link`}
+      name={`Test name`}
+      teaser={`Test file`}
+      link={`Test link`}
       movieLinkClick={movieLinkClickHandler}
     />);
 
