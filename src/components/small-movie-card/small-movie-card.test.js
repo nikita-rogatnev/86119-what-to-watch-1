@@ -7,9 +7,9 @@ it(`SmallMovieCard renders correctly`, () => {
   const tree = renderer
     .create(<SmallMovieCard
       key={0}
-      movieName={`Test name`}
-      movieLink={`http://test-link.com/`}
-      movieButtonClick={jest.fn()}
+      name={`Test name`}
+      teaser={`Test file`}
+      link={`Test link`}
       movieLinkClick={jest.fn()}
     />).toJSON();
 

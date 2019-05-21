@@ -15,7 +15,7 @@ class App extends PureComponent {
         <div className="page-content">
           <Catalog films={films} genres={genres}/>
           <PageFooter/>
-        </div>÷`
+        </div>
       </React.Fragment>
     );
   }

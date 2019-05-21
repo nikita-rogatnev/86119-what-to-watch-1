@@ -8,17 +8,20 @@ const mock = {
     {
       id: 1,
       name: `Fantastic Beasts: The Crimes of Grindelwald`,
-      link: `movie-page.html`
+      link: `movie-page.html`,
+      teaser: `https://some-teaser.ru/teaser.mp4`
     },
     {
       id: 2,
       name: `Bohemian Rhapsody`,
-      link: `movie-page.html`
+      link: `movie-page.html`,
+      teaser: `https://some-teaser.ru/teaser.mp4`
     },
     {
       id: 3,
       name: `Macbeth`,
-      link: `movie-page.html`
+      link: `movie-page.html`,
+      teaser: `https://some-teaser.ru/teaser.mp4`
     },
   ],
 };
