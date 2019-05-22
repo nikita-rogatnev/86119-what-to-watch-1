@@ -1,6 +1,10 @@
 import moviesList from './mocks/movies';
 
+let genresList = Array.from(new Set(moviesList.map(({genre}) => genre)));
+genresList.unshift(`All genres`);
+
 const initialState = {
+  allGenres: genresList,
   movies: moviesList,
   activeGenre: `All genres`,
 };

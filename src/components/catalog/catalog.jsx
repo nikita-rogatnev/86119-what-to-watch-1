@@ -5,13 +5,13 @@ import GenresList from '../genres-list/genres-list';
 import MoviesList from '../movies-list/movies-list';
 
 const Catalog = (props) => {
-  const {movies, activeGenre, onChangeGenre} = props;
+  const {movies, allGenres, activeGenre, onChangeGenre} = props;
 
   return (
     <section className="catalog">
       <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-      <GenresList movies={movies} activeGenre={activeGenre} onChangeGenre={onChangeGenre}/>
+      <GenresList allGenres={allGenres} activeGenre={activeGenre} onChangeGenre={onChangeGenre}/>
       <MoviesList movies={movies}/>
 
       <div className="catalog__more">
@@ -23,6 +23,7 @@ const Catalog = (props) => {
 
 Catalog.propTypes = {
   movies: PropTypes.array.isRequired,
+  allGenres: PropTypes.array.isRequired,
   activeGenre: PropTypes.string,
   onChangeGenre: PropTypes.func.isRequired,
 };

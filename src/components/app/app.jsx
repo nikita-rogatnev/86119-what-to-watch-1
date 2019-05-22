@@ -11,6 +11,7 @@ class App extends PureComponent {
   render() {
     const {
       movies,
+      allGenres,
       activeGenre,
       onChangeGenre,
     } = this.props;
@@ -21,6 +22,7 @@ class App extends PureComponent {
         <div className="page-content">
           <Catalog
             movies={movies}
+            allGenres={allGenres}
             activeGenre={activeGenre}
             onChangeGenre={onChangeGenre}
           />
@@ -41,12 +43,14 @@ App.propTypes = {
         genre: PropTypes.string.isRequired,
       })
   ),
+  allGenres: PropTypes.array.isRequired,
   activeGenre: PropTypes.string,
   onChangeGenre: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   movies: state.movies,
+  allGenres: state.allGenres,
   activeGenre: state.activeGenre,
 });
 
