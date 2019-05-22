@@ -525,6 +525,7 @@ main {
   text-decoration: none;
   position: relative;
   padding-bottom: 15px;
+  text-transform: capitalize;
   -webkit-transition: font-weight;
   transition: font-weight; }
   .catalog__genres-link::after {

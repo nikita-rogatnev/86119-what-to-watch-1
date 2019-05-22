@@ -9,7 +9,7 @@ exports[`GenresList renders correctly 1`] = `
   >
     <a
       className="catalog__genres-link"
-      href="#"
+      onClick={[Function]}
     >
       All genres
     </a>
@@ -19,9 +19,9 @@ exports[`GenresList renders correctly 1`] = `
   >
     <a
       className="catalog__genres-link"
-      href="#"
+      onClick={[Function]}
     >
-      Comedies
+      comedies
     </a>
   </li>
   <li
@@ -29,9 +29,19 @@ exports[`GenresList renders correctly 1`] = `
   >
     <a
       className="catalog__genres-link"
-      href="#"
+      onClick={[Function]}
     >
-      Crime
+      documentaries
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item "
+  >
+    <a
+      className="catalog__genres-link"
+      onClick={[Function]}
+    >
+      dramas
     </a>
   </li>
 </ul>

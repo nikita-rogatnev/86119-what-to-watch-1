@@ -3,25 +3,16 @@ import renderer from 'react-test-renderer';
 
 import GenresList from './genres-list';
 
-const mock = {
-  genres: [
-    {
-      "title": `All genres`,
-      "isActive": true
-    },
-    {
-      "title": `Comedies`,
-      "isActive": false
-    },
-    {
-      "title": `Crime`,
-      "isActive": false
-    },
-  ]
-};
+import moviesList from '../../mocks/movies';
 
 it(`GenresList renders correctly`, () => {
-  const {genres} = mock;
-  const tree = renderer.create(<GenresList genres={genres}/>).toJSON();
+  const activeGenre = `All genres`;
+
+  const tree = renderer.create(<GenresList
+    movies={moviesList}
+    activeGenre={activeGenre}
+    onChangeGenre={() => {
+    }}
+  />).toJSON();
   expect(tree).toMatchSnapshot();
 });

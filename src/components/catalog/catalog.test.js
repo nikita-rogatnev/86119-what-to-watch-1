@@ -3,43 +3,16 @@ import renderer from 'react-test-renderer';
 
 import Catalog from './catalog';
 
-const mock = {
-  films: [
-    {
-      id: 1,
-      name: `Fantastic Beasts: The Crimes of Grindelwald`,
-      link: `movie-page.html`
-    },
-    {
-      id: 2,
-      name: `Bohemian Rhapsody`,
-      link: `movie-page.html`
-    },
-    {
-      id: 3,
-      name: `Macbeth`,
-      link: `movie-page.html`
-    },
-  ],
-  genres: [
-    {
-      "title": `All genres`,
-      "isActive": true
-    },
-    {
-      "title": `Comedies`,
-      "isActive": false
-    },
-    {
-      "title": `Crime`,
-      "isActive": false
-    },
-  ]
-};
+import moviesList from '../../mocks/movies';
 
 it(`Catalog renders correctly`, () => {
-  const {films, genres} = mock;
+  const activeGenre = `All genres`;
 
-  const tree = renderer.create(<Catalog films={films} genres={genres}/>).toJSON();
+  const tree = renderer.create(<Catalog
+    movies={moviesList}
+    activeGenre={activeGenre}
+    onChangeGenre={() => {
+    }}
+  />).toJSON();
   expect(tree).toMatchSnapshot();
 });
