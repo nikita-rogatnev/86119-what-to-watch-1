@@ -56,8 +56,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeGenre: (activeGenre, movies) => {
-    dispatch(ActionCreator.changeGenre(activeGenre));
-    dispatch(ActionCreator.getMovies(activeGenre, movies));
+    dispatch(ActionCreator.filterMovies(activeGenre, movies));
   },
 });
 
