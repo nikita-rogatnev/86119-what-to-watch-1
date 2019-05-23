@@ -1,4 +1,6 @@
 import React, {PureComponent} from 'react';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../reducer';
 import PropTypes from 'prop-types';
 
 import MovieCard from '../movie-card/movie-card';
@@ -7,13 +9,23 @@ import PageFooter from "../page-footer/page-footer";
 
 class App extends PureComponent {
   render() {
-    const {films, genres} = this.props;
+    const {
+      movies,
+      allGenres,
+      activeGenre,
+      onChangeGenre,
+    } = this.props;
 
     return (
       <React.Fragment>
         <MovieCard/>
         <div className="page-content">
-          <Catalog films={films} genres={genres}/>
+          <Catalog
+            movies={movies}
+            allGenres={allGenres}
+            activeGenre={activeGenre}
+            onChangeGenre={onChangeGenre}
+          />
           <PageFooter/>
         </div>
       </React.Fragment>
@@ -22,8 +34,32 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  films: PropTypes.array.isRequired,
-  genres: PropTypes.array.isRequired,
+  movies: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        link: PropTypes.string.isRequired,
+        teaser: PropTypes.string.isRequired,
+        genre: PropTypes.string.isRequired,
+      })
+  ),
+  allGenres: PropTypes.array.isRequired,
+  activeGenre: PropTypes.string,
+  onChangeGenre: PropTypes.func.isRequired,
 };
 
-export default App;
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  movies: state.movies,
+  allGenres: state.allGenres,
+  activeGenre: state.activeGenre,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onChangeGenre: (activeGenre, movies) => {
+    dispatch(ActionCreator.filterMovies(activeGenre, movies));
+  },
+});
+
+export {App};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,45 +1,23 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import App from './app';
+import {App} from './app';
 
-const mock = {
-  films: [
-    {
-      id: 1,
-      name: `Fantastic Beasts: The Crimes of Grindelwald`,
-      link: `movie-page.html`
-    },
-    {
-      id: 2,
-      name: `Bohemian Rhapsody`,
-      link: `movie-page.html`
-    },
-    {
-      id: 3,
-      name: `Macbeth`,
-      link: `movie-page.html`
-    },
-  ],
-  genres: [
-    {
-      "title": `All genres`,
-      "isActive": true
-    },
-    {
-      "title": `Comedies`,
-      "isActive": false
-    },
-    {
-      "title": `Crime`,
-      "isActive": false
-    },
-  ]
-};
+import moviesList from '../../mocks/movies';
 
 it(`App renders correctly`, () => {
-  const {films, genres} = mock;
+  const activeGenre = `All genres`;
 
-  const tree = renderer.create(<App films={films} genres={genres}/>).toJSON();
+  let genresList = Array.from(new Set(moviesList.map(({genre}) => genre)));
+  genresList.unshift(`All genres`);
+
+  const tree = renderer
+    .create(<App
+      movies={moviesList}
+      allGenres={genresList}
+      activeGenre={activeGenre}
+      onChangeGenre={() => {
+      }}
+    />).toJSON();
   expect(tree).toMatchSnapshot();
 });
