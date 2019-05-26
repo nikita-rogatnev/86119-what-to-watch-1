@@ -31,7 +31,6 @@ class SmallMovieCard extends React.PureComponent {
       name,
       teaser,
       link,
-      movieLinkClick
     } = this.props;
 
     const {isPreviewPlaying} = this.state;
@@ -60,7 +59,7 @@ class SmallMovieCard extends React.PureComponent {
           }
         </div>
         <h3 className="small-movie-card__title">
-          <a className="small-movie-card__link" onClick={movieLinkClick} href={link}>{name}</a>
+          <a className="small-movie-card__link" href={link}>{name}</a>
         </h3>
       </article>
     );
@@ -71,7 +70,7 @@ SmallMovieCard.propTypes = {
   name: PropTypes.string.isRequired,
   teaser: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
-  movieLinkClick: PropTypes.func.isRequired,
+  onHover: PropTypes.func.isRequired,
 };
 
 export default SmallMovieCard;
