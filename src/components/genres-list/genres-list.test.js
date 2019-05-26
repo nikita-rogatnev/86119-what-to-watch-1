@@ -15,8 +15,9 @@ it(`GenresList renders correctly`, () => {
     movies={moviesList}
     allGenres={genresList}
     activeItem={activeGenre}
-    onChange={() => {
+    onActiveGenreChange={() => {
     }}
   />).toJSON();
+  
   expect(tree).toMatchSnapshot();
 });

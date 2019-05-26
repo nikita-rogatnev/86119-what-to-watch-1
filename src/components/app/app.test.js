@@ -19,5 +19,6 @@ it(`App renders correctly`, () => {
       onChangeGenre={() => {
       }}
     />).toJSON();
+  
   expect(tree).toMatchSnapshot();
 });

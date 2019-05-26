@@ -18,5 +18,6 @@ it(`Catalog renders correctly`, () => {
     onChangeGenre={() => {
     }}
   />).toJSON();
+
   expect(tree).toMatchSnapshot();
 });
