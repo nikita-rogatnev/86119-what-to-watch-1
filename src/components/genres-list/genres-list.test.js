@@ -14,9 +14,10 @@ it(`GenresList renders correctly`, () => {
   const tree = renderer.create(<GenresList
     movies={moviesList}
     allGenres={genresList}
-    activeGenre={activeGenre}
-    onChangeGenre={() => {
+    activeItem={activeGenre}
+    onActiveGenreChange={() => {
     }}
   />).toJSON();
+  
   expect(tree).toMatchSnapshot();
 });
