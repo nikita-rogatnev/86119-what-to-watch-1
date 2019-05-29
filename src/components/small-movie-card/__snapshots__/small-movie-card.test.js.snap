@@ -22,7 +22,6 @@ exports[`SmallMovieCard renders correctly 1`] = `
     <a
       className="small-movie-card__link"
       href="Test link"
-      onClick={[MockFunction]}
     >
       Test name
     </a>

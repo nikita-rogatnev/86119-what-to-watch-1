@@ -7,23 +7,18 @@ import SmallMovieCard from './small-movie-card';
 Enzyme.configure({adapter: new Adapter()});
 
 describe(`SmallMovieCard`, () => {
-  const movieLinkClickHandler = jest.fn();
+  const hoverHandler = jest.fn();
 
-  it(`Card heading link click handles`, () => {
+  it(`Card hover handles`, () => {
     const smallMovieCard = shallow(<SmallMovieCard
       name={`Test name`}
       teaser={`Test file`}
       link={`Test link`}
-      movieLinkClick={movieLinkClickHandler}
+      onHover={hoverHandler}
     />);
 
-    const movieLink = smallMovieCard.find(`.small-movie-card__link`);
+    smallMovieCard.simulate(`mouseEnter`);
 
-    movieLink.simulate(`click`, {
-      preventDefault() {
-      }
-    });
-
-    expect(movieLinkClickHandler).toHaveBeenCalledTimes(1);
+    expect(hoverHandler).toHaveBeenCalledWith(1);
   });
 });

@@ -4,19 +4,18 @@ import PropTypes from 'prop-types';
 import SmallMovieCard from '../small-movie-card/small-movie-card';
 
 class MoviesList extends PureComponent {
-  movieLinkClick() {
-    event.preventDefault();
-  }
-
   render() {
-    const {movies} = this.props;
+    const {
+      movies,
+      onChange
+    } = this.props;
 
     return (
       <div className="catalog__movies-list">
         {movies.map((item) =>
           <SmallMovieCard
             key={item.id}
-            movieLinkClick={this.movieLinkClick}
+            onHover={onChange}
             {...item}
           />
         )}
@@ -27,6 +26,7 @@ class MoviesList extends PureComponent {
 
 MoviesList.propTypes = {
   movies: PropTypes.array.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default MoviesList;

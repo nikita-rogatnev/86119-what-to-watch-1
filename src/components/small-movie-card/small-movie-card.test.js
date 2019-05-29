@@ -10,7 +10,7 @@ it(`SmallMovieCard renders correctly`, () => {
       name={`Test name`}
       teaser={`Test file`}
       link={`Test link`}
-      movieLinkClick={jest.fn()}
+      onHover={jest.fn()}
     />).toJSON();
 
   expect(tree).toMatchSnapshot();
