@@ -14,14 +14,14 @@ const withActiveItem = (Component) => {
         activeItem: undefined,
       };
 
-      this._handleChange = this._handleChange.bind(this);
+      this.handleChange = this.handleChange.bind(this);
     }
 
     render() {
-      return <Component activeItem={this.state.activeItem} onChange={this._handleChange} {...this.props}/>;
+      return <Component activeItem={this.state.activeItem} onChange={this.handleChange} {...this.props}/>;
     }
 
-    _handleChange(value) {
+    handleChange(value) {
       this.setState({
         activeItem: value
       });
