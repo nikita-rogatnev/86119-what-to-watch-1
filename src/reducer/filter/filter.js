@@ -1,13 +1,13 @@
 const initialState = {
-  currentFilter: `all`,
+  currentFilter: `All`,
 };
 
-export const ActionType = {
+const ActionType = {
   CHANGE_FILTER: `CHANGE_FILTER`,
 };
 
-export const ActionCreator = {
-  currentFilter: (genre) => ({
+const ActionCreator = {
+  changeCurrentFilter: (genre) => ({
     type: ActionType.CHANGE_FILTER,
     payload: genre,
   }),

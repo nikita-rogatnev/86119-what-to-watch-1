@@ -1,6 +1,6 @@
 import {createSelector} from 'reselect';
-
 import NameSpace from '../name-spaces';
+
 import {getCurrentFilter} from '../filter/selectors';
 
 const NAME_SPACE = NameSpace.DATA;
@@ -13,7 +13,7 @@ export const getFilteredData = createSelector(
     getData,
     getCurrentFilter,
     (data, filter) => {
-      if (filter === `all`) {
+      if (filter === `All`) {
         return data;
       }
 
