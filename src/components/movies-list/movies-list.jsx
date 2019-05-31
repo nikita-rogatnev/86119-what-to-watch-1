@@ -3,19 +3,15 @@ import PropTypes from 'prop-types';
 
 import SmallMovieCard from '../small-movie-card/small-movie-card';
 
-class MoviesList extends PureComponent {
+export class MoviesList extends PureComponent {
   render() {
-    const {
-      movies,
-      onChange
-    } = this.props;
+    const {data} = this.props;
 
     return (
       <div className="catalog__movies-list">
-        {movies.map((item) =>
+        {data.map((item) =>
           <SmallMovieCard
             key={item.id}
-            onHover={onChange}
             {...item}
           />
         )}
@@ -25,8 +21,8 @@ class MoviesList extends PureComponent {
 }
 
 MoviesList.propTypes = {
-  movies: PropTypes.array.isRequired,
-  onChange: PropTypes.func.isRequired,
+  data: PropTypes.array.isRequired,
 };
 
 export default MoviesList;
+

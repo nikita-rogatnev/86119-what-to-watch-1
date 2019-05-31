@@ -13,12 +13,12 @@ it(`App renders correctly`, () => {
 
   const tree = renderer
     .create(<App
-      movies={moviesList}
+      films={moviesList}
       allGenres={genresList}
       activeGenre={activeGenre}
       onChangeGenre={() => {
       }}
     />).toJSON();
-  
+
   expect(tree).toMatchSnapshot();
 });

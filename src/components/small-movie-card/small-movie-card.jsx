@@ -29,37 +29,32 @@ class SmallMovieCard extends React.PureComponent {
   render() {
     const {
       name,
-      teaser,
-      link,
+      previewVideoSrc,
+      previewImageSrc,
     } = this.props;
 
     const {isPreviewPlaying} = this.state;
-
-    const convertedMovieName = name
-      .replace(/\s+/g, `-`)
-      .replace(/:/g, ``)
-      .toLowerCase() + `.jpg`;
 
     return (
       <article className="small-movie-card catalog__movies-card" onMouseEnter={this._onHoverEnter} onMouseLeave={this._onHoverLeave}>
         <div className="small-movie-card__image">
           {
             isPreviewPlaying ? <VideoPlayer
-              src={teaser}
-              poster={`img/${convertedMovieName}`}
+              src={previewVideoSrc}
+              poster={previewImageSrc}
               muted={true}
               autoPlay={true}
               controls={false}
             /> :
               <img
-                src={`img/${convertedMovieName}`}
+                src={previewImageSrc}
                 alt={name}
                 width="280"
                 height="175"/>
           }
         </div>
         <h3 className="small-movie-card__title">
-          <a className="small-movie-card__link" href={link}>{name}</a>
+          <a className="small-movie-card__link" href='#'>{name}</a>
         </h3>
       </article>
     );
@@ -68,9 +63,8 @@ class SmallMovieCard extends React.PureComponent {
 
 SmallMovieCard.propTypes = {
   name: PropTypes.string.isRequired,
-  teaser: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired,
-  onHover: PropTypes.func.isRequired,
+  previewImageSrc: PropTypes.string.isRequired,
+  previewVideoSrc: PropTypes.string.isRequired,
 };
 
 export default SmallMovieCard;
