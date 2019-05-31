@@ -21,8 +21,6 @@ export class Catalog extends PureComponent {
       changeCurrentFilter
     } = this.props;
 
-    console.log(this.props);
-
     return (
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
