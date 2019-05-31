@@ -1,18 +1,13 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-
-import {ActionCreator} from '../../reducer/filter/filter';
-import {getFilteredData, getFilmsGenres} from '../../reducer/data/selectors';
-import {getCurrentFilter} from '../../reducer/filter/selectors';
 
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
-import GenresList from '../genres-list/genres-list';
+import FiltersList from '../filters-list/filters-list';
 import MoviesList from '../movies-list/movies-list';
 
-export class Catalog extends PureComponent {
+class Catalog extends PureComponent {
   render() {
-    const GenresListWithActiveItem = withActiveItem(GenresList);
+    const FiltersListWithActiveItem = withActiveItem(FiltersList);
     const MoviesListWithActiveItem = withActiveItem(MoviesList);
     const {
       data,
@@ -21,12 +16,14 @@ export class Catalog extends PureComponent {
       changeCurrentFilter
     } = this.props;
 
+    console.log(currentFilter);
+
     return (
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <GenresListWithActiveItem filters={filters} currentFilter={currentFilter}/>
-        <MoviesListWithActiveItem data={data} changeCurrentFilter={changeCurrentFilter}/>
+        <FiltersListWithActiveItem filters={filters} currentFilter={currentFilter} changeCurrentFilter={changeCurrentFilter}/>
+        <MoviesListWithActiveItem data={data}/>
 
         <div className="catalog__more">
           <button className="catalog__button" type="button">Show more</button>
@@ -43,14 +40,4 @@ Catalog.propTypes = {
   changeCurrentFilter: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  data: getFilteredData(state),
-  filters: getFilmsGenres(state),
-  currentFilter: getCurrentFilter(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  changeCurrentFilter: (currentFilter) => dispatch(ActionCreator.changeCurrentFilter(currentFilter)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Catalog);
+export default Catalog;

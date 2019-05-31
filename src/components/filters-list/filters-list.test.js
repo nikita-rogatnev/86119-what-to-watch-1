@@ -1,23 +1,23 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import GenresList from './genres-list';
+import FiltersList from './filters-list';
 
 import moviesList from '../../mocks/movies';
 
-it(`GenresList renders correctly`, () => {
+it(`FiltersList renders correctly`, () => {
   const activeGenre = `All genres`;
 
-  let genresList = Array.from(new Set(moviesList.map(({genre}) => genre)));
-  genresList.unshift(`All genres`);
+  let filtersList = Array.from(new Set(moviesList.map(({genre}) => genre)));
+  filtersList.unshift(`All genres`);
 
-  const tree = renderer.create(<GenresList
+  const tree = renderer.create(<FiltersList
     movies={moviesList}
-    allGenres={genresList}
+    allGenres={filtersList}
     activeItem={activeGenre}
     onActiveGenreChange={() => {
     }}
   />).toJSON();
-  
+
   expect(tree).toMatchSnapshot();
 });
