@@ -1,8 +1,10 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+
+import {ActionCreator} from '../../reducer/filter/filter';
 import {getFilteredData, getFilmsGenres} from '../../reducer/data/selectors';
-import {getCurrentFilter, changeCurrentFilter} from '../../reducer/filter/selectors';
+import {getCurrentFilter} from '../../reducer/filter/selectors';
 
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
 import GenresList from '../genres-list/genres-list';
@@ -18,6 +20,8 @@ export class Catalog extends PureComponent {
       currentFilter,
       changeCurrentFilter
     } = this.props;
+
+    console.log(this.props);
 
     return (
       <section className="catalog">
@@ -45,7 +49,10 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   data: getFilteredData(state),
   filters: getFilmsGenres(state),
   currentFilter: getCurrentFilter(state),
-  changeCurrentFilter: changeCurrentFilter(state),
 });
 
-export default connect(mapStateToProps)(Catalog);
+const mapDispatchToProps = (dispatch) => ({
+  changeCurrentFilter: (currentFilter) => dispatch(ActionCreator.changeCurrentFilter(currentFilter)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Catalog);

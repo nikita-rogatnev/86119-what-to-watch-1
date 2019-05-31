@@ -6,7 +6,7 @@ const ActionType = {
   CHANGE_FILTER: `CHANGE_FILTER`,
 };
 
-const ActionCreator = {
+export const ActionCreator = {
   changeCurrentFilter: (genre) => ({
     type: ActionType.CHANGE_FILTER,
     payload: genre,
