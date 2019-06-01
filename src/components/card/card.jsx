@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import VideoPlayer from '../video-player/video-player';
 
-class SmallMovieCard extends React.PureComponent {
+class Card extends React.PureComponent {
   constructor(props) {
     super(props);
     this.timeoutId = null;
@@ -61,10 +61,10 @@ class SmallMovieCard extends React.PureComponent {
   }
 }
 
-SmallMovieCard.propTypes = {
+Card.propTypes = {
   name: PropTypes.string.isRequired,
   previewImageSrc: PropTypes.string.isRequired,
   previewVideoSrc: PropTypes.string.isRequired,
 };
 
-export default SmallMovieCard;
+export default Card;

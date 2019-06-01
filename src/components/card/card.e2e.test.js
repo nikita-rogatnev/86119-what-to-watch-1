@@ -2,7 +2,7 @@ import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import SmallMovieCard from './small-movie-card';
+import Card from './card';
 
 const mockData = {
   "id": 1,
@@ -13,11 +13,11 @@ const mockData = {
 
 Enzyme.configure({adapter: new Adapter()});
 
-describe(`SmallMovieCard`, () => {
+describe(`CardList e2e`, () => {
   const hoverHandler = jest.fn(() => mockData.id);
 
   it(`Card hover handles`, () => {
-    const smallMovieCard = shallow(<SmallMovieCard
+    const smallMovieCard = shallow(<Card
       id={mockData.id}
       name={mockData.name}
       previewVideoSrc={mockData.previewVideoSrc}

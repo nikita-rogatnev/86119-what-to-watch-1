@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PageFooter = () => {
+const Footer = () => {
   return (
     <footer className="page-footer">
       <div className="logo">
@@ -18,4 +18,4 @@ const PageFooter = () => {
   );
 };
 
-export default PageFooter;
+export default Footer;

@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import SmallMovieCard from './small-movie-card';
+import Card from './card';
 
 const mockData = {
   "id": 1,
@@ -10,9 +10,9 @@ const mockData = {
   "previewVideoSrc": `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
 };
 
-it(`SmallMovieCard renders correctly`, () => {
+it(`Card renders correctly`, () => {
   const tree = renderer
-    .create(<SmallMovieCard
+    .create(<Card
       key={mockData.id}
       name={mockData.name}
       previewVideoSrc={mockData.previewVideoSrc}

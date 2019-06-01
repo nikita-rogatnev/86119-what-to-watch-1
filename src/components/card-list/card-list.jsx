@@ -1,16 +1,16 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
-import SmallMovieCard from '../small-movie-card/small-movie-card';
+import Card from '../card/card';
 
-export class MoviesList extends PureComponent {
+export class CardList extends PureComponent {
   render() {
     const {data} = this.props;
 
     return (
       <div className="catalog__movies-list">
         {data.map((item) =>
-          <SmallMovieCard
+          <Card
             key={item.id}
             name={item.name}
             previewVideoSrc={item.previewVideoSrc}
@@ -22,9 +22,9 @@ export class MoviesList extends PureComponent {
   }
 }
 
-MoviesList.propTypes = {
+CardList.propTypes = {
   data: PropTypes.array.isRequired,
 };
 
-export default MoviesList;
+export default CardList;
 

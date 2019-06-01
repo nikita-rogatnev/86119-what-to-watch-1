@@ -1,13 +1,13 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import MoviesList from './movies-list';
+import CardList from './card-list';
 
 import mockData from '../../mocks/mock-data';
 
-it(`MoviesList renders correctly`, () => {
+it(`CardList renders correctly`, () => {
   const tree = renderer
-    .create(<MoviesList
+    .create(<CardList
       data={mockData}
     />).toJSON();
 

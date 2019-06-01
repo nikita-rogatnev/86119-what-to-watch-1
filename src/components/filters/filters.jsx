@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const FiltersList = (props) => {
+const Filters = (props) => {
   const {
     filters,
     currentFilter,
@@ -21,10 +21,10 @@ const FiltersList = (props) => {
   );
 };
 
-FiltersList.propTypes = {
+Filters.propTypes = {
   filters: PropTypes.array.isRequired,
   currentFilter: PropTypes.string.isRequired,
   changeCurrentFilter: PropTypes.func.isRequired,
 };
 
-export default FiltersList;
+export default Filters;

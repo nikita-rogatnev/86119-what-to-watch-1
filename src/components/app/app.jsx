@@ -2,9 +2,9 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import MovieCard from '../movie-card/movie-card';
+import Header from '../header/header';
 import Catalog from '../catalog/catalog';
-import PageFooter from '../page-footer/page-footer';
+import Footer from '../footer/footer';
 
 import {ActionCreators} from '../../reducer/data/data.js';
 
@@ -26,16 +26,16 @@ class App extends PureComponent {
 
     return (
       <React.Fragment>
-        <MovieCard/>
-        <div className="page-content">
+        <Header/>
+        <main className="page-content">
           <Catalog
             data={data}
             filters={filters}
             currentFilter={currentFilter}
             changeCurrentFilter={changeCurrentFilter}
           />
-          <PageFooter/>
-        </div>
+          <Footer/>
+        </main>
       </React.Fragment>
     );
   }

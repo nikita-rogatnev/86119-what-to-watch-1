@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MovieCard = () => {
+const Header = () => {
   return (
     <section className="movie-card">
       <div className="movie-card__bg">
@@ -60,4 +60,4 @@ const MovieCard = () => {
   );
 };
 
-export default MovieCard;
+export default Header;

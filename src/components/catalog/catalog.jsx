@@ -2,11 +2,11 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
-import FiltersList from '../filters-list/filters-list';
-import MoviesList from '../movies-list/movies-list';
+import Filters from '../filters/filters';
+import CardList from '../card-list/card-list';
 
-const FiltersListWithActiveItem = withActiveItem(FiltersList);
-const MoviesListWithActiveItem = withActiveItem(MoviesList);
+const FiltersListWithActiveItem = withActiveItem(Filters);
+const MoviesListWithActiveItem = withActiveItem(CardList);
 
 class Catalog extends PureComponent {
   render() {
