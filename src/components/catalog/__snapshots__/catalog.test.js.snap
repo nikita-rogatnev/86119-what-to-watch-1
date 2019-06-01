@@ -1,0 +1,163 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Catalog renders correctly 1`] = `
+<section
+  className="catalog"
+>
+  <h2
+    className="catalog__title visually-hidden"
+  >
+    Catalog
+  </h2>
+  <ul
+    className="catalog__genres-list"
+  >
+    <li
+      className="catalog__genres-item catalog__genres-item--active"
+    >
+      <a
+        className="catalog__genres-link"
+        onClick={[Function]}
+      >
+        All genres
+      </a>
+    </li>
+    <li
+      className="catalog__genres-item "
+    >
+      <a
+        className="catalog__genres-link"
+        onClick={[Function]}
+      >
+        Adventure
+      </a>
+    </li>
+    <li
+      className="catalog__genres-item "
+    >
+      <a
+        className="catalog__genres-link"
+        onClick={[Function]}
+      >
+        Action
+      </a>
+    </li>
+    <li
+      className="catalog__genres-item "
+    >
+      <a
+        className="catalog__genres-link"
+        onClick={[Function]}
+      >
+        Crime
+      </a>
+    </li>
+    <li
+      className="catalog__genres-item "
+    >
+      <a
+        className="catalog__genres-link"
+        onClick={[Function]}
+      >
+        Comedy
+      </a>
+    </li>
+    <li
+      className="catalog__genres-item "
+    >
+      <a
+        className="catalog__genres-link"
+        onClick={[Function]}
+      >
+        Drama
+      </a>
+    </li>
+    <li
+      className="catalog__genres-item "
+    >
+      <a
+        className="catalog__genres-link"
+        onClick={[Function]}
+      >
+        Fantasy
+      </a>
+    </li>
+    <li
+      className="catalog__genres-item "
+    >
+      <a
+        className="catalog__genres-link"
+        onClick={[Function]}
+      >
+        Thriller
+      </a>
+    </li>
+  </ul>
+  <div
+    className="catalog__movies-list"
+  >
+    <article
+      className="small-movie-card catalog__movies-card"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="small-movie-card__image"
+      >
+        <img
+          alt="Seven Years in Tibet"
+          height="175"
+          src="https://es31-server.appspot.com/wtw/static/film/preview/seven-years-in-tibet.jpg"
+          width="280"
+        />
+      </div>
+      <h3
+        className="small-movie-card__title"
+      >
+        <a
+          className="small-movie-card__link"
+          href="#"
+        >
+          Seven Years in Tibet
+        </a>
+      </h3>
+    </article>
+    <article
+      className="small-movie-card catalog__movies-card"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <div
+        className="small-movie-card__image"
+      >
+        <img
+          alt="The Revenant"
+          height="175"
+          src="https://es31-server.appspot.com/wtw/static/film/preview/revenant.jpg"
+          width="280"
+        />
+      </div>
+      <h3
+        className="small-movie-card__title"
+      >
+        <a
+          className="small-movie-card__link"
+          href="#"
+        >
+          The Revenant
+        </a>
+      </h3>
+    </article>
+  </div>
+  <div
+    className="catalog__more"
+  >
+    <button
+      className="catalog__button"
+      type="button"
+    >
+      Show more
+    </button>
+  </div>
+</section>
+`;
