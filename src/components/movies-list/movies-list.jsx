@@ -12,7 +12,9 @@ export class MoviesList extends PureComponent {
         {data.map((item) =>
           <SmallMovieCard
             key={item.id}
-            {...item}
+            name={item.name}
+            previewVideoSrc={item.previewVideoSrc}
+            previewImageSrc={item.previewImageSrc}
           />
         )}
       </div>

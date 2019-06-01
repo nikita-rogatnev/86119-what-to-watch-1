@@ -36,7 +36,7 @@ class VideoPlayer extends PureComponent {
 
 VideoPlayer.propTypes = {
   previewVideoSrc: PropTypes.string.isRequired,
-  previewImageSrc: PropTypes.string,
+  previewImageSrc: PropTypes.string.isRequired,
   muted: PropTypes.bool,
   autoPlay: PropTypes.bool,
   controls: PropTypes.bool
