@@ -45,8 +45,8 @@ const mapData = (data) => {
       id: dataItem.id,
       name: dataItem.name,
       genre: dataItem.genre,
-      previewImageSrc: dataItem.preview_image,
-      previewVideoSrc: dataItem.preview_video_link
+      previewImageSrc: dataItem[`preview_image`],
+      previewVideoSrc: dataItem[`preview_video_link`]
     };
   });
 };
@@ -54,6 +54,11 @@ const mapData = (data) => {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ActionType.LOAD_DATA:
+      return Object.assign({}, state, {
+        data: mapData(action.payload)
+      });
+
     case ActionType.CHANGE_FILTER:
       return Object.assign({}, state, {
         currentFilter: action.payload,
@@ -62,11 +67,6 @@ export const reducer = (state = initialState, action) => {
     case ActionType.GET_FILTERED_DATA:
       return Object.assign({}, state, {
         currentFilter: action.payload,
-      });
-
-    case ActionType.LOAD_DATA:
-      return Object.assign({}, state, {
-        data: mapData(action.payload)
       });
   }
 
