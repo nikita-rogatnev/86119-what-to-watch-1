@@ -4,21 +4,25 @@ import Adapter from 'enzyme-adapter-react-16';
 
 import SmallMovieCard from './small-movie-card';
 
+import mockData from "../../mocks/mock-data";
+
 Enzyme.configure({adapter: new Adapter()});
 
 describe(`SmallMovieCard`, () => {
-  const hoverHandler = jest.fn();
+  const hoverHandler = jest.fn(() => mockData.id);
 
   it(`Card hover handles`, () => {
     const smallMovieCard = shallow(<SmallMovieCard
-      key={0}
-      name={`Test name`}
-      previewVideoSrc={`Test Video`}
-      previewImageSrc={`Test Image`}
+      key={mockData.id}
+      name={mockData.name}
+      previewVideoSrc={mockData.previewVideoSrc}
+      previewImageSrc={mockData.previewImageSrc}
+      onMouseEnter={hoverHandler}
     />);
 
-    smallMovieCard.simulate(`mouseEnter`);
-
-    expect(hoverHandler).toHaveBeenCalledWith(1);
+    smallMovieCard.find(`.catalog__movies-card`).simulate(`mouseenter`);
+    expect(hoverHandler).toHaveBeenCalled();
+    hoverHandler(mockData);
+    expect(hoverHandler).toHaveReturnedWith(mockData.id);
   });
 });
