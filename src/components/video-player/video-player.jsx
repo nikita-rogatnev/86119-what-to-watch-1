@@ -9,8 +9,8 @@ class VideoPlayer extends PureComponent {
 
   render() {
     const {
-      poster,
-      src,
+      previewImageSrc,
+      previewVideoSrc,
       muted,
       autoPlay,
       controls
@@ -19,7 +19,7 @@ class VideoPlayer extends PureComponent {
     return (
       <React.Fragment>
         <video
-          poster={poster}
+          poster={previewImageSrc}
           muted={muted}
           autoPlay={autoPlay}
           controls={controls}
@@ -27,7 +27,7 @@ class VideoPlayer extends PureComponent {
           height="180"
           ref={this._videoRef}
         >
-          <source src={src} type='video/mp4'/>
+          <source src={previewVideoSrc} type='video/mp4'/>
         </video>
       </React.Fragment>
     );
@@ -35,8 +35,8 @@ class VideoPlayer extends PureComponent {
 }
 
 VideoPlayer.propTypes = {
-  src: PropTypes.string.isRequired,
-  poster: PropTypes.string,
+  previewVideoSrc: PropTypes.string.isRequired,
+  previewImageSrc: PropTypes.string,
   muted: PropTypes.bool,
   autoPlay: PropTypes.bool,
   controls: PropTypes.bool

@@ -10,7 +10,6 @@ exports[`SmallMovieCard renders correctly 1`] = `
     className="small-movie-card__image"
   >
     <img
-      alt="Test name"
       height="175"
       width="280"
     />
@@ -21,9 +20,7 @@ exports[`SmallMovieCard renders correctly 1`] = `
     <a
       className="small-movie-card__link"
       href="#"
-    >
-      Test name
-    </a>
+    />
   </h3>
 </article>
 `;

@@ -23,7 +23,7 @@ const initApp = () => {
       )
   );
 
-  store.dispatch(Operations.loadFilms());
+  store.dispatch(Operations.loadData());
 
   render((
     <Provider store={store}>

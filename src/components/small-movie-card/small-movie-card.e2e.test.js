@@ -11,10 +11,10 @@ describe(`SmallMovieCard`, () => {
 
   it(`Card hover handles`, () => {
     const smallMovieCard = shallow(<SmallMovieCard
+      key={0}
       name={`Test name`}
-      teaser={`Test file`}
-      link={`Test link`}
-      onHover={hoverHandler}
+      previewVideoSrc={`Test Video`}
+      previewImageSrc={`Test Image`}
     />);
 
     smallMovieCard.simulate(`mouseEnter`);

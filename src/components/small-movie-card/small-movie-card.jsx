@@ -40,8 +40,8 @@ class SmallMovieCard extends React.PureComponent {
         <div className="small-movie-card__image">
           {
             isPreviewPlaying ? <VideoPlayer
-              src={previewVideoSrc}
-              poster={previewImageSrc}
+              previewVideoSrc={previewVideoSrc}
+              previewImageSrc={previewImageSrc}
               muted={true}
               autoPlay={true}
               controls={false}

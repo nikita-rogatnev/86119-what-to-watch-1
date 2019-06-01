@@ -24,7 +24,7 @@ export const ActionCreators = {
     };
   },
 
-  loadFilms: (data) => {
+  loadData: (data) => {
     return {
       type: ActionType.LOAD_DATA,
       payload: data
@@ -33,9 +33,9 @@ export const ActionCreators = {
 };
 
 export const Operations = {
-  loadFilms: () => (dispatch, getState, api) => {
+  loadData: () => (dispatch, getState, api) => {
     return api.get(`/films`)
-      .then((response) => dispatch(ActionCreators.loadFilms(response.data)));
+      .then((response) => dispatch(ActionCreators.loadData(response.data)));
   }
 };
 

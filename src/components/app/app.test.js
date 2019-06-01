@@ -3,20 +3,16 @@ import renderer from 'react-test-renderer';
 
 import {App} from './app';
 
-import moviesList from '../../mocks/movies';
+import mockData from '../../mocks/mock-data';
+import mockFilters from '../../mocks/mock-filters';
 
 it(`App renders correctly`, () => {
-  const currentFilter = `All genres`;
-
-  let genresList = Array.from(new Set(moviesList.map(({genre}) => genre)));
-  genresList.unshift(`All genres`);
-
   const tree = renderer
     .create(<App
-      films={moviesList}
-      allGenres={genresList}
-      currentFilter={currentFilter}
-      onChangeGenre={() => {
+      data={mockData}
+      filters={mockFilters}
+      currentFilter={`All genres`}
+      changeCurrentFilter={() => {
       }}
     />).toJSON();
 

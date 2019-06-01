@@ -6,7 +6,6 @@ exports[`VideoPlayer renders correctly 1`] = `
   width="280"
 >
   <source
-    src="Test src"
     type="video/mp4"
   />
 </video>
