@@ -8,7 +8,7 @@ Enzyme.configure({adapter: new Adapter()});
 const MockComponent = () => <div/>;
 const MockComponentWrapped = withActiveItem(MockComponent);
 
-describe(`withActiveItem HOC`, () => {
+describe(`withActiveItem HOC e2e`, () => {
   it(`Should change activeItem on onChange`, () => {
     const wrappedComponent = shallow(<MockComponentWrapped
     />);
