@@ -5,10 +5,11 @@ import withActiveItem from '../../hocs/with-active-item/with-active-item';
 import FiltersList from '../filters-list/filters-list';
 import MoviesList from '../movies-list/movies-list';
 
+const FiltersListWithActiveItem = withActiveItem(FiltersList);
+const MoviesListWithActiveItem = withActiveItem(MoviesList);
+
 class Catalog extends PureComponent {
   render() {
-    const FiltersListWithActiveItem = withActiveItem(FiltersList);
-    const MoviesListWithActiveItem = withActiveItem(MoviesList);
     const {
       data,
       filters,

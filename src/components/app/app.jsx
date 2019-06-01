@@ -57,8 +57,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  changeCurrentFilter: (evt, genre) => {
-    evt.preventDefault();
+  changeCurrentFilter: (genre) => {
     dispatch(ActionCreators.changeActiveGenre(genre));
     dispatch(ActionCreators.getFilteredData(genre));
   },

@@ -12,7 +12,7 @@ import thunk from 'redux-thunk';
 import {compose} from 'recompose';
 
 const initApp = () => {
-  const api = createAPI((...args) => store.dispatch(...args));
+  const api = createAPI();
 
   const store = createStore(
       reducer,
