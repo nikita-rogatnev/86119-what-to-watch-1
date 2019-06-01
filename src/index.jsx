@@ -5,7 +5,7 @@ import App from './components/app/app.jsx';
 
 import {createAPI} from './api';
 import reducer from './reducer';
-import {Operation} from './reducer/data/data';
+import {Operations} from './reducer/data/data.js';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
@@ -23,7 +23,7 @@ const initApp = () => {
       )
   );
 
-  store.dispatch(Operation.loadData());
+  store.dispatch(Operations.loadFilms());
 
   render((
     <Provider store={store}>

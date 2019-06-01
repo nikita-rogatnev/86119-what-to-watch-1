@@ -1,6 +1,6 @@
-const NameSpace = {
+const NameSpaces = {
   DATA: `DATA`,
   USER: `USER`
 };
 
-export default NameSpace;
+export default NameSpaces;

@@ -6,14 +6,14 @@ import MovieCard from '../movie-card/movie-card';
 import Catalog from '../catalog/catalog';
 import PageFooter from '../page-footer/page-footer';
 
-import {
-  actionGetFilters,
-  actionGetCurrentFilter,
-  actionChangeCurrentFilter,
-  actionFilterData
-} from '../../reducer/data/data';
+import {ActionCreators} from '../../reducer/data/data.js';
 
-import {getFilteredData} from '../../reducer/data/selectors';
+import {
+  getFilters,
+  getCurrentFilter,
+  getFilteredData
+} from '../../reducer/data/selectors.js';
+
 
 class App extends PureComponent {
   render() {
@@ -23,8 +23,6 @@ class App extends PureComponent {
       currentFilter,
       changeCurrentFilter
     } = this.props;
-
-    console.log(data);
 
     return (
       <React.Fragment>
@@ -50,19 +48,22 @@ App.propTypes = {
   changeCurrentFilter: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  data: getFilteredData(state),
-  filters: actionGetFilters(state),
-  currentFilter: actionGetCurrentFilter(state),
-});
+const mapStateToProps = (state, ownProps) => {
+  return Object.assign({}, ownProps, {
+    data: getFilteredData(state),
+    filters: getFilters(state),
+    currentFilter: getCurrentFilter(state),
+  });
+};
 
 const mapDispatchToProps = (dispatch) => ({
-  changeCurrentFilter: (newFilter) => {
-    dispatch(actionChangeCurrentFilter(newFilter));
-    dispatch(actionFilterData(newFilter));
-  }
+  changeCurrentFilter: (evt, genre) => {
+    evt.preventDefault();
+    dispatch(ActionCreators.changeActiveGenre(genre));
+    dispatch(ActionCreators.getFilteredData(genre));
+  },
 });
 
 export {App};
 
-export default connect(mapStateToProps,)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

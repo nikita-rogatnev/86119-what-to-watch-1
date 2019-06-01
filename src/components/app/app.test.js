@@ -6,7 +6,7 @@ import {App} from './app';
 import moviesList from '../../mocks/movies';
 
 it(`App renders correctly`, () => {
-  const activeGenre = `All genres`;
+  const currentFilter = `All genres`;
 
   let genresList = Array.from(new Set(moviesList.map(({genre}) => genre)));
   genresList.unshift(`All genres`);
@@ -15,7 +15,7 @@ it(`App renders correctly`, () => {
     .create(<App
       films={moviesList}
       allGenres={genresList}
-      activeGenre={activeGenre}
+      currentFilter={currentFilter}
       onChangeGenre={() => {
       }}
     />).toJSON();

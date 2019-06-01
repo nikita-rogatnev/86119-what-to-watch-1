@@ -1,18 +1,28 @@
 import {createSelector} from 'reselect';
-import NameSpace from '../name-spaces';
-import {actionGetCurrentFilter} from '../data/data';
+import NameSpaces from '../name-spaces.js';
 
-const NAME_SPACE = NameSpace.DATA;
-export const getData = (state) => state[NAME_SPACE].data;
+const NAME_SPACE = NameSpaces.DATA;
+
+export const getData = (state) => {
+  return state[NAME_SPACE].data;
+};
+
+export const getCurrentFilter = (state) => {
+  return state[NAME_SPACE].currentFilter;
+};
+
+export const getAllFilters = createSelector(
+    getData, (data) => data.map((dataItem) => dataItem.genre)
+);
+
+export const getFilters = createSelector(
+    getAllFilters, (filters) => ([`All genres`, ...new Set(filters)])
+);
 
 export const getFilteredData = createSelector(
     getData,
-    actionGetCurrentFilter,
-    (data, filter) => {
-      if (filter === `All`) {
-        return data;
-      }
-
-      return data.filter(({genre}) => genre === filter);
+    getCurrentFilter,
+    (data, currentFilter) => {
+      return (currentFilter === `All genres`) ? data : data.filter((dataItem) => dataItem.genre === currentFilter);
     }
 );
