@@ -6,6 +6,8 @@ import Card from './card';
 
 Enzyme.configure({adapter: new Adapter()});
 
+jest.useFakeTimers();
+
 describe(`Card e2e`, () => {
   const mockData = {
     "id": 1,
@@ -22,10 +24,17 @@ describe(`Card e2e`, () => {
       name={mockData.name}
       previewVideoSrc={mockData.previewVideoSrc}
       previewImageSrc={mockData.previewImageSrc}
-      onMouseEnter={hoverHandler}
+      onHover={hoverHandler}
     />);
 
-    tree.simulate(`mouseEnter`);
-    expect(hoverHandler).toHaveBeenCalledTimes(1);
+    const element = tree.find(`article`);
+
+    element.simulate(`mouseEnter`);
+
+    jest.advanceTimersByTime(1000);
+    expect(tree.state(`isPreviewPlaying`)).toBe(true);
+
+    tree.simulate(`mouseleave`);
+    expect(tree.state(`isPreviewPlaying`)).toBe(false);
   });
 });
