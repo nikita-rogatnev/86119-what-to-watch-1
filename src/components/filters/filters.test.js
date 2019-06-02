@@ -1,15 +1,13 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import {App} from './app';
+import Filters from './filters';
 
-import mockData from '../../mocks/mock-data';
 import mockFilters from '../../mocks/mock-filters';
 
-it(`App renders correctly`, () => {
+it(`Filters renders correctly`, () => {
   const tree = renderer
-    .create(<App
-      data={mockData}
+    .create(<Filters
       filters={mockFilters}
       currentFilter={`All genres`}
       changeCurrentFilter={() => {

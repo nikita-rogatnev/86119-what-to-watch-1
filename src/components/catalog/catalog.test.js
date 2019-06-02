@@ -3,21 +3,18 @@ import renderer from 'react-test-renderer';
 
 import Catalog from './catalog';
 
-import moviesList from '../../mocks/movies';
+import mockData from '../../mocks/mock-data';
+import mockFilters from '../../mocks/mock-filters';
 
 it(`Catalog renders correctly`, () => {
-  const activeGenre = `All genres`;
-
-  let genresList = Array.from(new Set(moviesList.map(({genre}) => genre)));
-  genresList.unshift(`All genres`);
-
-  const tree = renderer.create(<Catalog
-    movies={moviesList}
-    allGenres={genresList}
-    activeGenre={activeGenre}
-    onChangeGenre={() => {
-    }}
-  />).toJSON();
+  const tree = renderer
+    .create(<Catalog
+      data={mockData}
+      filters={mockFilters}
+      currentFilter={`All genres`}
+      changeCurrentFilter={() => {
+      }}
+    />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

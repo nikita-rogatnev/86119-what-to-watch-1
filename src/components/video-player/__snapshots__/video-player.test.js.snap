@@ -3,10 +3,11 @@
 exports[`VideoPlayer renders correctly 1`] = `
 <video
   height="180"
+  poster="https://es31-server.appspot.com/wtw/static/film/preview/seven-years-in-tibet.jpg"
   width="280"
 >
   <source
-    src="Test src"
+    src="https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4"
     type="video/mp4"
   />
 </video>

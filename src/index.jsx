@@ -1,12 +1,35 @@
-import React from "react";
-import ReactDOM from 'react-dom';
+import React from 'react';
+import {render} from 'react-dom';
+
 import App from './components/app/app.jsx';
 
-import {createStore} from 'redux';
+import {createAPI} from './api';
+import reducer from './reducer';
+import {Operations} from './reducer/data/data.js';
+import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
-import {reducer} from './reducer';
+import thunk from 'redux-thunk';
+import {compose} from 'recompose';
 
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-const appContainer = document.querySelector(`#root`);
+const initApp = () => {
+  const api = createAPI((action) => store.dispatch(action));
 
-ReactDOM.render(<Provider store={store}><App/></Provider>, appContainer);
+  const store = createStore(
+      reducer,
+      compose(
+          applyMiddleware(thunk.withExtraArgument(api)),
+          window[`__REDUX_DEVTOOLS_EXTENSION__`] &&
+          window[`__REDUX_DEVTOOLS_EXTENSION__`]()
+      )
+  );
+
+  store.dispatch(Operations.loadData());
+
+  render((
+    <Provider store={store}>
+      <App/>
+    </Provider>
+  ), document.getElementById(`root`));
+};
+
+initApp();

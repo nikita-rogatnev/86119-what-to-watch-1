@@ -1,62 +1,64 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../reducer';
 import PropTypes from 'prop-types';
 
-import MovieCard from '../movie-card/movie-card';
-import Catalog from "../catalog/catalog";
-import PageFooter from "../page-footer/page-footer";
+import Header from '../header/header';
+import Catalog from '../catalog/catalog';
+import Footer from '../footer/footer';
+
+import {ActionCreators} from '../../reducer/data/data.js';
+
+import {
+  getFilters,
+  getCurrentFilter,
+  getFilteredData
+} from '../../reducer/data/selectors.js';
+
 
 class App extends PureComponent {
   render() {
     const {
-      movies,
-      allGenres,
-      activeGenre,
-      onChangeGenre,
+      data,
+      filters,
+      currentFilter,
+      changeCurrentFilter
     } = this.props;
 
     return (
       <React.Fragment>
-        <MovieCard/>
-        <div className="page-content">
+        <Header/>
+        <main className="page-content">
           <Catalog
-            movies={movies}
-            allGenres={allGenres}
-            activeGenre={activeGenre}
-            onChangeGenre={onChangeGenre}
+            data={data}
+            filters={filters}
+            currentFilter={currentFilter}
+            changeCurrentFilter={changeCurrentFilter}
           />
-          <PageFooter/>
-        </div>
+          <Footer/>
+        </main>
       </React.Fragment>
     );
   }
 }
 
 App.propTypes = {
-  movies: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        link: PropTypes.string.isRequired,
-        teaser: PropTypes.string.isRequired,
-        genre: PropTypes.string.isRequired,
-      })
-  ),
-  allGenres: PropTypes.array.isRequired,
-  activeGenre: PropTypes.string,
-  onChangeGenre: PropTypes.func.isRequired,
+  data: PropTypes.array.isRequired,
+  filters: PropTypes.array.isRequired,
+  currentFilter: PropTypes.string.isRequired,
+  changeCurrentFilter: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  movies: state.movies,
-  allGenres: state.allGenres,
-  activeGenre: state.activeGenre,
-});
+const mapStateToProps = (state) => {
+  return {
+    data: getFilteredData(state),
+    filters: getFilters(state),
+    currentFilter: getCurrentFilter(state),
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
-  onChangeGenre: (activeGenre, movies) => {
-    dispatch(ActionCreator.filterMovies(activeGenre, movies));
+  changeCurrentFilter: (genre) => {
+    dispatch(ActionCreators.changeActiveGenre(genre));
   },
 });
 
