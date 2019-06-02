@@ -26,7 +26,6 @@ describe(`CardList e2e`, () => {
     />);
 
     smallMovieCard.find(`.catalog__movies-card`).simulate(`mouseenter`);
-    hoverHandler(mockData);
     expect(hoverHandler).toHaveReturnedWith(mockData.id);
   });
 });
