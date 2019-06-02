@@ -17,23 +17,19 @@ describe(`Card e2e`, () => {
   };
 
   it(`Card hover handles`, () => {
-    const hoverHandler = jest.fn();
-
     const tree = mount(<Card
       id={mockData.id}
       name={mockData.name}
       previewVideoSrc={mockData.previewVideoSrc}
       previewImageSrc={mockData.previewImageSrc}
-      onHover={hoverHandler}
     />);
 
-    const element = tree.find(`article`);
-
-    element.simulate(`mouseEnter`);
-
+    // On mouse enter
+    tree.find(`article`).simulate(`mouseEnter`);
     jest.advanceTimersByTime(1000);
     expect(tree.state(`isPreviewPlaying`)).toBe(true);
 
+    // On mouse leave
     tree.simulate(`mouseleave`);
     expect(tree.state(`isPreviewPlaying`)).toBe(false);
   });
