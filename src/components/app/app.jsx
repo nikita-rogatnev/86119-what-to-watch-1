@@ -48,18 +48,17 @@ App.propTypes = {
   changeCurrentFilter: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state, ownProps) => {
-  return Object.assign({}, ownProps, {
+const mapStateToProps = (state) => {
+  return {
     data: getFilteredData(state),
     filters: getFilters(state),
     currentFilter: getCurrentFilter(state),
-  });
+  };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   changeCurrentFilter: (genre) => {
     dispatch(ActionCreators.changeActiveGenre(genre));
-    dispatch(ActionCreators.getFilteredData(genre));
   },
 });
 

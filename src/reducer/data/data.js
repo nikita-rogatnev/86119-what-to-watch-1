@@ -5,7 +5,6 @@ const initialState = {
 
 export const ActionType = {
   'CHANGE_FILTER': `CHANGE_FILTER`,
-  'GET_FILTERED_DATA': `GET_FILTERED_DATA`,
   'LOAD_DATA': `LOAD_DATA`,
 };
 
@@ -14,13 +13,6 @@ export const ActionCreators = {
     return {
       type: ActionType.CHANGE_FILTER,
       payload: data,
-    };
-  },
-
-  getFilteredData: (data) => {
-    return {
-      type: ActionType.GET_FILTERED_DATA,
-      payload: data
     };
   },
 
@@ -60,11 +52,6 @@ export const reducer = (state = initialState, action) => {
       });
 
     case ActionType.CHANGE_FILTER:
-      return Object.assign({}, state, {
-        currentFilter: action.payload,
-      });
-
-    case ActionType.GET_FILTERED_DATA:
       return Object.assign({}, state, {
         currentFilter: action.payload,
       });
