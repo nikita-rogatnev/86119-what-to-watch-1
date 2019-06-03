@@ -34,15 +34,26 @@ export const Operations = {
 const mapData = (data) => {
   return data.map((dataItem) => {
     return {
-      id: dataItem.id,
-      name: dataItem.name,
-      genre: dataItem.genre,
-      previewImageSrc: dataItem[`preview_image`],
-      previewVideoSrc: dataItem[`preview_video_link`]
+      id: dataItem[`id`],
+      name: dataItem[`name`],
+      posterImage: dataItem[`poster_image`],
+      previewImage: dataItem[`preview_image`],
+      backgroundImage: dataItem[`background_image`],
+      backgroundColor: dataItem[`background_color`],
+      videoLink: dataItem[`video_link`],
+      previewVideoLink: dataItem[`preview_video_link`],
+      description: dataItem[`description`],
+      rating: dataItem[`rating`],
+      scoresCount: dataItem[`scores_count`],
+      director: dataItem[`director`],
+      starring: dataItem[`starring`],
+      runTime: dataItem[`run_time`],
+      genre: dataItem[`genre`],
+      released: dataItem[`released`],
+      isFavorite: dataItem[`is_favorite`],
     };
   });
 };
-
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {

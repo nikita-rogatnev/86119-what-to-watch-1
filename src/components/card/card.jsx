@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import VideoPlayer from '../video-player/video-player';
+import {Link} from "react-router-dom";
 
 class Card extends React.PureComponent {
   constructor(props) {
@@ -28,33 +29,38 @@ class Card extends React.PureComponent {
 
   render() {
     const {
+      id,
       name,
-      previewVideoSrc,
-      previewImageSrc,
+      previewImage,
+      previewVideoLink,
+      showButton,
     } = this.props;
 
     const {isPreviewPlaying} = this.state;
 
     return (
       <article className="small-movie-card catalog__movies-card" onMouseEnter={this._onHoverEnter} onMouseLeave={this._onHoverLeave}>
+        {showButton ? <button className="small-movie-card__play-btn" type="button">Play</button> : ``}
         <div className="small-movie-card__image">
           {
             isPreviewPlaying ? <VideoPlayer
-              previewVideoSrc={previewVideoSrc}
-              previewImageSrc={previewImageSrc}
+              previewVideoLink={previewVideoLink}
+              previewImage={previewImage}
               muted={true}
               autoPlay={true}
               controls={false}
             /> :
               <img
-                src={previewImageSrc}
+                src={previewImage}
                 alt={name}
                 width="280"
                 height="175"/>
           }
         </div>
         <h3 className="small-movie-card__title">
-          <a className="small-movie-card__link" href='#'>{name}</a>
+          <Link to={`/films/${id}`} className="small-movie-card__link">
+            {name}
+          </Link>
         </h3>
       </article>
     );
@@ -62,9 +68,24 @@ class Card extends React.PureComponent {
 }
 
 Card.propTypes = {
-  name: PropTypes.string.isRequired,
-  previewImageSrc: PropTypes.string.isRequired,
-  previewVideoSrc: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string,
+  posterImage: PropTypes.string,
+  previewImage: PropTypes.string.isRequired,
+  backgroundImage: PropTypes.string,
+  backgroundColor: PropTypes.string,
+  videoLink: PropTypes.string,
+  previewVideoLink: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  rating: PropTypes.number,
+  scoresCount: PropTypes.number,
+  director: PropTypes.string,
+  starring: PropTypes.array,
+  runTime: PropTypes.number,
+  genre: PropTypes.string,
+  released: PropTypes.number,
+  isFavorite: PropTypes.bool,
+  showButton: PropTypes.bool.isRequired,
 };
 
 export default Card;

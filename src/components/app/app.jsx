@@ -1,23 +1,22 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 
 import Header from '../header/header';
 import SignIn from '../sign-in/sign-in';
 import CardHuge from '../card-huge/card-huge';
 import Catalog from '../catalog/catalog';
+import Favorites from '../favorites/favorites';
 import Footer from '../footer/footer';
 
 import {ActionCreators} from '../../reducer/data/data.js';
+import {getFilters, getCurrentFilter, getFilteredData} from '../../reducer/data/selectors.js';
 import {getAuthorizationStatus} from '../../reducer/user/selectors';
 
-import {
-  getFilters,
-  getCurrentFilter,
-  getFilteredData
-} from '../../reducer/data/selectors.js';
+import withPrivateRoute from '../../hocs/with-private-route/with-private-route';
 
+const PrivateRoute = withPrivateRoute(Route);
 
 class App extends PureComponent {
   render() {
@@ -26,32 +25,33 @@ class App extends PureComponent {
       filters,
       currentFilter,
       changeCurrentFilter,
-      isAuthorizationRequired,
     } = this.props;
 
-    if (isAuthorizationRequired) {
-      return (
-        <div className="user-page">
-          <Header/>
-          <SignIn/>
-          <Footer/>
-        </div>
-      );
-    }
-
     return (
-      <React.Fragment>
-        <CardHuge/>
-        <main className="page-content">
-          <Catalog
-            data={data}
-            filters={filters}
-            currentFilter={currentFilter}
-            changeCurrentFilter={changeCurrentFilter}
-          />
-          <Footer/>
-        </main>
-      </React.Fragment>
+      <Switch>
+        <Route path="/" exact render={() => (
+          <React.Fragment>
+            <CardHuge/>
+            <main className="page-content">
+              <Catalog
+                data={data}
+                filters={filters}
+                currentFilter={currentFilter}
+                changeCurrentFilter={changeCurrentFilter}
+              />
+              <Footer/>
+            </main>
+          </React.Fragment>
+        )}/>
+        <Route path="/login" render={() => (
+          <div className="user-page">
+            <Header/>
+            <SignIn/>
+            <Footer/>
+          </div>
+        )}/>
+        <PrivateRoute path="/mylist" component={Favorites}/>
+      </Switch>
     );
   }
 }

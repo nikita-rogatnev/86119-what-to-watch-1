@@ -2,26 +2,69 @@
 
 exports[`Favorites renders correctly 1`] = `
 <div
-  className="logo"
+  className="catalog__movies-list"
 >
-  <a
-    className="logo__link"
+  <article
+    className="small-movie-card catalog__movies-card"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
-    <span
-      className="logo__letter logo__letter--1"
+    <button
+      className="small-movie-card__play-btn"
+      type="button"
     >
-      W
-    </span>
-    <span
-      className="logo__letter logo__letter--2"
+      Play
+    </button>
+    <div
+      className="small-movie-card__image"
     >
-      T
-    </span>
-    <span
-      className="logo__letter logo__letter--3"
+      <img
+        alt="Seven Years in Tibet"
+        height="175"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
     >
-      W
-    </span>
-  </a>
+      <a
+        className="small-movie-card__link"
+        href="#"
+      >
+        Seven Years in Tibet
+      </a>
+    </h3>
+  </article>
+  <article
+    className="small-movie-card catalog__movies-card"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <button
+      className="small-movie-card__play-btn"
+      type="button"
+    >
+      Play
+    </button>
+    <div
+      className="small-movie-card__image"
+    >
+      <img
+        alt="The Revenant"
+        height="175"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+    >
+      <a
+        className="small-movie-card__link"
+        href="#"
+      >
+        The Revenant
+      </a>
+    </h3>
+  </article>
 </div>
 `;

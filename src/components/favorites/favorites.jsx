@@ -1,15 +1,28 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 
-const Favorites = () => {
-  return (
-    <div className="logo">
-      <a className="logo__link">
-        <span className="logo__letter logo__letter--1">W</span>
-        <span className="logo__letter logo__letter--2">T</span>
-        <span className="logo__letter logo__letter--3">W</span>
-      </a>
-    </div>
-  );
+import Card from "../card/card";
+import PropTypes from "prop-types";
+
+class Favorites extends PureComponent {
+  render() {
+    const {data} = this.props;
+
+    return (
+      <div className="catalog__movies-list">
+        {data.map((item) =>
+          <Card
+            key={item.id}
+            showButton={true}
+            {...item}
+          />
+        )}
+      </div>
+    );
+  }
+}
+
+Favorites.propTypes = {
+  data: PropTypes.array.isRequired,
 };
 
 export default Favorites;

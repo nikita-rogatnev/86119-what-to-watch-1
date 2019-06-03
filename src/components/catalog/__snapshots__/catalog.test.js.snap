@@ -101,13 +101,13 @@ exports[`Catalog renders correctly 1`] = `
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
+      
       <div
         className="small-movie-card__image"
       >
         <img
           alt="Seven Years in Tibet"
           height="175"
-          src="https://es31-server.appspot.com/wtw/static/film/preview/seven-years-in-tibet.jpg"
           width="280"
         />
       </div>
@@ -127,13 +127,13 @@ exports[`Catalog renders correctly 1`] = `
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
     >
+      
       <div
         className="small-movie-card__image"
       >
         <img
           alt="The Revenant"
           height="175"
-          src="https://es31-server.appspot.com/wtw/static/film/preview/revenant.jpg"
           width="280"
         />
       </div>

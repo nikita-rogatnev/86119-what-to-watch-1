@@ -12,9 +12,8 @@ export class CardList extends PureComponent {
         {data.map((item) =>
           <Card
             key={item.id}
-            name={item.name}
-            previewVideoSrc={item.previewVideoSrc}
-            previewImageSrc={item.previewImageSrc}
+            showButton={false}
+            {...item}
           />
         )}
       </div>
