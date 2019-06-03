@@ -5,14 +5,14 @@ import Card from '../card/card';
 
 export class CardList extends PureComponent {
   render() {
-    const {data} = this.props;
+    const {data, showPlayButton} = this.props;
 
     return (
       <div className="catalog__movies-list">
         {data.map((item) =>
           <Card
             key={item.id}
-            showPlayButton={false}
+            showPlayButton={showPlayButton}
             {...item}
           />
         )}
@@ -23,6 +23,7 @@ export class CardList extends PureComponent {
 
 CardList.propTypes = {
   data: PropTypes.array.isRequired,
+  showPlayButton: PropTypes.bool.isRequired,
 };
 
 export default CardList;

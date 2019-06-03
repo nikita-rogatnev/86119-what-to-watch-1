@@ -40,6 +40,7 @@ class App extends PureComponent {
                 currentFilter={currentFilter}
                 changeCurrentFilter={changeCurrentFilter}
                 showMoreButton={true}
+                showPlayButton={false}
               />
               <Footer/>
             </main>
@@ -62,6 +63,7 @@ class App extends PureComponent {
                 currentFilter={currentFilter}
                 changeCurrentFilter={changeCurrentFilter}
                 showMoreButton={false}
+                showPlayButton={true}
               />
               <Footer/>
             </main>

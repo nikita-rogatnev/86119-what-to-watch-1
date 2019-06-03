@@ -10,6 +10,7 @@ it(`CardList renders correctly`, () => {
   const tree = renderer
     .create(<BrowserRouter><CardList
       data={mockData}
+      showPlayButton={false}
     /></BrowserRouter>).toJSON();
 
   expect(tree).toMatchSnapshot();

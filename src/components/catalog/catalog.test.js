@@ -16,6 +16,7 @@ it(`Catalog renders correctly`, () => {
       changeCurrentFilter={() => {
       }}
       showMoreButton={false}
+      showPlayButton={false}
     /></BrowserRouter>).toJSON();
 
   expect(tree).toMatchSnapshot();
