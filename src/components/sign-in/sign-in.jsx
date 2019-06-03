@@ -29,7 +29,6 @@ class SignIn extends PureComponent {
   }
 
   _onClick() {
-    console.log(this.state.email);
     this.props.loginUser(this.state.email, this.state.password);
   }
 
