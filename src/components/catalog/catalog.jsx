@@ -15,7 +15,8 @@ class Catalog extends PureComponent {
       data,
       filters,
       currentFilter,
-      changeCurrentFilter
+      changeCurrentFilter,
+      showMoreButton
     } = this.props;
 
     return (
@@ -25,9 +26,11 @@ class Catalog extends PureComponent {
         <FiltersListWithActiveItem filters={filters} currentFilter={currentFilter} changeCurrentFilter={changeCurrentFilter}/>
         <CardListWithActiveItem data={data}/>
 
-        <div className="catalog__more">
-          <button className="catalog__button" type="button">Show more</button>
-        </div>
+        {showMoreButton ?
+          <div className="catalog__more">
+            <button className="catalog__button" type="button">Show more</button>
+          </div>
+          : ``}
       </section>
     );
   }
@@ -38,6 +41,7 @@ Catalog.propTypes = {
   filters: PropTypes.array.isRequired,
   currentFilter: PropTypes.string.isRequired,
   changeCurrentFilter: PropTypes.func.isRequired,
+  showMoreButton: PropTypes.bool.isRequired,
 };
 
 export default Catalog;

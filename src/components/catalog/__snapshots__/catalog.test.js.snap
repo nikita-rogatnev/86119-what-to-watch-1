@@ -106,8 +106,9 @@ exports[`Catalog renders correctly 1`] = `
         className="small-movie-card__image"
       >
         <img
-          alt="Seven Years in Tibet"
+          alt="Matrix"
           height="175"
+          src="https://es31-server.appspot.com/wtw/static/film/preview/matrix.jpg"
           width="280"
         />
       </div>
@@ -116,9 +117,10 @@ exports[`Catalog renders correctly 1`] = `
       >
         <a
           className="small-movie-card__link"
-          href="#"
+          href="/films/1"
+          onClick={[Function]}
         >
-          Seven Years in Tibet
+          Matrix
         </a>
       </h3>
     </article>
@@ -132,8 +134,9 @@ exports[`Catalog renders correctly 1`] = `
         className="small-movie-card__image"
       >
         <img
-          alt="The Revenant"
+          alt="Johnny English"
           height="175"
+          src="https://es31-server.appspot.com/wtw/static/film/preview/johnny-english.jpg"
           width="280"
         />
       </div>
@@ -142,22 +145,14 @@ exports[`Catalog renders correctly 1`] = `
       >
         <a
           className="small-movie-card__link"
-          href="#"
+          href="/films/2"
+          onClick={[Function]}
         >
-          The Revenant
+          Johnny English
         </a>
       </h3>
     </article>
   </div>
-  <div
-    className="catalog__more"
-  >
-    <button
-      className="catalog__button"
-      type="button"
-    >
-      Show more
-    </button>
-  </div>
+  
 </section>
 `;

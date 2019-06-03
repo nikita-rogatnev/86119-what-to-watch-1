@@ -23,7 +23,7 @@ class CardHuge extends React.PureComponent {
       genre,
       released,
       isFavorite,
-      showButton,
+      showPlayButton,
     } = this.props;
 
     return (

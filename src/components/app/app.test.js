@@ -1,5 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {BrowserRouter} from "react-router-dom";
 
 import {App} from './app';
 
@@ -10,14 +11,14 @@ jest.mock(`../header/header`, () => `Header`);
 
 it(`App renders correctly`, () => {
   const tree = renderer
-    .create(<App
+    .create(<BrowserRouter><App
       data={mockData}
       filters={mockFilters}
       currentFilter={`All genres`}
       changeCurrentFilter={() => {
       }}
       isAuthorizationRequired={false}
-    />).toJSON();
+    /></BrowserRouter>).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

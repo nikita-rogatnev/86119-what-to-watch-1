@@ -33,14 +33,14 @@ class Card extends React.PureComponent {
       name,
       previewImage,
       previewVideoLink,
-      showButton,
+      showPlayButton,
     } = this.props;
 
     const {isPreviewPlaying} = this.state;
 
     return (
       <article className="small-movie-card catalog__movies-card" onMouseEnter={this._onHoverEnter} onMouseLeave={this._onHoverLeave}>
-        {showButton ? <button className="small-movie-card__play-btn" type="button">Play</button> : ``}
+        {showPlayButton ? <button className="small-movie-card__play-btn" type="button">Play</button> : ``}
         <div className="small-movie-card__image">
           {
             isPreviewPlaying ? <VideoPlayer
@@ -72,7 +72,7 @@ Card.propTypes = {
   name: PropTypes.string,
   previewImage: PropTypes.string.isRequired,
   previewVideoLink: PropTypes.string.isRequired,
-  showButton: PropTypes.bool.isRequired,
+  showPlayButton: PropTypes.bool.isRequired,
 };
 
 export default Card;

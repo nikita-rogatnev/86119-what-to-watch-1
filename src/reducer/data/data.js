@@ -40,8 +40,6 @@ const mapData = (data) => {
       previewImage: dataItem[`preview_image`],
       backgroundImage: dataItem[`background_image`],
       backgroundColor: dataItem[`background_color`],
-      videoLink: dataItem[`video_link`],
-      previewVideoLink: dataItem[`preview_video_link`],
       description: dataItem[`description`],
       rating: dataItem[`rating`],
       scoresCount: dataItem[`scores_count`],
@@ -51,6 +49,8 @@ const mapData = (data) => {
       genre: dataItem[`genre`],
       released: dataItem[`released`],
       isFavorite: dataItem[`is_favorite`],
+      videoLink: dataItem[`video_link`],
+      previewVideoLink: dataItem[`preview_video_link`],
     };
   });
 };

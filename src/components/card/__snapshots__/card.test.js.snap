@@ -12,7 +12,7 @@ exports[`Card renders correctly 1`] = `
   >
     <img
       height="175"
-      src="https://es31-server.appspot.com/wtw/static/film/preview/seven-years-in-tibet.jpg"
+      src="https://es31-server.appspot.com/wtw/static/film/preview/matrix.jpg"
       width="280"
     />
   </div>
@@ -21,7 +21,8 @@ exports[`Card renders correctly 1`] = `
   >
     <a
       className="small-movie-card__link"
-      href="#"
+      href="/films/1"
+      onClick={[Function]}
     />
   </h3>
 </article>

@@ -3,7 +3,7 @@
 exports[`VideoPlayer renders correctly 1`] = `
 <video
   height="180"
-  poster="https://es31-server.appspot.com/wtw/static/film/preview/seven-years-in-tibet.jpg"
+  poster="https://es31-server.appspot.com/wtw/static/film/preview/matrix.jpg"
   width="280"
 >
   <source

@@ -1,24 +1,20 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {BrowserRouter} from "react-router-dom";
 
 import Card from './card';
 
-const mockData = {
-  "id": 1,
-  "name": `Seven Years in Tibet`,
-  "previewImage": `https://es31-server.appspot.com/wtw/static/film/preview/seven-years-in-tibet.jpg`,
-  "previewVideoLink": `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
-};
+import mockData from '../../mocks/mock-data';
 
 it(`Card renders correctly`, () => {
   const tree = renderer
-    .create(<Card
-      key={mockData.id}
-      id={mockData.id}
-      previewImage={mockData.previewImage}
-      previewVideoLink={mockData.previewVideoLink}
-      showButton={false}
-    />).toJSON();
+    .create(<BrowserRouter><Card
+      key={mockData[0].id}
+      id={mockData[0].id}
+      previewImage={mockData[0].previewImage}
+      previewVideoLink={mockData[0].previewVideoLink}
+      showPlayButton={false}
+    /></BrowserRouter>).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

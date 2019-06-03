@@ -12,7 +12,7 @@ class Favorites extends PureComponent {
         {data.map((item) =>
           <Card
             key={item.id}
-            showButton={true}
+            showPlayButton={false}
             {...item}
           />
         )}

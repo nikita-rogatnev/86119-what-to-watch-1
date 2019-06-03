@@ -1,29 +1,27 @@
 import React from 'react';
 import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import {BrowserRouter} from "react-router-dom";
 
 import Card from './card';
+
+import mockData from '../../mocks/mock-data';
 
 Enzyme.configure({adapter: new Adapter()});
 
 jest.useFakeTimers();
 
 describe(`Card e2e`, () => {
-  const mockData = {
-    "id": 1,
-    "name": `Seven Years in Tibet`,
-    "previewImageSrc": `https://es31-server.appspot.com/wtw/static/film/preview/seven-years-in-tibet.jpg`,
-    "previewVideoSrc": `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
-  };
-
   it(`Card hover handles`, () => {
-    const tree = mount(<Card
-      id={mockData.id}
-      name={mockData.name}
-      previewImage={mockData.previewImage}
-      previewVideoLink={mockData.previewVideoLink}
-      showButton={false}
-    />);
+    const tree = mount(<BrowserRouter>
+      <Card
+        id={mockData[0].id}
+        name={mockData[0].name}
+        previewImage={mockData[0].previewImage}
+        previewVideoLink={mockData[0].previewVideoLink}
+        showPlayButton={false}
+      />
+    </BrowserRouter>);
 
     // On mouse enter
     tree.find(`article`).simulate(`mouseEnter`);

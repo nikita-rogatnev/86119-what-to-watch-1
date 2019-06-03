@@ -12,7 +12,7 @@ export class CardList extends PureComponent {
         {data.map((item) =>
           <Card
             key={item.id}
-            showButton={false}
+            showPlayButton={false}
             {...item}
           />
         )}
