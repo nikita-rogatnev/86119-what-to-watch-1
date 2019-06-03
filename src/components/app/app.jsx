@@ -3,10 +3,13 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Header from '../header/header';
+import SignIn from '../sign-in/sign-in';
+import CardHuge from '../card-huge/card-huge';
 import Catalog from '../catalog/catalog';
 import Footer from '../footer/footer';
 
 import {ActionCreators} from '../../reducer/data/data.js';
+import {getAuthorizationStatus} from '../../reducer/user/selectors';
 
 import {
   getFilters,
@@ -21,12 +24,23 @@ class App extends PureComponent {
       data,
       filters,
       currentFilter,
-      changeCurrentFilter
+      changeCurrentFilter,
+      isAuthorizationRequired,
     } = this.props;
+
+    if (isAuthorizationRequired) {
+      return (
+        <div className="user-page">
+          <Header/>
+          <SignIn/>
+          <Footer/>
+        </div>
+      );
+    }
 
     return (
       <React.Fragment>
-        <Header/>
+        <CardHuge/>
         <main className="page-content">
           <Catalog
             data={data}
@@ -46,6 +60,7 @@ App.propTypes = {
   filters: PropTypes.array.isRequired,
   currentFilter: PropTypes.string.isRequired,
   changeCurrentFilter: PropTypes.func.isRequired,
+  isAuthorizationRequired: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => {
@@ -53,6 +68,7 @@ const mapStateToProps = (state) => {
     data: getFilteredData(state),
     filters: getFilters(state),
     currentFilter: getCurrentFilter(state),
+    isAuthorizationRequired: getAuthorizationStatus(state)
   };
 };
 

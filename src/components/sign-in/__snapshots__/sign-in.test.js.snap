@@ -12,12 +12,14 @@ exports[`SignIn renders correctly 1`] = `
       className="sign-in__fields"
     >
       <div
-        className="sign-in__field"
+        className="sign-in__field "
       >
         <input
+          autoComplete="username email"
           className="sign-in__input"
           id="user-email"
           name="user-email"
+          onKeyUp={[Function]}
           placeholder="Email address"
           type="email"
         />
@@ -32,9 +34,11 @@ exports[`SignIn renders correctly 1`] = `
         className="sign-in__field"
       >
         <input
+          autoComplete="current-password"
           className="sign-in__input"
           id="user-password"
           name="user-password"
+          onKeyUp={[Function]}
           placeholder="Password"
           type="password"
         />
@@ -51,6 +55,7 @@ exports[`SignIn renders correctly 1`] = `
     >
       <button
         className="sign-in__btn"
+        onClick={[Function]}
         type="submit"
       >
         Sign in

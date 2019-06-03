@@ -6,6 +6,8 @@ import {App} from './app';
 import mockData from '../../mocks/mock-data';
 import mockFilters from '../../mocks/mock-filters';
 
+jest.mock(`../header/header`, () => `Header`);
+
 it(`App renders correctly`, () => {
   const tree = renderer
     .create(<App
@@ -14,6 +16,7 @@ it(`App renders correctly`, () => {
       currentFilter={`All genres`}
       changeCurrentFilter={() => {
       }}
+      isAuthorizationRequired={false}
     />).toJSON();
 
   expect(tree).toMatchSnapshot();

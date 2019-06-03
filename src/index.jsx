@@ -1,11 +1,11 @@
 import React from 'react';
 import {render} from 'react-dom';
 
-import App from './components/app/app.jsx';
+import App from './components/app/app';
 
 import {createAPI} from './api';
 import reducer from './reducer';
-import {Operations} from './reducer/data/data.js';
+import {Operations} from './reducer/data/data';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
