@@ -70,21 +70,8 @@ class Card extends React.PureComponent {
 Card.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string,
-  posterImage: PropTypes.string,
   previewImage: PropTypes.string.isRequired,
-  backgroundImage: PropTypes.string,
-  backgroundColor: PropTypes.string,
-  videoLink: PropTypes.string,
   previewVideoLink: PropTypes.string.isRequired,
-  description: PropTypes.string,
-  rating: PropTypes.number,
-  scoresCount: PropTypes.number,
-  director: PropTypes.string,
-  starring: PropTypes.array,
-  runTime: PropTypes.number,
-  genre: PropTypes.string,
-  released: PropTypes.number,
-  isFavorite: PropTypes.bool,
   showButton: PropTypes.bool.isRequired,
 };
 

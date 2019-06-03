@@ -20,8 +20,9 @@ describe(`Card e2e`, () => {
     const tree = mount(<Card
       id={mockData.id}
       name={mockData.name}
-      previewVideoSrc={mockData.previewVideoSrc}
-      previewImageSrc={mockData.previewImageSrc}
+      previewImage={mockData.previewImage}
+      previewVideoLink={mockData.previewVideoLink}
+      showButton={false}
     />);
 
     // On mouse enter

@@ -6,6 +6,7 @@ import {Switch, Route} from 'react-router-dom';
 import Header from '../header/header';
 import SignIn from '../sign-in/sign-in';
 import CardHuge from '../card-huge/card-huge';
+import CardHero from '../card-hero/card-hero';
 import Catalog from '../catalog/catalog';
 import Favorites from '../favorites/favorites';
 import Footer from '../footer/footer';
@@ -49,6 +50,20 @@ class App extends PureComponent {
             <SignIn/>
             <Footer/>
           </div>
+        )}/>
+        <Route path="/films/:id" render={() => (
+          <React.Fragment>
+            <CardHero {...this.props}/>
+            <main className="page-content">
+              <Catalog
+                data={data}
+                filters={[]}
+                currentFilter={currentFilter}
+                changeCurrentFilter={changeCurrentFilter}
+              />
+              <Footer/>
+            </main>
+          </React.Fragment>
         )}/>
         <PrivateRoute path="/mylist" component={Favorites}/>
       </Switch>
