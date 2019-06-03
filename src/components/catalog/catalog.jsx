@@ -1,41 +1,42 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
-import GenresList from '../genres-list/genres-list';
-import MoviesList from '../movies-list/movies-list';
-
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
+import Filters from '../filters/filters';
+import CardList from '../card-list/card-list';
 
-const Catalog = (props) => {
-  const {
-    movies,
-    allGenres,
-    activeGenre,
-    onChangeGenre
-  } = props;
+const FiltersListWithActiveItem = withActiveItem(Filters);
+const MoviesListWithActiveItem = withActiveItem(CardList);
 
-  const GenresListWithActiveItem = withActiveItem(GenresList);
-  const MoviesListWithActiveItem = withActiveItem(MoviesList);
+class Catalog extends PureComponent {
+  render() {
+    const {
+      data,
+      filters,
+      currentFilter,
+      changeCurrentFilter
+    } = this.props;
 
-  return (
-    <section className="catalog">
-      <h2 className="catalog__title visually-hidden">Catalog</h2>
+    return (
+      <section className="catalog">
+        <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-      <GenresListWithActiveItem allGenres={allGenres} activeGenre={activeGenre} onActiveGenreChange={onChangeGenre}/>
-      <MoviesListWithActiveItem movies={movies}/>
+        <FiltersListWithActiveItem filters={filters} currentFilter={currentFilter} changeCurrentFilter={changeCurrentFilter}/>
+        <MoviesListWithActiveItem data={data}/>
 
-      <div className="catalog__more">
-        <button className="catalog__button" type="button">Show more</button>
-      </div>
-    </section>
-  );
-};
+        <div className="catalog__more">
+          <button className="catalog__button" type="button">Show more</button>
+        </div>
+      </section>
+    );
+  }
+}
 
 Catalog.propTypes = {
-  movies: PropTypes.array.isRequired,
-  allGenres: PropTypes.array.isRequired,
-  activeGenre: PropTypes.string,
-  onChangeGenre: PropTypes.func.isRequired,
+  data: PropTypes.array.isRequired,
+  filters: PropTypes.array.isRequired,
+  currentFilter: PropTypes.string.isRequired,
+  changeCurrentFilter: PropTypes.func.isRequired,
 };
 
 export default Catalog;
