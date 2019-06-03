@@ -1,27 +1,106 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Switch, Route, NavLink} from 'react-router-dom';
 
 import Header from '../header/header';
+
+const Overview = (item) => {
+  return (
+    <div className="movie-card__text">
+      <div className="movie-rating">
+        <div className="movie-rating__score">{item.rating}</div>
+        <p className="movie-rating__meta">
+          <span className="movie-rating__level">{CardHero.getRating(item.rating)}</span>
+          <span className="movie-rating__count">{item.scoresCount} ratings</span>
+        </p>
+      </div>
+
+      <div className="movie-card__text">
+        <p>{item.description}</p>
+        <p className="movie-card__director"><strong>Director: {item.director}</strong></p>
+        <p className="movie-card__starring"><strong>Starring: {item.starring} and other</strong></p>
+      </div>
+    </div>
+  );
+};
+
+const Details = (item) => {
+  return (
+    <div className="movie-card__text movie-card__row">
+      <div className="movie-card__text-col">
+        <p className="movie-card__details-item">
+          <strong className="movie-card__details-name">Director</strong>
+          <span className="movie-card__details-value">{item.director}</span>
+        </p>
+        <p className="movie-card__details-item">
+          <strong className="movie-card__details-name">Starring</strong>
+          <span className="movie-card__details-value">
+            {item.starring}
+          </span>
+        </p>
+      </div>
+
+      <div className="movie-card__text-col">
+        <p className="movie-card__details-item">
+          <strong className="movie-card__details-name">Run Time</strong>
+          <span className="movie-card__details-value">{item.runTime}</span>
+        </p>
+        <p className="movie-card__details-item">
+          <strong className="movie-card__details-name">Genre</strong>
+          <span className="movie-card__details-value">{item.genre}</span>
+        </p>
+        <p className="movie-card__details-item">
+          <strong className="movie-card__details-name">Released</strong>
+          <span className="movie-card__details-value">{item.released}</span>
+        </p>
+      </div>
+    </div>
+  );
+};
+
+const Reviews = (item) => {
+  return (
+    <div className="movie-card__reviews movie-card__row">
+      <div className="movie-card__reviews-col">
+        <div className="review">
+          <blockquote className="review__quote">
+            <p className="review__text">Discerning travellers and Wes Anderson fans will luxuriate in the
+              glorious Mittel-European kitsch of one of the directors funniest and most exquisitely designed
+              movies in years.</p>
+
+            <footer className="review__details">
+              <cite className="review__author">Kate Muir</cite>
+              <time className="review__date" dateTime="2016-12-24">December 24, 2016</time>
+            </footer>
+          </blockquote>
+
+          <div className="review__rating">8,9</div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 class CardHero extends React.PureComponent {
   constructor(props) {
     super(props);
 
+    this.path = location.pathname;
     this.id = location.pathname.split(`/`)[2];
   }
 
   static getRating(rating) {
     switch (true) {
       case rating >= 0 && rating < 3:
-        return `bad`;
+        return `Bad`;
       case rating >= 3 && rating < 5:
-        return `normal`;
+        return `Normal`;
       case rating >= 5 && rating < 8:
-        return `good`;
+        return `Good`;
       case rating >= 8 && rating < 10:
-        return `very good`;
+        return `Very good`;
       case rating = 10:
-        return `awesome`;
+        return `Awesome`;
       default:
         return `Unknown`;
     }
@@ -78,31 +157,24 @@ class CardHero extends React.PureComponent {
             <div className="movie-card__desc">
               <nav className="movie-nav movie-card__nav">
                 <ul className="movie-nav__list">
-                  <li className="movie-nav__item movie-nav__item--active">
-                    <a href="#" className="movie-nav__link">Overview</a>
+                  <li className={`movie-nav__item`}>
+                    <NavLink to={`${this.path}/`} exact className="movie-nav__link">Overview</NavLink>
+                  </li>
+                  <li className={`movie-nav__item`}>
+                    <NavLink to={`${this.path}/details`} className="movie-nav__link">Details</NavLink>
                   </li>
                   <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Details</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Reviews</a>
+                    <NavLink to={`${this.path}/reviews`} className="movie-nav__link">Reviews</NavLink>
                   </li>
                 </ul>
               </nav>
 
-              <div className="movie-rating">
-                <div className="movie-rating__score">{item.rating}</div>
-                <p className="movie-rating__meta">
-                  <span className="movie-rating__level">{CardHero.getRating(item.rating)}</span>
-                  <span className="movie-rating__count">{item.scoresCount} ratings</span>
-                </p>
-              </div>
+              <Switch>
+                <Route path={`${this.path}/`} exact render={() => (<Overview {...item}/>)}/>
+                <Route path={`${this.path}/details`} render={() => (<Details {...item}/>)}/>
+                <Route path={`${this.path}/reviews`} render={() => (<Reviews {...item}/>)}/>
+              </Switch>
 
-              <div className="movie-card__text">
-                <p>{item.description}</p>
-                <p className="movie-card__director"><strong>Director: {item.director}</strong></p>
-                <p className="movie-card__starring"><strong>Starring: {item.starring} and other</strong></p>
-              </div>
             </div>
           </div>
         </div>
