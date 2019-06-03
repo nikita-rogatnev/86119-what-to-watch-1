@@ -9,11 +9,9 @@ import mockData from '../../mocks/mock-data';
 jest.mock(`../header/header`, () => `Header`);
 
 it(`CardHuge renders correctly`, () => {
-  const data = mockData[0];
-
   const tree = renderer
     .create(<BrowserRouter><CardHero
-      data={data}
+      data={mockData}
     /></BrowserRouter>).toJSON();
 
   expect(tree).toMatchSnapshot();

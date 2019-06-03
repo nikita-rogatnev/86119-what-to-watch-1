@@ -23,6 +23,8 @@ describe(`Card e2e`, () => {
       />
     </BrowserRouter>);
 
+    expect(tree.state(`isPreviewPlaying`)).toBe(false);
+
     // On mouse enter
     tree.find(`article`).simulate(`mouseEnter`);
     jest.advanceTimersByTime(1000);
