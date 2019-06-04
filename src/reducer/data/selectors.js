@@ -7,6 +7,14 @@ export const getData = (state) => {
   return state[NAME_SPACE].data;
 };
 
+export const getDataFavorite = (state) => {
+  return state[NAME_SPACE].dataFavorite;
+};
+
+export const getDataComments = (state) => {
+  return state[NAME_SPACE].dataComments;
+};
+
 export const getCurrentFilter = (state) => {
   return state[NAME_SPACE].currentFilter;
 };

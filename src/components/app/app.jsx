@@ -14,7 +14,7 @@ import Footer from '../footer/footer';
 import NotFound from '../not-found/not-found';
 
 import {ActionCreators} from '../../reducer/data/data.js';
-import {getFilters, getCurrentFilter, getFilteredData} from '../../reducer/data/selectors.js';
+import {getFilters, getCurrentFilter, getFilteredData, getDataFavorite} from '../../reducer/data/selectors.js';
 import {getAuthorizationStatus} from '../../reducer/user/selectors';
 
 import withPrivateRoute from '../../hocs/with-private-route/with-private-route';
@@ -25,6 +25,7 @@ class App extends PureComponent {
   render() {
     const {
       data,
+      dataFavorite,
       filters,
       currentFilter,
       changeCurrentFilter,
@@ -71,7 +72,8 @@ class App extends PureComponent {
             </main>
           </React.Fragment>
         )}/>
-        <Route path="/films/:id/review" exact render={() => (
+
+        <PrivateRoute path="/films/:id/review" exact render={() => (
           <React.Fragment>
             <CardHero {...this.props}/>
             <AddReview/>
@@ -81,7 +83,7 @@ class App extends PureComponent {
         <PrivateRoute path="/mylist" exact render={() => (
           <React.Fragment>
             <Header/>
-            <Favorites {...this.props}/>
+            <Favorites data={dataFavorite}/>
             <Footer/>
           </React.Fragment>
         )}/>
@@ -93,6 +95,7 @@ class App extends PureComponent {
 
 App.propTypes = {
   data: PropTypes.array.isRequired,
+  dataFavorite: PropTypes.array.isRequired,
   filters: PropTypes.array.isRequired,
   currentFilter: PropTypes.string.isRequired,
   changeCurrentFilter: PropTypes.func.isRequired,
@@ -102,6 +105,7 @@ App.propTypes = {
 const mapStateToProps = (state) => {
   return {
     data: getFilteredData(state),
+    dataFavorite: getDataFavorite(state),
     filters: getFilters(state),
     currentFilter: getCurrentFilter(state),
     isAuthorizationRequired: getAuthorizationStatus(state)

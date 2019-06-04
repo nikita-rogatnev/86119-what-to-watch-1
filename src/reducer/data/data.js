@@ -1,11 +1,15 @@
 const initialState = {
   data: [],
+  dataFavorite: [],
+  dataComments: [],
   currentFilter: `All genres`,
 };
 
 export const ActionType = {
   'CHANGE_FILTER': `CHANGE_FILTER`,
   'LOAD_DATA': `LOAD_DATA`,
+  'LOAD_DATA_FAVORITE': `LOAD_DATA_FAVORITE`,
+  'LOAD_DATA_COMMENTS': `LOAD_DATA_COMMENTS`,
 };
 
 export const ActionCreators = {
@@ -22,12 +26,36 @@ export const ActionCreators = {
       payload: data
     };
   },
+
+  loadDataFavorite: (data) => {
+    return {
+      type: ActionType.LOAD_DATA_FAVORITE,
+      payload: data
+    };
+  },
+
+  loadDataComments: (data) => {
+    return {
+      type: ActionType.LOAD_DATA_COMMENTS,
+      payload: data
+    };
+  },
 };
 
 export const Operations = {
   loadData: () => (dispatch, getState, api) => {
     return api.get(`/films`)
       .then((response) => dispatch(ActionCreators.loadData(response.data)));
+  },
+
+  loadDataFavorite: () => (dispatch, getState, api) => {
+    return api.get(`/favorite`)
+      .then((response) => dispatch(ActionCreators.loadDataFavorite(response.data)));
+  },
+
+  loadDataComments: (id) => (dispatch, getState, api) => {
+    return api.get(`/comments/${id}`)
+      .then((response) => dispatch(ActionCreators.loadDataComments(response.data)));
   }
 };
 
@@ -60,6 +88,16 @@ export const reducer = (state = initialState, action) => {
     case ActionType.LOAD_DATA:
       return Object.assign({}, state, {
         data: mapData(action.payload)
+      });
+
+    case ActionType.LOAD_DATA_FAVORITE:
+      return Object.assign({}, state, {
+        dataFavorite: mapData(action.payload)
+      });
+
+    case ActionType.LOAD_DATA_COMMENTS:
+      return Object.assign({}, state, {
+        dataComments: action.payload
       });
 
     case ActionType.CHANGE_FILTER:

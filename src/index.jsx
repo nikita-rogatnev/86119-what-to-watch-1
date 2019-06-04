@@ -25,6 +25,7 @@ const initApp = () => {
   );
 
   store.dispatch(Operations.loadData());
+  store.dispatch(Operations.loadDataFavorite());
 
   render((
     <Provider store={store}>

@@ -16,7 +16,8 @@ class Header extends PureComponent {
   render() {
     const {
       isLogged,
-      isAuthorizationRequired
+      isAuthorizationRequired,
+      userAvatarUrl
     } = this.props;
 
     return (
@@ -29,7 +30,7 @@ class Header extends PureComponent {
         <div className="user-block">
           {isLogged && <div className="user-block__avatar">
             <Link to="/mylist">
-              <img src="img/avatar.jpg" width="63" height="63" alt="User avatar"/>
+              <img src={userAvatarUrl} width="63" height="63" alt="User avatar"/>
             </Link>
           </div>}
           {!isLogged && !isAuthorizationRequired &&
@@ -55,7 +56,8 @@ const mapDispatchToProps = (dispatch) => ({
 Header.propTypes = {
   isAuthorizationRequired: PropTypes.bool.PropTypes,
   isLogged: PropTypes.bool.isRequired,
-  requireAuthorization: PropTypes.func.isRequired
+  requireAuthorization: PropTypes.func.isRequired,
+  userAvatarUrl: PropTypes.string
 };
 
 export {Header};

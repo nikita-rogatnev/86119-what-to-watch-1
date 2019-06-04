@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import {Switch, Route, NavLink, Link} from 'react-router-dom';
 
 import Header from '../header/header';
+import {Operations} from "../../reducer/data/data";
+import {getDataComments} from '../../reducer/data/selectors';
+import {connect} from "react-redux";
 
 const Overview = (item) => {
   return (
@@ -193,5 +196,6 @@ class CardHero extends React.PureComponent {
 CardHero.propTypes = {
   data: PropTypes.array.isRequired,
 };
+
 
 export default CardHero;

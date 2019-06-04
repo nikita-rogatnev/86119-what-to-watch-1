@@ -30,6 +30,7 @@ class SignIn extends PureComponent {
   }
 
   _onClick() {
+    event.preventDefault();
     this.props.loginUser(this.state.email, this.state.password);
   }
 
