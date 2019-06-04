@@ -3,13 +3,15 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {Switch, Route} from 'react-router-dom';
 
-import Header from '../header/header';
 import SignIn from '../sign-in/sign-in';
 import CardHuge from '../card-huge/card-huge';
 import CardHero from '../card-hero/card-hero';
 import Catalog from '../catalog/catalog';
+import AddReview from '../add-review/add-review';
 import Favorites from '../favorites/favorites';
+import Header from '../header/header';
 import Footer from '../footer/footer';
+import NotFound from '../not-found/not-found';
 
 import {ActionCreators} from '../../reducer/data/data.js';
 import {getFilters, getCurrentFilter, getFilteredData} from '../../reducer/data/selectors.js';
@@ -69,7 +71,21 @@ class App extends PureComponent {
             </main>
           </React.Fragment>
         )}/>
-        <PrivateRoute path="/mylist" component={Favorites}/>
+        <Route path="/films/:id/review" exact render={() => (
+          <React.Fragment>
+            <CardHero {...this.props}/>
+            <AddReview/>
+          </React.Fragment>
+        )}/>
+
+        <PrivateRoute path="/mylist" exact render={() => (
+          <React.Fragment>
+            <Header/>
+            <Favorites {...this.props}/>
+            <Footer/>
+          </React.Fragment>
+        )}/>
+        <Route component={NotFound}/>
       </Switch>
     );
   }

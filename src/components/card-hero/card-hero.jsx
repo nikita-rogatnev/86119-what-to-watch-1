@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Switch, Route, NavLink} from 'react-router-dom';
+import {Switch, Route, NavLink, Link} from 'react-router-dom';
 
 import Header from '../header/header';
 
@@ -136,13 +136,20 @@ class CardHero extends React.PureComponent {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 18 14" width="18" height="14">
-                    <use xlinkHref="#in-list"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
-                <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                {item.isFavorite ?
+                  <Link to="/mylist" className="btn btn--list movie-card__button">
+                    <svg viewBox="0 0 18 14" width="18" height="14">
+                      <use xlinkHref="#in-list"></use>
+                    </svg>
+                    <span>My list</span>
+                  </Link> :
+                  <button type="button" className="btn btn--list movie-card__button">
+                    <svg viewBox="0 0 18 14" width="18" height="14">
+                      <use xlinkHref="#add"></use>
+                    </svg>
+                    <span>My list</span>
+                  </button>}
+                <Link to={`${this.path}/review`} className="btn movie-card__button">Add review</Link>
               </div>
             </div>
           </div>
@@ -158,7 +165,7 @@ class CardHero extends React.PureComponent {
               <nav className="movie-nav movie-card__nav">
                 <ul className="movie-nav__list">
                   <li className={`movie-nav__item`}>
-                    <NavLink to={`${this.path}/`} exact className="movie-nav__link">Overview</NavLink>
+                    <NavLink to={`${this.path}`} exact className="movie-nav__link">Overview</NavLink>
                   </li>
                   <li className={`movie-nav__item`}>
                     <NavLink to={`${this.path}/details`} className="movie-nav__link">Details</NavLink>
@@ -170,7 +177,7 @@ class CardHero extends React.PureComponent {
               </nav>
 
               <Switch>
-                <Route path={`${this.path}/`} exact render={() => (<Overview {...item}/>)}/>
+                <Route path={`${this.path}`} exact render={() => (<Overview {...item}/>)}/>
                 <Route path={`${this.path}/details`} render={() => (<Details {...item}/>)}/>
                 <Route path={`${this.path}/reviews`} render={() => (<Reviews {...item}/>)}/>
               </Switch>
