@@ -13,6 +13,7 @@ it(`App renders correctly`, () => {
   const tree = renderer
     .create(<BrowserRouter><App
       data={mockData}
+      dataFavorite={mockData}
       filters={mockFilters}
       currentFilter={`All genres`}
       changeCurrentFilter={() => {

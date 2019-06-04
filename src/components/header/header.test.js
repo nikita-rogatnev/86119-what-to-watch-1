@@ -3,7 +3,6 @@ import renderer from 'react-test-renderer';
 import {BrowserRouter} from "react-router-dom";
 
 import Header from './header';
-import {App} from "../app/app";
 
 jest.mock(`./header`, () => `Header`);
 

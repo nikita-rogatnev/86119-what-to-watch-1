@@ -76,23 +76,24 @@ exports[`CardHuge renders correctly 1`] = `
               Play
             </span>
           </button>
-          <button
+          <a
             className="btn btn--list movie-card__button"
-            type="button"
+            href="/mylist"
+            onClick={[Function]}
           >
             <svg
-              height="20"
-              viewBox="0 0 19 20"
-              width="19"
+              height="14"
+              viewBox="0 0 18 14"
+              width="18"
             >
               <use
-                xlinkHref="#add"
+                xlinkHref="#in-list"
               />
             </svg>
             <span>
               My list
             </span>
-          </button>
+          </a>
         </div>
       </div>
     </div>

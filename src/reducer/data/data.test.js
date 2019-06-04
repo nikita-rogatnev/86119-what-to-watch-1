@@ -6,6 +6,8 @@ describe(`Data reducer`, () => {
   it(`Should return initial state by default`, () => {
     expect(reducer(undefined, {})).toEqual({
       data: [],
+      dataFavorite: [],
+      dataComments: [],
       currentFilter: `All genres`,
     });
   });
