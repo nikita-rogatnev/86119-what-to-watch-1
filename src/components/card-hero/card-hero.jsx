@@ -168,13 +168,13 @@ class CardHero extends React.PureComponent {
               <nav className="movie-nav movie-card__nav">
                 <ul className="movie-nav__list">
                   <li className={`movie-nav__item`}>
-                    <NavLink to={`${this.path}`} exact className="movie-nav__link">Overview</NavLink>
+                    <NavLink to={`${this.path}`} exact className="movie-nav__link" activeClassName='is-active'>Overview</NavLink>
                   </li>
                   <li className={`movie-nav__item`}>
-                    <NavLink to={`${this.path}/details`} className="movie-nav__link">Details</NavLink>
+                    <NavLink to={`${this.path}/details`} className="movie-nav__link" activeClassName='is-active'>Details</NavLink>
                   </li>
                   <li className="movie-nav__item">
-                    <NavLink to={`${this.path}/reviews`} className="movie-nav__link">Reviews</NavLink>
+                    <NavLink to={`${this.path}/reviews`} className="movie-nav__link" activeClassName='is-active'>Reviews</NavLink>
                   </li>
                 </ul>
               </nav>
