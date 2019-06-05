@@ -1,11 +1,14 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from "prop-types";
 
-import CardHero from "../card-hero/card-hero";
 import Catalog from "../catalog/catalog";
 import Footer from "../footer/footer";
 
-class PageFilm extends PureComponent {
+import {connect} from 'react-redux';
+import {ActionCreators} from '../../reducer/data/data.js';
+import {getFilters, getCurrentFilter, getFilteredData, getDataFavorite} from '../../reducer/data/selectors.js';
+
+class PageFilm extends React.Component {
   render() {
     const {
       data,
@@ -15,7 +18,6 @@ class PageFilm extends PureComponent {
 
     return (
       <React.Fragment>
-        <CardHero {...this.props}/>
         <main className="page-content">
           <Catalog
             data={data}
@@ -38,4 +40,18 @@ PageFilm.propTypes = {
   changeCurrentFilter: PropTypes.func.isRequired,
 };
 
-export default PageFilm;
+const mapStateToProps = (state) => {
+  return {
+    data: getFilteredData(state),
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  changeCurrentFilter: (genre) => {
+    dispatch(ActionCreators.changeActiveGenre(genre));
+  },
+});
+
+export {PageFilm};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PageFilm);

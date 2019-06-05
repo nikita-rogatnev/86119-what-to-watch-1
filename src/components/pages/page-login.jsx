@@ -1,10 +1,10 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 
 import Header from "../header/header";
 import SignIn from "../sign-in/sign-in";
 import Footer from '../footer/footer';
 
-class PageLogin extends PureComponent {
+class PageLogin extends React.PureComponent {
   render() {
     return (
       <div className="user-page">

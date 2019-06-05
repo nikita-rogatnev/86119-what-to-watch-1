@@ -1,6 +1,6 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 
-class AddReview extends PureComponent {
+class AddReview extends React.PureComponent {
   render() {
     return (
       <div className="add-review">

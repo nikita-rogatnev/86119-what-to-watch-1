@@ -1,9 +1,9 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 
 import Card from "../card/card";
 import PropTypes from "prop-types";
 
-class Favorites extends PureComponent {
+class Favorites extends React.PureComponent {
   render() {
     const {data} = this.props;
 

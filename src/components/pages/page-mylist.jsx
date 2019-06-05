@@ -1,11 +1,11 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from "prop-types";
 
 import Header from "../header/header";
 import Favorites from "../favorites/favorites";
 import Footer from '../footer/footer';
 
-class PageMyList extends PureComponent {
+class PageMyList extends React.PureComponent {
   render() {
     const {
       dataFavorite,

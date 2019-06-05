@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import {Switch, Route} from 'react-router-dom';
 
 import PageHome from '../pages/page-home';
@@ -12,7 +12,7 @@ import withPrivateRoute from '../../hocs/with-private-route/with-private-route';
 
 const PrivateRoute = withPrivateRoute(Route);
 
-class App extends PureComponent {
+class App extends React.PureComponent {
   render() {
     return (
       <Switch>

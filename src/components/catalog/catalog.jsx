@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import Filters from '../filters/filters';
@@ -9,7 +9,7 @@ import withActiveItem from '../../hocs/with-active-item/with-active-item';
 const FiltersListWithActiveItem = withActiveItem(Filters);
 const CardListWithActiveItem = withActiveItem(CardList);
 
-class Catalog extends PureComponent {
+class Catalog extends React.PureComponent {
   render() {
     const {
       data,

@@ -129,8 +129,7 @@ class CardHero extends React.Component {
       released,
       isFavorite,
       posterImage,
-
-    } = this.state.item;
+    } = this.state;
 
     return (
       <section className="movie-card movie-card--full">

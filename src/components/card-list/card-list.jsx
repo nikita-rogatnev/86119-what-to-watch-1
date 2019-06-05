@@ -1,9 +1,9 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import Card from '../card/card';
 
-export class CardList extends PureComponent {
+export class CardList extends React.PureComponent {
   render() {
     const {data, showPlayButton} = this.props;
 

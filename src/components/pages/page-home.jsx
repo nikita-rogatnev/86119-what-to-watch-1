@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from "prop-types";
 
 import CardHuge from "../card-huge/card-huge";
@@ -10,7 +10,7 @@ import {ActionCreators} from '../../reducer/data/data.js';
 import {getFilters, getCurrentFilter, getFilteredData, getDataFavorite} from '../../reducer/data/selectors.js';
 import {getAuthorizationStatus} from '../../reducer/user/selectors';
 
-class PageHome extends PureComponent {
+class PageHome extends React.PureComponent {
   render() {
     const {
       data,

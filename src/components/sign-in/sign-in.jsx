@@ -29,16 +29,15 @@ class SignIn extends PureComponent {
     });
   }
 
-  _onClick(e) {
-    e.preventDefault();
-    this.props.loginUser(this.state.email, this.state.password);
-  }
-
   render() {
     return (
       <React.Fragment>
         <div className="sign-in user-page__content">
-          <form className="sign-in__form">
+          <form className="sign-in__form"
+            onSubmit={(e) => {
+              this.props.loginUser(this.state.email, this.state.password);
+              e.preventDefault();
+            }}>
             {this.props.userError && <div className="sign-in__message">
               <p>{this.props.userError}</p>
             </div>}
@@ -75,7 +74,7 @@ class SignIn extends PureComponent {
               </div>
             </div>
             <div className="sign-in__submit">
-              <button className="sign-in__btn" type="submit" onClick={() => this._onClick()}>
+              <button className="sign-in__btn" type="submit">
                 {this.props.isLoading ? `Please wait...` : `Sign in`}
               </button>
             </div>
