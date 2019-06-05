@@ -90,7 +90,9 @@ const Reviews = (data) => {
                   <p className="review__text">{item.comment}</p>
                   <footer className="review__details">
                     <cite className="review__author">{item.user.name}</cite>
-                    <time className="review__date" dateTime="2016-12-24">{item.date}</time>
+                    <time className="review__date" dateTime={item.date}>
+                      {item.date}
+                    </time>
                   </footer>
                 </blockquote>
                 <div className="review__rating">{item.rating}</div>
