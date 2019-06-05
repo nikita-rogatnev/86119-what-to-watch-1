@@ -11,7 +11,7 @@ jest.mock(`../header/header`, () => `Header`);
 it(`CardHuge renders correctly`, () => {
   const tree = renderer
     .create(<BrowserRouter><CardHero
-      data={mockData}
+      data={mockData[0]}
     /></BrowserRouter>).toJSON();
 
   expect(tree).toMatchSnapshot();

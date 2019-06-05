@@ -16,11 +16,12 @@ class Catalog extends React.PureComponent {
       filters,
       currentFilter,
       changeCurrentFilter,
+      maxCardsNumber = 40,
+      catalogTitle = `Catalog`,
+      showCatalogTitle = false,
       showFilters = false,
       showMoreButton = false,
       showPlayButton = false,
-      catalogTitle = `Catalog`,
-      showCatalogTitle = false,
     } = this.props;
 
     return (
@@ -35,7 +36,10 @@ class Catalog extends React.PureComponent {
           />
           : ``}
 
-        <CardListWithActiveItem data={data} showPlayButton={showPlayButton}/>
+        <CardListWithActiveItem
+          data={data.slice(0, maxCardsNumber)}
+          showPlayButton={showPlayButton}
+        />
 
         {showMoreButton ?
           <div className="catalog__more">
@@ -52,11 +56,12 @@ Catalog.propTypes = {
   filters: PropTypes.array.isRequired,
   currentFilter: PropTypes.string.isRequired,
   changeCurrentFilter: PropTypes.func.isRequired,
+  maxCardsNumber: PropTypes.number,
   showFilters: PropTypes.bool,
+  showCatalogTitle: PropTypes.bool,
+  catalogTitle: PropTypes.string,
   showMoreButton: PropTypes.bool,
   showPlayButton: PropTypes.bool,
-  catalogTitle: PropTypes.string,
-  showCatalogTitle: PropTypes.bool,
 };
 
 export default Catalog;

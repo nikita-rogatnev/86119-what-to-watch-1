@@ -27,7 +27,7 @@ exports[`CardList renders correctly 1`] = `
       <br />
       <a
         className="small-movie-card__link"
-        href="/films/1"
+        href="/films/1/"
         onClick={[Function]}
       >
         Matrix
@@ -57,7 +57,7 @@ exports[`CardList renders correctly 1`] = `
       <br />
       <a
         className="small-movie-card__link"
-        href="/films/2"
+        href="/films/2/"
         onClick={[Function]}
       >
         Johnny English

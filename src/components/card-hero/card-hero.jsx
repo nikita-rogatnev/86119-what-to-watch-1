@@ -4,26 +4,29 @@ import {Switch, Route, NavLink, Link} from "react-router-dom";
 
 import Header from "../header/header";
 
-const Overview = (item) => {
+const Overview = (data) => {
   const {
     rating,
     scoresCount,
     director,
-    starring
-  } = item;
+    starring,
+    description
+  } = data;
 
   return (
     <div className="movie-card__text">
       <div className="movie-rating">
         <div className="movie-rating__score">{rating}</div>
         <p className="movie-rating__meta">
-          <span className="movie-rating__level">{CardHero.getRating(rating)}</span>
+          <span className="movie-rating__level">
+            {[`Bad`, `Bad`, `Normal`, `Normal`, `Good`, `Good`, `Good`, `Very good`, `Very good`, `Awesome`][Math.floor(rating)] || `Unknown`}
+          </span>
           <span className="movie-rating__count">{scoresCount} ratings</span>
         </p>
       </div>
 
       <div className="movie-card__text">
-        <p>{item.description}</p>
+        <p>{description}</p>
         <p className="movie-card__director"><strong>Director: {director}</strong></p>
         <p className="movie-card__starring"><strong>Starring: {starring} and other</strong></p>
       </div>
@@ -31,14 +34,14 @@ const Overview = (item) => {
   );
 };
 
-const Details = (item) => {
+const Details = (data) => {
   const {
     director,
     starring,
     runTime,
     genre,
     released
-  } = item;
+  } = data;
 
   return (
     <div className="movie-card__text movie-card__row">
@@ -97,42 +100,16 @@ const Reviews = () => {
 };
 
 class CardHero extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.path = location.pathname;
-    this.id = location.pathname.split(`/`)[2];
-  }
-
-  // TODO: Refactor
-  // ["Bad", "Bad", "Normal", "Normal", "Good", "Good", "Good", "Very good", "Very good", "Awesome"][rating] || "Unknown"
-
-  static getRating(rating) {
-    switch (true) {
-      case rating >= 0 && rating < 3:
-        return `Bad`;
-      case rating >= 3 && rating < 5:
-        return `Normal`;
-      case rating >= 5 && rating < 8:
-        return `Good`;
-      case rating >= 8 && rating < 10:
-        return `Very good`;
-      case rating = 10:
-        return `Awesome`;
-      default:
-        return `Unknown`;
-    }
-  }
-
   render() {
     const {
+      id,
       backgroundImage,
       name,
       genre,
       released,
       isFavorite,
       posterImage,
-    } = this.state;
+    } = this.props.data;
 
     return (
       <section className="movie-card movie-card--full">
@@ -189,21 +166,21 @@ class CardHero extends React.Component {
               <nav className="movie-nav movie-card__nav">
                 <ul className="movie-nav__list">
                   <li className={`movie-nav__item`}>
-                    <NavLink to={`${this.path}`} exact className="movie-nav__link">Overview</NavLink>
+                    <NavLink to={`/films/${id}/`} exact className="movie-nav__link">Overview</NavLink>
                   </li>
                   <li className={`movie-nav__item`}>
-                    <NavLink to={`${this.path}/details`} className="movie-nav__link">Details</NavLink>
+                    <NavLink to={`/films/${id}/details`} className="movie-nav__link">Details</NavLink>
                   </li>
                   <li className="movie-nav__item">
-                    <NavLink to={`${this.path}/reviews`} className="movie-nav__link">Reviews</NavLink>
+                    <NavLink to={`/films/${id}/reviews`} className="movie-nav__link">Reviews</NavLink>
                   </li>
                 </ul>
               </nav>
 
               <Switch>
-                <Route path={`${this.path}`} exact render={() => (<Overview {...this.props}/>)}/>
-                <Route path={`${this.path}/details`} render={() => (<Details {...this.props}/>)}/>
-                <Route path={`${this.path}/reviews`} render={() => (<Reviews {...this.props}/>)}/>
+                <Route path={`/films/${id}/`} exact render={() => (<Overview {...this.props.data}/>)}/>
+                <Route path={`/films/${id}/details`} render={() => (<Details {...this.props.data}/>)}/>
+                <Route path={`/films/${id}/reviews`} render={() => (<Reviews {...this.props.data}/>)}/>
               </Switch>
 
             </div>
@@ -215,7 +192,7 @@ class CardHero extends React.Component {
 }
 
 CardHero.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.object.isRequired,
 };
 
 

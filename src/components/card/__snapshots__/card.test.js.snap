@@ -24,7 +24,7 @@ exports[`Card renders correctly 1`] = `
     <br />
     <a
       className="small-movie-card__link"
-      href="/films/1"
+      href="/films/1/"
       onClick={[Function]}
     >
       Matrix

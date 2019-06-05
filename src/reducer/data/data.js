@@ -1,25 +1,20 @@
 const initialState = {
   data: [],
-  dataFavorite: [],
-  dataComments: [],
+  dataItemCurrent: {},
+  dataItemComments: [],
+  dataFavorites: [],
   currentFilter: `All genres`,
 };
 
 export const ActionType = {
-  "CHANGE_FILTER": `CHANGE_FILTER`,
   "LOAD_DATA": `LOAD_DATA`,
   "LOAD_DATA_FAVORITE": `LOAD_DATA_FAVORITE`,
   "LOAD_DATA_COMMENTS": `LOAD_DATA_COMMENTS`,
+  "CHANGE_FILTER": `CHANGE_FILTER`,
+  "CHANGE_DATA_ACTIVE": `CHANGE_DATA_ACTIVE`,
 };
 
 export const ActionCreators = {
-  changeActiveFilter: (data) => {
-    return {
-      type: ActionType.CHANGE_FILTER,
-      payload: data,
-    };
-  },
-
   loadData: (data) => {
     return {
       type: ActionType.LOAD_DATA,
@@ -27,17 +22,31 @@ export const ActionCreators = {
     };
   },
 
-  loadDataFavorite: (data) => {
+  loadDataFavorites: (data) => {
     return {
       type: ActionType.LOAD_DATA_FAVORITE,
       payload: data
     };
   },
 
-  loadDataComments: (data) => {
+  loadDataItemComments: (data) => {
     return {
       type: ActionType.LOAD_DATA_COMMENTS,
       payload: data
+    };
+  },
+
+  changeCurrentFilter: (data) => {
+    return {
+      type: ActionType.CHANGE_FILTER,
+      payload: data,
+    };
+  },
+
+  changeDataItemCurrent: (id) => {
+    return {
+      type: ActionType.CHANGE_DATA_ACTIVE,
+      payload: id,
     };
   },
 };
@@ -48,14 +57,14 @@ export const Operations = {
       .then((response) => dispatch(ActionCreators.loadData(response.data)));
   },
 
-  loadDataFavorite: () => (dispatch, getState, api) => {
+  loadDataFavorites: () => (dispatch, getState, api) => {
     return api.get(`/favorite`)
-      .then((response) => dispatch(ActionCreators.loadDataFavorite(response.data)));
+      .then((response) => dispatch(ActionCreators.loadDataFavorites(response.data)));
   },
 
-  loadDataComments: (id) => (dispatch, getState, api) => {
+  loadDataItemComments: (id) => (dispatch, getState, api) => {
     return api.get(`/comments/${id}`)
-      .then((response) => dispatch(ActionCreators.loadDataComments(response.data)));
+      .then((response) => dispatch(ActionCreators.loadDataItemComments(response.data)));
   }
 };
 
@@ -92,17 +101,22 @@ export const reducer = (state = initialState, action) => {
 
     case ActionType.LOAD_DATA_FAVORITE:
       return Object.assign({}, state, {
-        dataFavorite: mapData(action.payload)
+        dataFavorites: mapData(action.payload)
       });
 
     case ActionType.LOAD_DATA_COMMENTS:
       return Object.assign({}, state, {
-        dataComments: action.payload
+        dataItemComments: action.payload
       });
 
     case ActionType.CHANGE_FILTER:
       return Object.assign({}, state, {
         currentFilter: action.payload,
+      });
+
+    case ActionType.CHANGE_DATA_ACTIVE:
+      return Object.assign({}, state, {
+        dataItemCurrent: state.data.find((item) => item.id === action.payload),
       });
   }
 

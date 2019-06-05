@@ -1,36 +1,42 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import CardHero from "../../card-hero/card-hero";
 import Catalog from "../../catalog/catalog";
 import Footer from "../../footer/footer";
 
 import {connect} from "react-redux";
 import {ActionCreators} from "../../../reducer/data/data.js";
-import {getFilteredData} from "../../../reducer/data/selectors.js";
-import {getCurrentFilter, getFilters} from "../../../reducer/data/selectors";
+import {
+  getDataItemCurrent,
+  getFilterCurrent,
+  getFilters,
+  getFilteredData
+} from "../../../reducer/data/selectors";
 
 class Film extends React.Component {
-  componentDidMount() {
-    const {changeCurrentFilter} = this.props;
+  componentWillMount() {
+    const {
+      changeCurrentFilter,
+      changeDataItemCurrent,
+    } = this.props;
 
     const {
       // eslint-disable-next-line react/prop-types
-      currentDataItem,
+      currentDataItemId,
       // eslint-disable-next-line react/prop-types
       currentDataFilter
       // eslint-disable-next-line react/prop-types
     } = this.props.location.state;
 
     changeCurrentFilter(currentDataFilter);
-
-    this.setState({
-      currentDataItem,
-    });
+    changeDataItemCurrent(currentDataItemId);
   }
 
   render() {
     const {
       data,
+      dataItemCurrent,
       filters,
       currentFilter,
       changeCurrentFilter,
@@ -38,14 +44,18 @@ class Film extends React.Component {
 
     return (
       <main className="page-content">
+        <CardHero
+          data={dataItemCurrent}
+        />
         <Catalog
           data={data}
           filters={filters}
           currentFilter={currentFilter}
           changeCurrentFilter={changeCurrentFilter}
-          showPlayButton={true}
+          maxCardsNumber={4}
           catalogTitle={`More like this`}
           showCatalogTitle={true}
+          showPlayButton={true}
         />
         <Footer/>
       </main>
@@ -55,22 +65,28 @@ class Film extends React.Component {
 
 Film.propTypes = {
   data: PropTypes.array.isRequired,
+  dataItemCurrent: PropTypes.object.isRequired,
   filters: PropTypes.array.isRequired,
   currentFilter: PropTypes.string.isRequired,
   changeCurrentFilter: PropTypes.func.isRequired,
+  changeDataItemCurrent: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
-    data: getFilteredData(state).slice(0, 4),
+    data: getFilteredData(state),
+    dataItemCurrent: getDataItemCurrent(state),
     filters: getFilters(state),
-    currentFilter: getCurrentFilter(state),
+    currentFilter: getFilterCurrent(state),
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   changeCurrentFilter: (genre) => {
-    dispatch(ActionCreators.changeActiveFilter(genre));
+    dispatch(ActionCreators.changeCurrentFilter(genre));
+  },
+  changeDataItemCurrent: (id) => {
+    dispatch(ActionCreators.changeDataItemCurrent(id));
   },
 });
 

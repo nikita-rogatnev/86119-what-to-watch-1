@@ -7,7 +7,7 @@ import Footer from "../../footer/footer";
 
 import {connect} from "react-redux";
 import {ActionCreators} from "../../../reducer/data/data.js";
-import {getFilters, getCurrentFilter, getFilteredData} from "../../../reducer/data/selectors.js";
+import {getFilters, getFilterCurrent, getFilteredData} from "../../../reducer/data/selectors.js";
 import {getAuthorizationStatus} from "../../../reducer/user/selectors";
 
 class Home extends React.PureComponent {
@@ -49,14 +49,14 @@ const mapStateToProps = (state) => {
   return {
     data: getFilteredData(state),
     filters: getFilters(state),
-    currentFilter: getCurrentFilter(state),
+    currentFilter: getFilterCurrent(state),
     isAuthorizationRequired: getAuthorizationStatus(state)
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   changeCurrentFilter: (genre) => {
-    dispatch(ActionCreators.changeActiveFilter(genre));
+    dispatch(ActionCreators.changeCurrentFilter(genre));
   },
 });
 
