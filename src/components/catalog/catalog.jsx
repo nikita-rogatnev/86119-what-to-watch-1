@@ -9,7 +9,7 @@ import withActiveItem from "../../hocs/with-active-item/with-active-item";
 const FiltersListWithActiveItem = withActiveItem(Filters);
 const CardListWithActiveItem = withActiveItem(CardList);
 
-class Catalog extends React.PureComponent {
+class Catalog extends React.Component {
   render() {
     const {
       data,

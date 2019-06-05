@@ -32,7 +32,7 @@ class Film extends React.Component {
     changeCurrentFilter(currentDataFilter);
     changeDataItemCurrent(currentDataItemId);
   }
-
+  
   render() {
     const {
       data,
