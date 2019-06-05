@@ -6,10 +6,15 @@ import Catalog from "../../catalog/catalog";
 import Footer from "../../footer/footer";
 
 import {connect} from "react-redux";
+import {Operations} from "../../../reducer/data/data";
 import {ActionCreators} from "../../../reducer/data/data.js";
 import {getFilterCurrent, getFilters, getDataFavorites} from "../../../reducer/data/selectors";
 
 class Mylist extends React.PureComponent {
+  componentWillMount() {
+    this.props.loadDataFavorites();
+  }
+
   render() {
     const {
       dataFavorites,
@@ -40,6 +45,7 @@ Mylist.propTypes = {
   filters: PropTypes.array.isRequired,
   currentFilter: PropTypes.string.isRequired,
   changeCurrentFilter: PropTypes.func.isRequired,
+  loadDataFavorites: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -51,6 +57,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  loadDataFavorites: () => {
+    dispatch(Operations.loadDataFavorites());
+  },
   changeCurrentFilter: (genre) => {
     dispatch(ActionCreators.changeCurrentFilter(genre));
   },

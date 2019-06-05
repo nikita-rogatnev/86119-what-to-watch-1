@@ -153,7 +153,7 @@ class CardHero extends React.Component {
                     </svg>
                     <span>My list</span>
                   </button>}
-                <Link to={`${this.path}/review`} className="btn movie-card__button">Add review</Link>
+                <Link to={`/films/${id}/review`} className="btn movie-card__button">Add review</Link>
               </div>
             </div>
           </div>

@@ -83,6 +83,12 @@ class SignIn extends PureComponent {
   }
 }
 
+SignIn.propTypes = {
+  userError: PropTypes.string,
+  loginUser: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool
+};
+
 const mapStateToProps = (state, ownProps) =>
   Object.assign({}, ownProps, {
     userError: getUserError(state),
@@ -90,14 +96,10 @@ const mapStateToProps = (state, ownProps) =>
   });
 
 const mapDispatchToProps = (dispatch) => ({
-  loginUser: (email, password) => dispatch(Operations.loginUser(email, password))
+  loginUser: (email, password) => {
+    dispatch(Operations.loginUser(email, password));
+  }
 });
-
-SignIn.propTypes = {
-  userError: PropTypes.string,
-  loginUser: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool
-};
 
 export {SignIn};
 
