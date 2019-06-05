@@ -123,6 +123,8 @@ exports[`Catalog renders correctly 1`] = `
       <h3
         className="small-movie-card__title"
       >
+        Action
+        <br />
         <a
           className="small-movie-card__link"
           href="/films/1"
@@ -151,6 +153,8 @@ exports[`Catalog renders correctly 1`] = `
       <h3
         className="small-movie-card__title"
       >
+        Comedy
+        <br />
         <a
           className="small-movie-card__link"
           href="/films/2"

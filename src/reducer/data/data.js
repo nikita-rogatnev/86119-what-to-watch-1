@@ -13,7 +13,7 @@ export const ActionType = {
 };
 
 export const ActionCreators = {
-  changeActiveGenre: (data) => {
+  changeActiveFilter: (data) => {
     return {
       type: ActionType.CHANGE_FILTER,
       payload: data,

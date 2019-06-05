@@ -34,6 +34,7 @@ class Card extends React.PureComponent {
       previewImage,
       previewVideoLink,
       showPlayButton,
+      genre,
     } = this.props;
 
     const {isPreviewPlaying} = this.state;
@@ -61,11 +62,12 @@ class Card extends React.PureComponent {
           }
         </div>
         <h3 className="small-movie-card__title">
+          {genre}<br/>
           <Link to={{
             pathname: `/films/${id}`,
             state: {
-              currentDataItem: `1`,
-              currentDataFilter: `2`,
+              currentDataItem: id,
+              currentDataFilter: genre,
             }
           }} className="small-movie-card__link">
             {name}
@@ -78,7 +80,8 @@ class Card extends React.PureComponent {
 
 Card.propTypes = {
   id: PropTypes.number.isRequired,
-  name: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  genre: PropTypes.string.isRequired,
   previewImage: PropTypes.string.isRequired,
   previewVideoLink: PropTypes.string.isRequired,
   showPlayButton: PropTypes.bool.isRequired,

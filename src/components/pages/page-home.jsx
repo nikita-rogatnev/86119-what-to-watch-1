@@ -57,7 +57,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   changeCurrentFilter: (genre) => {
-    dispatch(ActionCreators.changeActiveGenre(genre));
+    dispatch(ActionCreators.changeActiveFilter(genre));
   },
 });
 

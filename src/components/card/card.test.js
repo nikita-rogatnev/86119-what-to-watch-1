@@ -11,6 +11,8 @@ it(`Card renders correctly`, () => {
     .create(<BrowserRouter><Card
       key={mockData[0].id}
       id={mockData[0].id}
+      name={mockData[0].name}
+      genre={mockData[0].genre}
       previewImage={mockData[0].previewImage}
       previewVideoLink={mockData[0].previewVideoLink}
       showPlayButton={false}

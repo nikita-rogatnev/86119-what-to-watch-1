@@ -12,3 +12,5 @@ it(`App renders correctly`, () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+// TODO: Fix test

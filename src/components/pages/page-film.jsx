@@ -6,9 +6,28 @@ import Footer from "../footer/footer";
 
 import {connect} from 'react-redux';
 import {ActionCreators} from '../../reducer/data/data.js';
-import {getFilters, getCurrentFilter, getFilteredData, getDataFavorite} from '../../reducer/data/selectors.js';
+import {getFilteredData} from '../../reducer/data/selectors.js';
+import {getCurrentFilter} from "../../reducer/data/selectors";
 
 class PageFilm extends React.Component {
+  componentDidMount() {
+    const {changeCurrentFilter} = this.props;
+
+    const {
+      // eslint-disable-next-line react/prop-types
+      currentDataItem,
+      // eslint-disable-next-line react/prop-types
+      currentDataFilter
+      // eslint-disable-next-line react/prop-types
+    } = this.props.location.state;
+
+    changeCurrentFilter(currentDataFilter);
+
+    this.setState({
+      currentDataItem,
+    });
+  }
+
   render() {
     const {
       data,
@@ -17,19 +36,17 @@ class PageFilm extends React.Component {
     } = this.props;
 
     return (
-      <React.Fragment>
-        <main className="page-content">
-          <Catalog
-            data={data}
-            filters={[]}
-            currentFilter={currentFilter}
-            changeCurrentFilter={changeCurrentFilter}
-            showMoreButton={false}
-            showPlayButton={true}
-          />
-          <Footer/>
-        </main>
-      </React.Fragment>
+      <main className="page-content">
+        <Catalog
+          data={data}
+          filters={[]}
+          currentFilter={currentFilter}
+          changeCurrentFilter={changeCurrentFilter}
+          showMoreButton={false}
+          showPlayButton={true}
+        />
+        <Footer/>
+      </main>
     );
   }
 }
@@ -42,13 +59,14 @@ PageFilm.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    data: getFilteredData(state),
+    data: getFilteredData(state).slice(0, 4),
+    currentFilter: getCurrentFilter(state),
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   changeCurrentFilter: (genre) => {
-    dispatch(ActionCreators.changeActiveGenre(genre));
+    dispatch(ActionCreators.changeActiveFilter(genre));
   },
 });
 

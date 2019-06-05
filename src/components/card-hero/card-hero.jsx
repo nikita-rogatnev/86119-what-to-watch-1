@@ -104,6 +104,9 @@ class CardHero extends React.Component {
     this.id = location.pathname.split(`/`)[2];
   }
 
+  // TODO: Refactor
+  // ['Bad', 'Bad', 'Normal', 'Normal', 'Good', 'Good', 'Good', 'Very good', 'Very good', 'Awesome'][rating] || 'Unknown'
+
   static getRating(rating) {
     switch (true) {
       case rating >= 0 && rating < 3:

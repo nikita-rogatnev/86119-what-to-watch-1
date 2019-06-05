@@ -31,56 +31,54 @@ class SignIn extends PureComponent {
 
   render() {
     return (
-      <React.Fragment>
-        <div className="sign-in user-page__content">
-          <form className="sign-in__form"
-            onSubmit={(e) => {
-              this.props.loginUser(this.state.email, this.state.password);
-              e.preventDefault();
-            }}>
-            {this.props.userError && <div className="sign-in__message">
-              <p>{this.props.userError}</p>
-            </div>}
+      <section className="sign-in user-page__content">
+        <form className="sign-in__form"
+          onSubmit={(e) => {
+            this.props.loginUser(this.state.email, this.state.password);
+            e.preventDefault();
+          }}>
+          {this.props.userError && <div className="sign-in__message">
+            <p>{this.props.userError}</p>
+          </div>}
 
-            {this.state.error && <div className="sign-in__message">
-              <p>{this.state.error}</p>
-            </div>}
-            <div className="sign-in__fields">
-              <div className={`sign-in__field ${this.state.error ? `sign-in__field--error` : ``}`}>
-                <input
-                  className="sign-in__input"
-                  type="email"
-                  placeholder="Email address"
-                  name="user-email"
-                  id="user-email"
-                  autoComplete="username email"
-                  required="required"
-                  onKeyUp={(e) => this._onChangeEmail(e.target.value)}
-                />
-                <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
-              </div>
-              <div className="sign-in__field">
-                <input
-                  className="sign-in__input"
-                  type="password"
-                  placeholder="Password"
-                  name="user-password"
-                  id="user-password"
-                  autoComplete="current-password"
-                  required="required"
-                  onKeyUp={(e) => this._onChangePassword(e.target.value)}
-                />
-                <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
-              </div>
+          {this.state.error && <div className="sign-in__message">
+            <p>{this.state.error}</p>
+          </div>}
+          <div className="sign-in__fields">
+            <div className={`sign-in__field ${this.state.error ? `sign-in__field--error` : ``}`}>
+              <input
+                className="sign-in__input"
+                type="email"
+                placeholder="Email address"
+                name="user-email"
+                id="user-email"
+                autoComplete="username email"
+                required="required"
+                onKeyUp={(e) => this._onChangeEmail(e.target.value)}
+              />
+              <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
-            <div className="sign-in__submit">
-              <button className="sign-in__btn" type="submit">
-                {this.props.isLoading ? `Please wait...` : `Sign in`}
-              </button>
+            <div className="sign-in__field">
+              <input
+                className="sign-in__input"
+                type="password"
+                placeholder="Password"
+                name="user-password"
+                id="user-password"
+                autoComplete="current-password"
+                required="required"
+                onKeyUp={(e) => this._onChangePassword(e.target.value)}
+              />
+              <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>
-          </form>
-        </div>
-      </React.Fragment>
+          </div>
+          <div className="sign-in__submit">
+            <button className="sign-in__btn" type="submit">
+              {this.props.isLoading ? `Please wait...` : `Sign in`}
+            </button>
+          </div>
+        </form>
+      </section>
     );
   }
 }
