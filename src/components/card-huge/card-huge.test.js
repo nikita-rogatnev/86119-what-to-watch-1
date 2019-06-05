@@ -1,8 +1,8 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import React from "react";
+import renderer from "react-test-renderer";
 import {BrowserRouter} from "react-router-dom";
 
-import CardHuge from './card-huge';
+import CardHuge from "./card-huge";
 
 jest.mock(`../header/header`, () => `Header`);
 

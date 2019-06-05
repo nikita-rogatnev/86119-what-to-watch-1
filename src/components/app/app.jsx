@@ -1,14 +1,14 @@
-import React from 'react';
-import {Switch, Route} from 'react-router-dom';
+import React from "react";
+import {Switch, Route} from "react-router-dom";
 
-import PageHome from '../pages/page-home';
-import PageLogin from '../pages/page-login';
-import PageFilm from '../pages/page-film';
-import PageReview from '../pages/page-review';
-import PageMyList from '../pages/page-mylist';
-import PageError from '../pages/page-error';
+import PageHome from "../pages/home/home";
+import Login from "../pages/login/login";
+import PageFilm from "../pages/film/film";
+import Review from "../pages/review/review";
+import Mylist from "../pages/mylist/mylist";
+import Error from "../pages/error/error";
 
-import withPrivateRoute from '../../hocs/with-private-route/with-private-route';
+import withPrivateRoute from "../../hocs/with-private-route/with-private-route";
 
 const PrivateRoute = withPrivateRoute(Route);
 
@@ -17,11 +17,11 @@ class App extends React.PureComponent {
     return (
       <Switch>
         <Route path="/" exact component={PageHome}/>
-        <Route path="/login" component={PageLogin}/>
+        <Route path="/login" component={Login}/>
         <Route path="/films/:id" component={PageFilm}/>
-        <PrivateRoute path="/films/:id/review" exact component={PageReview}/>
-        <PrivateRoute path="/mylist" exact component={PageMyList}/>
-        <Route component={PageError}/>
+        <PrivateRoute path="/films/:id/review" exact component={Review}/>
+        <PrivateRoute path="/mylist" exact component={Mylist}/>
+        <Route component={Error}/>
       </Switch>
     );
   }

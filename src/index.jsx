@@ -1,16 +1,16 @@
-import React from 'react';
-import {render} from 'react-dom';
-import {BrowserRouter} from 'react-router-dom';
+import React from "react";
+import {render} from "react-dom";
+import {BrowserRouter} from "react-router-dom";
 
-import App from './components/app/app';
+import App from "./components/app/app";
 
-import {createAPI} from './api';
-import reducer from './reducer';
-import {Operations} from './reducer/data/data';
-import {createStore, applyMiddleware} from 'redux';
-import {Provider} from 'react-redux';
-import thunk from 'redux-thunk';
-import {compose} from 'recompose';
+import {createAPI} from "./api";
+import reducer from "./reducer";
+import {Operations} from "./reducer/data/data";
+import {createStore, applyMiddleware} from "redux";
+import {Provider} from "react-redux";
+import thunk from "redux-thunk";
+import {compose} from "recompose";
 
 const initApp = () => {
   const api = createAPI((action) => store.dispatch(action));

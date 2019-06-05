@@ -1,16 +1,16 @@
-import React from 'react';
+import React from "react";
 import PropTypes from "prop-types";
 
-import CardHuge from "../card-huge/card-huge";
-import Catalog from "../catalog/catalog";
-import Footer from '../footer/footer';
+import CardHuge from "../../card-huge/card-huge";
+import Catalog from "../../catalog/catalog";
+import Footer from "../../footer/footer";
 
-import {connect} from 'react-redux';
-import {ActionCreators} from '../../reducer/data/data.js';
-import {getFilters, getCurrentFilter, getFilteredData, getDataFavorite} from '../../reducer/data/selectors.js';
-import {getAuthorizationStatus} from '../../reducer/user/selectors';
+import {connect} from "react-redux";
+import {ActionCreators} from "../../../reducer/data/data.js";
+import {getFilters, getCurrentFilter, getFilteredData} from "../../../reducer/data/selectors.js";
+import {getAuthorizationStatus} from "../../../reducer/user/selectors";
 
-class PageHome extends React.PureComponent {
+class Home extends React.PureComponent {
   render() {
     const {
       data,
@@ -28,6 +28,7 @@ class PageHome extends React.PureComponent {
             filters={filters}
             currentFilter={currentFilter}
             changeCurrentFilter={changeCurrentFilter}
+            showFilters={true}
             showMoreButton={true}
           />
           <Footer/>
@@ -37,7 +38,7 @@ class PageHome extends React.PureComponent {
   }
 }
 
-PageHome.propTypes = {
+Home.propTypes = {
   data: PropTypes.array.isRequired,
   filters: PropTypes.array.isRequired,
   currentFilter: PropTypes.string.isRequired,
@@ -47,7 +48,6 @@ PageHome.propTypes = {
 const mapStateToProps = (state) => {
   return {
     data: getFilteredData(state),
-    dataFavorite: getDataFavorite(state),
     filters: getFilters(state),
     currentFilter: getCurrentFilter(state),
     isAuthorizationRequired: getAuthorizationStatus(state)
@@ -60,6 +60,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export {PageHome};
+export {Home};
 
-export default connect(mapStateToProps, mapDispatchToProps)(PageHome);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

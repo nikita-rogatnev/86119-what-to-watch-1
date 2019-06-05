@@ -1,5 +1,5 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import React, {PureComponent} from "react";
+import PropTypes from "prop-types";
 
 class VideoPlayer extends PureComponent {
   constructor(props) {
@@ -27,7 +27,7 @@ class VideoPlayer extends PureComponent {
           height="180"
           ref={this._videoRef}
         >
-          <source src={previewVideoLink} type='video/mp4'/>
+          <source src={previewVideoLink} type="video/mp4"/>
         </video>
       </React.Fragment>
     );

@@ -1,11 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import React from "react";
+import renderer from "react-test-renderer";
 import {BrowserRouter} from "react-router-dom";
 
-import Catalog from './catalog';
+import Catalog from "./catalog";
 
-import mockData from '../../mocks/mock-data';
-import mockFilters from '../../mocks/mock-filters';
+import mockData from "../../mocks/mock-data";
+import mockFilters from "../../mocks/mock-filters";
 
 it(`Catalog renders correctly`, () => {
   const tree = renderer

@@ -1,4 +1,4 @@
-import {reducer} from './user';
+import {reducer} from "./user";
 
 describe(`User reducer`, () => {
   it(`Should change isAuthorizationRequired to true`, () => {

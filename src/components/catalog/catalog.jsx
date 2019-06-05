@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import Filters from '../filters/filters';
-import CardList from '../card-list/card-list';
+import Filters from "../filters/filters";
+import CardList from "../card-list/card-list";
 
-import withActiveItem from '../../hocs/with-active-item/with-active-item';
+import withActiveItem from "../../hocs/with-active-item/with-active-item";
 
 const FiltersListWithActiveItem = withActiveItem(Filters);
 const CardListWithActiveItem = withActiveItem(CardList);
@@ -16,6 +16,7 @@ class Catalog extends React.PureComponent {
       filters,
       currentFilter,
       changeCurrentFilter,
+      showFilters = false,
       showMoreButton = false,
       showPlayButton = false,
       catalogTitle = `Catalog`,
@@ -26,7 +27,14 @@ class Catalog extends React.PureComponent {
       <section className="catalog">
         <h2 className={`catalog__title ${showCatalogTitle ? `` : `visually-hidden`}`}>{catalogTitle}</h2>
 
-        <FiltersListWithActiveItem filters={filters} currentFilter={currentFilter} changeCurrentFilter={changeCurrentFilter}/>
+        {showFilters ?
+          <FiltersListWithActiveItem
+            filters={filters}
+            currentFilter={currentFilter}
+            changeCurrentFilter={changeCurrentFilter}
+          />
+          : ``}
+
         <CardListWithActiveItem data={data} showPlayButton={showPlayButton}/>
 
         {showMoreButton ?
@@ -44,6 +52,7 @@ Catalog.propTypes = {
   filters: PropTypes.array.isRequired,
   currentFilter: PropTypes.string.isRequired,
   changeCurrentFilter: PropTypes.func.isRequired,
+  showFilters: PropTypes.bool,
   showMoreButton: PropTypes.bool,
   showPlayButton: PropTypes.bool,
   catalogTitle: PropTypes.string,

@@ -1,10 +1,10 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import {BrowserRouter} from 'react-router-dom';
+import React from "react";
+import renderer from "react-test-renderer";
+import {BrowserRouter} from "react-router-dom";
 
-import Filters from './filters';
+import Filters from "./filters";
 
-import mockFilters from '../../mocks/mock-filters';
+import mockFilters from "../../mocks/mock-filters";
 
 it(`Filters renders correctly`, () => {
   const tree = renderer

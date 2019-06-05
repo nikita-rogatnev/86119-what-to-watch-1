@@ -1,10 +1,10 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import React from "react";
+import renderer from "react-test-renderer";
 import {BrowserRouter} from "react-router-dom";
 
-import Card from './card';
+import Card from "./card";
 
-import mockData from '../../mocks/mock-data';
+import mockData from "../../mocks/mock-data";
 
 it(`Card renders correctly`, () => {
   const tree = renderer

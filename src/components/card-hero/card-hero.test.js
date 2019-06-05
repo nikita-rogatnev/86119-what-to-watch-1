@@ -1,10 +1,10 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import React from "react";
+import renderer from "react-test-renderer";
 import {BrowserRouter} from "react-router-dom";
 
-import CardHero from './card-hero';
+import CardHero from "./card-hero";
 
-import mockData from '../../mocks/mock-data';
+import mockData from "../../mocks/mock-data";
 
 jest.mock(`../header/header`, () => `Header`);
 

@@ -1,11 +1,11 @@
-import React from 'react';
-import Enzyme, {mount} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import React from "react";
+import Enzyme, {mount} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
 import {BrowserRouter} from "react-router-dom";
 
-import Card from './card';
+import Card from "./card";
 
-import mockData from '../../mocks/mock-data';
+import mockData from "../../mocks/mock-data";
 
 Enzyme.configure({adapter: new Adapter()});
 
@@ -17,6 +17,7 @@ describe(`Card e2e`, () => {
       <Card
         id={mockData[0].id}
         name={mockData[0].name}
+        genre={mockData[0].genre}
         previewImage={mockData[0].previewImage}
         previewVideoLink={mockData[0].previewVideoLink}
         showPlayButton={false}

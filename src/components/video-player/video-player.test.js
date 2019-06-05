@@ -1,10 +1,10 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import React from "react";
+import renderer from "react-test-renderer";
 import {BrowserRouter} from "react-router-dom";
 
-import VideoPlayer from './video-player';
+import VideoPlayer from "./video-player";
 
-import mockData from '../../mocks/mock-data';
+import mockData from "../../mocks/mock-data";
 
 it(`VideoPlayer renders correctly`, () => {
   const tree = renderer

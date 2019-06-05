@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {Switch, Route, NavLink, Link} from 'react-router-dom';
+import React from "react";
+import PropTypes from "prop-types";
+import {Switch, Route, NavLink, Link} from "react-router-dom";
 
-import Header from '../header/header';
+import Header from "../header/header";
 
 const Overview = (item) => {
   const {
@@ -105,7 +105,7 @@ class CardHero extends React.Component {
   }
 
   // TODO: Refactor
-  // ['Bad', 'Bad', 'Normal', 'Normal', 'Good', 'Good', 'Good', 'Very good', 'Very good', 'Awesome'][rating] || 'Unknown'
+  // ["Bad", "Bad", "Normal", "Normal", "Good", "Good", "Good", "Very good", "Very good", "Awesome"][rating] || "Unknown"
 
   static getRating(rating) {
     switch (true) {

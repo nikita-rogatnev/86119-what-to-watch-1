@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {Redirect} from 'react-router-dom';
+import React from "react";
+import PropTypes from "prop-types";
+import {Redirect} from "react-router-dom";
 
 const withPrivateRoute = (Component) => {
   const WithPrivateRoute = (props) => {

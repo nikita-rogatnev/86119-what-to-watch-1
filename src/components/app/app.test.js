@@ -1,8 +1,8 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import React from "react";
+import renderer from "react-test-renderer";
 import {BrowserRouter} from "react-router-dom";
 
-import {App} from './app';
+import App from "./app";
 
 jest.mock(`../header/header`, () => `Header`);
 
@@ -12,5 +12,3 @@ it(`App renders correctly`, () => {
 
   expect(tree).toMatchSnapshot();
 });
-
-// TODO: Fix test

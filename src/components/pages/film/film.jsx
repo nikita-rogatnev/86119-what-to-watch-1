@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 import PropTypes from "prop-types";
 
-import Catalog from "../catalog/catalog";
-import Footer from "../footer/footer";
+import Catalog from "../../catalog/catalog";
+import Footer from "../../footer/footer";
 
-import {connect} from 'react-redux';
-import {ActionCreators} from '../../reducer/data/data.js';
-import {getFilteredData} from '../../reducer/data/selectors.js';
-import {getCurrentFilter} from "../../reducer/data/selectors";
+import {connect} from "react-redux";
+import {ActionCreators} from "../../../reducer/data/data.js";
+import {getFilteredData} from "../../../reducer/data/selectors.js";
+import {getCurrentFilter, getFilters} from "../../../reducer/data/selectors";
 
-class PageFilm extends React.Component {
+class Film extends React.Component {
   componentDidMount() {
     const {changeCurrentFilter} = this.props;
 
@@ -31,6 +31,7 @@ class PageFilm extends React.Component {
   render() {
     const {
       data,
+      filters,
       currentFilter,
       changeCurrentFilter,
     } = this.props;
@@ -39,7 +40,7 @@ class PageFilm extends React.Component {
       <main className="page-content">
         <Catalog
           data={data}
-          filters={[]}
+          filters={filters}
           currentFilter={currentFilter}
           changeCurrentFilter={changeCurrentFilter}
           showPlayButton={true}
@@ -52,8 +53,9 @@ class PageFilm extends React.Component {
   }
 }
 
-PageFilm.propTypes = {
+Film.propTypes = {
   data: PropTypes.array.isRequired,
+  filters: PropTypes.array.isRequired,
   currentFilter: PropTypes.string.isRequired,
   changeCurrentFilter: PropTypes.func.isRequired,
 };
@@ -61,6 +63,7 @@ PageFilm.propTypes = {
 const mapStateToProps = (state) => {
   return {
     data: getFilteredData(state).slice(0, 4),
+    filters: getFilters(state),
     currentFilter: getCurrentFilter(state),
   };
 };
@@ -71,6 +74,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export {PageFilm};
+export {Film};
 
-export default connect(mapStateToProps, mapDispatchToProps)(PageFilm);
+export default connect(mapStateToProps, mapDispatchToProps)(Film);

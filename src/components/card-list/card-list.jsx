@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import Card from '../card/card';
+import Card from "../card/card";
 
 export class CardList extends React.PureComponent {
   render() {

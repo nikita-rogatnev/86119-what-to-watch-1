@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import Header from '../header/header';
+import Header from "../header/header";
 import {Link} from "react-router-dom";
 
 class CardHuge extends React.PureComponent {
