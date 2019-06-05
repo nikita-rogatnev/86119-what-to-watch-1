@@ -9,7 +9,7 @@ const initialState = {
 export const ActionType = {
   "LOAD_DATA": `LOAD_DATA`,
   "LOAD_DATA_FAVORITE": `LOAD_DATA_FAVORITE`,
-  "LOAD_DATA_COMMENTS": `LOAD_DATA_COMMENTS`,
+  "LOAD_DATA_REVIEWS": `LOAD_DATA_REVIEWS`,
   "CHANGE_FILTER": `CHANGE_FILTER`,
   "CHANGE_DATA_ACTIVE": `CHANGE_DATA_ACTIVE`,
 };
@@ -31,7 +31,7 @@ export const ActionCreators = {
 
   loadDataItemReviews: (data) => {
     return {
-      type: ActionType.LOAD_DATA_COMMENTS,
+      type: ActionType.LOAD_DATA_REVIEWS,
       payload: data
     };
   },
@@ -104,11 +104,6 @@ export const reducer = (state = initialState, action) => {
         dataFavorites: mapData(action.payload)
       });
 
-    case ActionType.LOAD_DATA_COMMENTS:
-      return Object.assign({}, state, {
-        dataItemReviews: action.payload
-      });
-
     case ActionType.CHANGE_FILTER:
       return Object.assign({}, state, {
         currentFilter: action.payload,
@@ -117,6 +112,11 @@ export const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_DATA_ACTIVE:
       return Object.assign({}, state, {
         dataItemCurrent: state.data.find((item) => item.id === action.payload),
+      });
+
+    case ActionType.LOAD_DATA_REVIEWS:
+      return Object.assign({}, state, {
+        dataItemReviews: action.payload
       });
   }
 

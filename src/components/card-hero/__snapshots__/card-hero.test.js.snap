@@ -85,7 +85,7 @@ exports[`CardHero renders correctly 1`] = `
           </button>
           <Link
             className="btn movie-card__button"
-            to="undefined/review"
+            to="/films/1/review"
           >
             Add review
           </Link>

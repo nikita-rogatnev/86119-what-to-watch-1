@@ -14,13 +14,13 @@ import {
   getFilteredData,
   getDataItemReviews
 } from "../../../reducer/data/selectors";
+import {Operations} from "../../../reducer/data/data";
 
 class Film extends React.Component {
   componentWillMount() {
     const {
       changeCurrentFilter,
       changeDataItemCurrent,
-      loadDataItemReviews,
     } = this.props;
 
     const {
@@ -33,7 +33,8 @@ class Film extends React.Component {
 
     changeCurrentFilter(currentDataFilter);
     changeDataItemCurrent(currentDataItemId);
-    loadDataItemReviews(currentDataItemId);
+
+    this.props.loadDataItemReviews(currentDataItemId);
   }
 
   render() {
@@ -99,7 +100,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreators.changeDataItemCurrent(id));
   },
   loadDataItemReviews: (id) => {
-    dispatch(ActionCreators.loadDataItemReviews(id));
+    dispatch(Operations.loadDataItemReviews(id));
   },
 });
 

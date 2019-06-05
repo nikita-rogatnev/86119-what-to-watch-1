@@ -76,24 +76,46 @@ const Details = (data) => {
   );
 };
 
-const Reviews = () => {
+const Reviews = (data) => {
   return (
     <div className="movie-card__reviews movie-card__row">
       <div className="movie-card__reviews-col">
-        <div className="review">
-          <blockquote className="review__quote">
-            <p className="review__text">Discerning travellers and Wes Anderson fans will luxuriate in the
-              glorious Mittel-European kitsch of one of the directors funniest and most exquisitely designed
-              movies in years.</p>
-
-            <footer className="review__details">
-              <cite className="review__author">Kate Muir</cite>
-              <time className="review__date" dateTime="2016-12-24">December 24, 2016</time>
-            </footer>
-          </blockquote>
-
-          <div className="review__rating">8,9</div>
-        </div>
+        {Object
+          .values(data)
+          .filter((item, key) => key % 2 === 0)
+          .map((item) => {
+            return (
+              <div className="review" key={item.id}>
+                <blockquote className="review__quote">
+                  <p className="review__text">{item.comment}</p>
+                  <footer className="review__details">
+                    <cite className="review__author">{item.user.name}</cite>
+                    <time className="review__date" dateTime="2016-12-24">{item.date}</time>
+                  </footer>
+                </blockquote>
+                <div className="review__rating">{item.rating}</div>
+              </div>
+            );
+          })}
+      </div>
+      <div className="movie-card__reviews-col">
+        {Object
+          .values(data)
+          .filter((item, key) => key % 2 === 1)
+          .map((item) => {
+            return (
+              <div className="review" key={item.id}>
+                <blockquote className="review__quote">
+                  <p className="review__text">{item.comment}</p>
+                  <footer className="review__details">
+                    <cite className="review__author">{item.user.name}</cite>
+                    <time className="review__date" dateTime="2016-12-24">{item.date}</time>
+                  </footer>
+                </blockquote>
+                <div className="review__rating">{item.rating}</div>
+              </div>
+            );
+          })}
       </div>
     </div>
   );
@@ -110,9 +132,6 @@ class CardHero extends React.Component {
       isFavorite,
       posterImage,
     } = this.props.data;
-
-    // const {reviews} = this.props;
-    // console.log(reviews);
 
     return (
       <section className="movie-card movie-card--full">
@@ -183,7 +202,7 @@ class CardHero extends React.Component {
               <Switch>
                 <Route path={`/films/${id}/`} exact render={() => (<Overview {...this.props.data}/>)}/>
                 <Route path={`/films/${id}/details`} render={() => (<Details {...this.props.data}/>)}/>
-                <Route path={`/films/${id}/reviews`} render={() => (<Reviews {...this.props.data}/>)}/>
+                <Route path={`/films/${id}/reviews`} render={() => (<Reviews {...this.props.reviews}/>)}/>
               </Switch>
 
             </div>
@@ -196,7 +215,7 @@ class CardHero extends React.Component {
 
 CardHero.propTypes = {
   data: PropTypes.object.isRequired,
-  reviews: PropTypes.array.isRequired,
+  reviews: PropTypes.object.isRequired,
 };
 
 
