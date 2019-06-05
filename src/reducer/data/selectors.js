@@ -11,8 +11,8 @@ export const getDataFavorites = (state) => {
   return state[NAME_SPACE].dataFavorites;
 };
 
-export const getDataItemComments = (state) => {
-  return state[NAME_SPACE].dataItemComments;
+export const getDataItemReviews = (state) => {
+  return state[NAME_SPACE].dataItemReviews;
 };
 
 export const getFilterCurrent = (state) => {

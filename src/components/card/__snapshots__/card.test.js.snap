@@ -6,7 +6,6 @@ exports[`Card renders correctly 1`] = `
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
 >
-  
   <div
     className="small-movie-card__image"
   >
@@ -20,15 +19,20 @@ exports[`Card renders correctly 1`] = `
   <h3
     className="small-movie-card__title"
   >
-    Action
-    <br />
-    <a
+    <Link
       className="small-movie-card__link"
-      href="/films/1/"
-      onClick={[Function]}
+      to={
+        Object {
+          "pathname": "/films/1/",
+          "state": Object {
+            "currentDataFilter": "Action",
+            "currentDataItemId": 1,
+          },
+        }
+      }
     >
       Matrix
-    </a>
+    </Link>
   </h3>
 </article>
 `;

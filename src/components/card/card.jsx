@@ -62,7 +62,6 @@ class Card extends React.PureComponent {
           }
         </div>
         <h3 className="small-movie-card__title">
-          {genre}<br/>
           <Link to={{
             pathname: `/films/${id}/`,
             state: {

@@ -111,6 +111,9 @@ class CardHero extends React.Component {
       posterImage,
     } = this.props.data;
 
+    // const {reviews} = this.props;
+    // console.log(reviews);
+
     return (
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
@@ -193,6 +196,7 @@ class CardHero extends React.Component {
 
 CardHero.propTypes = {
   data: PropTypes.object.isRequired,
+  reviews: PropTypes.array.isRequired,
 };
 
 

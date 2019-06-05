@@ -4,10 +4,9 @@ exports[`Logo renders correctly 1`] = `
 <div
   className="logo"
 >
-  <a
+  <Link
     className="logo__link"
-    href="/"
-    onClick={[Function]}
+    to="/"
   >
     <span
       className="logo__letter logo__letter--1"
@@ -24,6 +23,6 @@ exports[`Logo renders correctly 1`] = `
     >
       W
     </span>
-  </a>
+  </Link>
 </div>
 `;

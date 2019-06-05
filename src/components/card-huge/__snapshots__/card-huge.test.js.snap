@@ -17,7 +17,7 @@ exports[`CardHuge renders correctly 1`] = `
   >
     WTW
   </h1>
-  <Header />
+  <ConnectFunction />
   <div
     className="movie-card__wrap"
   >
@@ -76,10 +76,9 @@ exports[`CardHuge renders correctly 1`] = `
               Play
             </span>
           </button>
-          <a
+          <Link
             className="btn btn--list movie-card__button"
-            href="/mylist"
-            onClick={[Function]}
+            to="/mylist"
           >
             <svg
               height="14"
@@ -93,7 +92,7 @@ exports[`CardHuge renders correctly 1`] = `
             <span>
               My list
             </span>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

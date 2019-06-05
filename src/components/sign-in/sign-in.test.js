@@ -1,16 +1,16 @@
 import React from "react";
-import renderer from "react-test-renderer";
-import {BrowserRouter} from "react-router-dom";
+import Enzyme, {shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import toJson from "enzyme-to-json";
 
-import {SignIn} from "./sign-in";
+import SignIn from "./sign-in";
 
-jest.mock(`../header/header`, () => `Header`);
+jest.mock(`../sign-in/sign-in`, () => `SignIn`);
+
+Enzyme.configure({adapter: new Adapter()});
 
 it(`SignIn renders correctly`, () => {
-  const tree = renderer
-    .create(<BrowserRouter><SignIn
-      loginUser={() => jest.fn()}
-    /></BrowserRouter>).toJSON();
+  const tree = shallow(<SignIn/>);
 
-  expect(tree).toMatchSnapshot();
+  expect(toJson(tree)).toMatchSnapshot();
 });

@@ -1,13 +1,14 @@
 import React from "react";
-import renderer from "react-test-renderer";
-import {BrowserRouter} from "react-router-dom";
-
-jest.mock(`../header/header`, () => `Header`);
+import Enzyme, {shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import toJson from "enzyme-to-json";
 
 import NotFound from "./not-found";
 
-it(`NotFound renders correctly`, () => {
-  const tree = renderer.create(<BrowserRouter><NotFound/></BrowserRouter>).toJSON();
+Enzyme.configure({adapter: new Adapter()});
 
-  expect(tree).toMatchSnapshot();
+it(`NotFound renders correctly`, () => {
+  const tree = shallow(<NotFound/>);
+
+  expect(toJson(tree)).toMatchSnapshot();
 });

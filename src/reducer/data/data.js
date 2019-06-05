@@ -1,8 +1,8 @@
 const initialState = {
   data: [],
-  dataItemCurrent: {},
-  dataItemComments: [],
   dataFavorites: [],
+  dataItemCurrent: {},
+  dataItemReviews: [],
   currentFilter: `All genres`,
 };
 
@@ -29,7 +29,7 @@ export const ActionCreators = {
     };
   },
 
-  loadDataItemComments: (data) => {
+  loadDataItemReviews: (data) => {
     return {
       type: ActionType.LOAD_DATA_COMMENTS,
       payload: data
@@ -62,9 +62,9 @@ export const Operations = {
       .then((response) => dispatch(ActionCreators.loadDataFavorites(response.data)));
   },
 
-  loadDataItemComments: (id) => (dispatch, getState, api) => {
+  loadDataItemReviews: (id) => (dispatch, getState, api) => {
     return api.get(`/comments/${id}`)
-      .then((response) => dispatch(ActionCreators.loadDataItemComments(response.data)));
+      .then((response) => dispatch(ActionCreators.loadDataItemReviews(response.data)));
   }
 };
 
@@ -106,7 +106,7 @@ export const reducer = (state = initialState, action) => {
 
     case ActionType.LOAD_DATA_COMMENTS:
       return Object.assign({}, state, {
-        dataItemComments: action.payload
+        dataItemReviews: action.payload
       });
 
     case ActionType.CHANGE_FILTER:

@@ -1,14 +1,14 @@
 import React from "react";
-import renderer from "react-test-renderer";
-import {BrowserRouter} from "react-router-dom";
+import Enzyme, {shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import toJson from "enzyme-to-json";
 
 import App from "./app";
 
-jest.mock(`../header/header`, () => `Header`);
+Enzyme.configure({adapter: new Adapter()});
 
 it(`App renders correctly`, () => {
-  const tree = renderer
-    .create(<BrowserRouter><App/></BrowserRouter>).toJSON();
+  const tree = shallow(<App/>);
 
-  expect(tree).toMatchSnapshot();
+  expect(toJson(tree)).toMatchSnapshot();
 });

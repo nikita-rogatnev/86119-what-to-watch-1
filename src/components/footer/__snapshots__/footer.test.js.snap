@@ -7,10 +7,9 @@ exports[`Footer renders correctly 1`] = `
   <div
     className="logo"
   >
-    <a
+    <Link
       className="logo__link logo__link--light"
-      href="/"
-      onClick={[Function]}
+      to="/"
     >
       <span
         className="logo__letter logo__letter--1"
@@ -27,7 +26,7 @@ exports[`Footer renders correctly 1`] = `
       >
         W
       </span>
-    </a>
+    </Link>
   </div>
   <div
     className="copyright"

@@ -7,12 +7,12 @@ import Footer from "../../footer/footer";
 
 import {connect} from "react-redux";
 import {ActionCreators} from "../../../reducer/data/data.js";
-import {getFilterCurrent, getFilters, getFilteredData} from "../../../reducer/data/selectors";
+import {getFilterCurrent, getFilters, getDataFavorites} from "../../../reducer/data/selectors";
 
 class Mylist extends React.PureComponent {
   render() {
     const {
-      data,
+      dataFavorites,
       filters,
       changeCurrentFilter,
     } = this.props;
@@ -21,7 +21,7 @@ class Mylist extends React.PureComponent {
       <div className="user-page">
         <Header/>
         <Catalog
-          data={data}
+          data={dataFavorites}
           filters={filters}
           currentFilter={`All genres`}
           changeCurrentFilter={changeCurrentFilter}
@@ -36,7 +36,7 @@ class Mylist extends React.PureComponent {
 }
 
 Mylist.propTypes = {
-  data: PropTypes.array.isRequired,
+  dataFavorites: PropTypes.array.isRequired,
   filters: PropTypes.array.isRequired,
   currentFilter: PropTypes.string.isRequired,
   changeCurrentFilter: PropTypes.func.isRequired,
@@ -44,7 +44,7 @@ Mylist.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    data: getFilteredData(state),
+    dataFavorites: getDataFavorites(state),
     filters: getFilters(state),
     currentFilter: getFilterCurrent(state),
   };

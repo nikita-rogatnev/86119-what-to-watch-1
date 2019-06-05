@@ -1,11 +1,15 @@
 import React from "react";
-import renderer from "react-test-renderer";
-import {BrowserRouter} from "react-router-dom";
+import Enzyme, {shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import toJson from "enzyme-to-json";
 
 import Footer from "./footer";
 
-it(`Footer renders correctly`, () => {
-  const tree = renderer.create(<BrowserRouter><Footer/></BrowserRouter>).toJSON();
+Enzyme.configure({adapter: new Adapter()});
 
-  expect(tree).toMatchSnapshot();
+it(`Footer renders correctly`, () => {
+  const tree = shallow(<Footer/>);
+
+  expect(toJson(tree)).toMatchSnapshot();
 });
+

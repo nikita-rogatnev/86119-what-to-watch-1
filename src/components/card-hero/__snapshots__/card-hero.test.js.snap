@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CardHuge renders correctly 1`] = `
+exports[`CardHero renders correctly 1`] = `
 <section
   className="movie-card movie-card--full"
 >
@@ -20,7 +20,7 @@ exports[`CardHuge renders correctly 1`] = `
     >
       WTW
     </h1>
-    <Header />
+    <ConnectFunction />
     <div
       className="movie-card__wrap"
     >
@@ -83,13 +83,12 @@ exports[`CardHuge renders correctly 1`] = `
               My list
             </span>
           </button>
-          <a
+          <Link
             className="btn movie-card__button"
-            href="/undefined/review"
-            onClick={[Function]}
+            to="undefined/review"
           >
             Add review
-          </a>
+          </Link>
         </div>
       </div>
     </div>
@@ -122,41 +121,51 @@ exports[`CardHuge renders correctly 1`] = `
             <li
               className="movie-nav__item"
             >
-              <a
-                aria-current={null}
+              <NavLink
                 className="movie-nav__link"
-                href="/films/1/"
-                onClick={[Function]}
+                exact={true}
+                to="/films/1/"
               >
                 Overview
-              </a>
+              </NavLink>
             </li>
             <li
               className="movie-nav__item"
             >
-              <a
-                aria-current={null}
+              <NavLink
                 className="movie-nav__link"
-                href="/films/1/details"
-                onClick={[Function]}
+                to="/films/1/details"
               >
                 Details
-              </a>
+              </NavLink>
             </li>
             <li
               className="movie-nav__item"
             >
-              <a
-                aria-current={null}
+              <NavLink
                 className="movie-nav__link"
-                href="/films/1/reviews"
-                onClick={[Function]}
+                to="/films/1/reviews"
               >
                 Reviews
-              </a>
+              </NavLink>
             </li>
           </ul>
         </nav>
+        <Switch>
+          <Route
+            exact={true}
+            path="/films/1/"
+            render={[Function]}
+          />
+          <Route
+            path="/films/1/details"
+            render={[Function]}
+          />
+          <Route
+            path="/films/1/reviews"
+            render={[Function]}
+          />
+        </Switch>
       </div>
     </div>
   </div>

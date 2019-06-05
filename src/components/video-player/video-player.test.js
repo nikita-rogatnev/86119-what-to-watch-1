@@ -1,17 +1,20 @@
 import React from "react";
-import renderer from "react-test-renderer";
-import {BrowserRouter} from "react-router-dom";
+import Enzyme, {shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import toJson from "enzyme-to-json";
 
 import VideoPlayer from "./video-player";
 
 import mockData from "../../mocks/mock-data";
 
-it(`VideoPlayer renders correctly`, () => {
-  const tree = renderer
-    .create(<BrowserRouter><VideoPlayer
-      previewImage={mockData[0].previewImage}
-      previewVideoLink={mockData[0].previewVideoLink}
-    /></BrowserRouter>).toJSON();
+Enzyme.configure({adapter: new Adapter()});
 
-  expect(tree).toMatchSnapshot();
+it(`VideoPlayer renders correctly`, () => {
+  const tree = shallow(<VideoPlayer
+    previewImage={mockData[0].previewImage}
+    previewVideoLink={mockData[0].previewVideoLink}
+  />);
+
+  expect(toJson(tree)).toMatchSnapshot();
 });
+
