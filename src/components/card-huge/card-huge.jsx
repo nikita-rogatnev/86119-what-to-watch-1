@@ -1,31 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Header from '../header/header';
 import {Link} from "react-router-dom";
 
 class CardHuge extends React.PureComponent {
   render() {
-    const {
-      id,
-      name,
-      posterImage,
-      previewImage,
-      backgroundImage,
-      backgroundColor,
-      videoLink,
-      previewVideoLink,
-      description,
-      rating,
-      scoresCount,
-      director,
-      starring,
-      runTime,
-      genre,
-      released,
-      isFavorite,
-      showPlayButton,
-    } = this.props;
+    // TODO: Add real logic
+    const isFavorite = true;
 
     return (
       <section className="movie-card">

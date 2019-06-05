@@ -23,15 +23,17 @@ describe(`Card e2e`, () => {
       />
     </BrowserRouter>);
 
-    expect(tree.state(`isPreviewPlaying`)).toBe(false);
+    let card = tree.find(Card);
+
+    expect(card.state(`isPreviewPlaying`)).toBe(false);
 
     // On mouse enter
-    tree.find(`article`).simulate(`mouseEnter`);
+    card.find(`article`).simulate(`mouseEnter`);
     jest.advanceTimersByTime(1000);
-    expect(tree.state(`isPreviewPlaying`)).toBe(true);
+    expect(card.state(`isPreviewPlaying`)).toBe(true);
 
     // On mouse leave
-    tree.simulate(`mouseleave`);
-    expect(tree.state(`isPreviewPlaying`)).toBe(false);
+    card.simulate(`mouseleave`);
+    expect(card.state(`isPreviewPlaying`)).toBe(false);
   });
 });

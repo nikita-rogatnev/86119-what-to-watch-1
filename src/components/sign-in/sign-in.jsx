@@ -29,8 +29,8 @@ class SignIn extends PureComponent {
     });
   }
 
-  _onClick() {
-    event.preventDefault();
+  _onClick(e) {
+    e.preventDefault();
     this.props.loginUser(this.state.email, this.state.password);
   }
 

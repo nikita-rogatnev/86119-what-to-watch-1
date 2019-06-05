@@ -31,7 +31,6 @@ class Card extends React.PureComponent {
     const {
       id,
       name,
-      genre,
       previewImage,
       previewVideoLink,
       showPlayButton,
@@ -40,18 +39,20 @@ class Card extends React.PureComponent {
     const {isPreviewPlaying} = this.state;
 
     return (
-      <article className="small-movie-card catalog__movies-card" onMouseEnter={this._onHoverEnter}
-               onMouseLeave={this._onHoverLeave}>
+      <article
+        className="small-movie-card catalog__movies-card"
+        onMouseEnter={this._onHoverEnter}
+        onMouseLeave={this._onHoverLeave}>
         {showPlayButton ? <button className="small-movie-card__play-btn" type="button">Play</button> : ``}
         <div className="small-movie-card__image">
           {
             isPreviewPlaying ? <VideoPlayer
-                previewVideoLink={previewVideoLink}
-                previewImage={previewImage}
-                muted={true}
-                autoPlay={true}
-                controls={false}
-              /> :
+              previewVideoLink={previewVideoLink}
+              previewImage={previewImage}
+              muted={true}
+              autoPlay={true}
+              controls={false}
+            /> :
               <img
                 src={previewImage}
                 alt={name}
@@ -60,7 +61,7 @@ class Card extends React.PureComponent {
           }
         </div>
         <h3 className="small-movie-card__title">
-          <Link to={{pathname: `/films/${id}`, state: {foo: 'bar'}}} className="small-movie-card__link">
+          <Link to={`/films/${id}`} className="small-movie-card__link">
             {name}
           </Link>
         </h3>

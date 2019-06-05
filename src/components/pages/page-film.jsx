@@ -1,28 +1,29 @@
 import React, {PureComponent} from 'react';
 import PropTypes from "prop-types";
 
-import CardHuge from "../components/card-huge/card-huge";
-import Catalog from "../components/catalog/catalog";
-import Footer from '../components/footer/footer';
+import CardHero from "../card-hero/card-hero";
+import Catalog from "../catalog/catalog";
+import Footer from "../footer/footer";
 
-class UserPage extends PureComponent {
+class PageFilm extends PureComponent {
   render() {
     const {
       data,
-      filters,
       currentFilter,
       changeCurrentFilter,
     } = this.props;
 
     return (
       <React.Fragment>
-        <CardHuge/>
+        <CardHero {...this.props}/>
         <main className="page-content">
           <Catalog
             data={data}
-            filters={filters}
+            filters={[]}
             currentFilter={currentFilter}
             changeCurrentFilter={changeCurrentFilter}
+            showMoreButton={false}
+            showPlayButton={true}
           />
           <Footer/>
         </main>
@@ -31,11 +32,10 @@ class UserPage extends PureComponent {
   }
 }
 
-UserPage.propTypes = {
+PageFilm.propTypes = {
   data: PropTypes.array.isRequired,
-  filters: PropTypes.array.isRequired,
   currentFilter: PropTypes.string.isRequired,
   changeCurrentFilter: PropTypes.func.isRequired,
 };
 
-export default UserPage;
+export default PageFilm;
