@@ -25,7 +25,7 @@ class Catalog extends React.Component {
     } = this.props;
 
     return (
-      <section className="catalog">
+      <section className={`catalog ${showCatalogTitle ? `catalog--like-this` : ``}`}>
         <h2 className={`catalog__title ${showCatalogTitle ? `` : `visually-hidden`}`}>{catalogTitle}</h2>
 
         {showFilters ?

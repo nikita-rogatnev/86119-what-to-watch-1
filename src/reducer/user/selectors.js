@@ -17,3 +17,7 @@ export const getUserError = (state) => {
 export const getLoadingStatus = (state) => {
   return state[NAME_SPACE].isLoading;
 };
+
+export const getUserData = (state) => {
+  return state[NAME_SPACE].user;
+};

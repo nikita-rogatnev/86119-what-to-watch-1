@@ -5,27 +5,32 @@ import Header from "../../header/header";
 import Catalog from "../../catalog/catalog";
 import Footer from "../../footer/footer";
 
+import {connect} from "react-redux";
+import {ActionCreators} from "../../../reducer/data/data.js";
+import {getFilterCurrent, getFilters, getFilteredData} from "../../../reducer/data/selectors";
+
 class Mylist extends React.PureComponent {
   render() {
     const {
       data,
       filters,
-      currentFilter,
       changeCurrentFilter,
     } = this.props;
 
     return (
-      <React.Fragment>
+      <div className="user-page">
         <Header/>
         <Catalog
           data={data}
           filters={filters}
-          currentFilter={currentFilter}
+          currentFilter={`All genres`}
           changeCurrentFilter={changeCurrentFilter}
+          maxCardsNumber={9999}
+          showCatalogTitle={false}
           showPlayButton={true}
         />
         <Footer/>
-      </React.Fragment>
+      </div>
     );
   }
 }
@@ -37,4 +42,20 @@ Mylist.propTypes = {
   changeCurrentFilter: PropTypes.func.isRequired,
 };
 
-export default Mylist;
+const mapStateToProps = (state) => {
+  return {
+    data: getFilteredData(state),
+    filters: getFilters(state),
+    currentFilter: getFilterCurrent(state),
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  changeCurrentFilter: (genre) => {
+    dispatch(ActionCreators.changeCurrentFilter(genre));
+  },
+});
+
+export {Mylist};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Mylist);

@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 
 import Logo from "../logo/logo";
 
-import {getAuthorizationStatus, getLoggedStatus} from "../../reducer/user/selectors";
+import {getAuthorizationStatus, getLoggedStatus, getUserData} from "../../reducer/user/selectors";
 import {ActionCreator} from "../../reducer/user/user";
 
 class Header extends React.PureComponent {
@@ -17,7 +17,7 @@ class Header extends React.PureComponent {
     const {
       isLogged,
       isAuthorizationRequired,
-      userAvatarUrl
+      user,
     } = this.props;
 
     return (
@@ -30,7 +30,7 @@ class Header extends React.PureComponent {
         <div className="user-block">
           {isLogged && <div className="user-block__avatar">
             <Link to="/mylist">
-              <img src={userAvatarUrl} width="63" height="63" alt="User avatar"/>
+              <img src={user.avatar} width="63" height="63" alt={`${user.name} avatar`}/>
             </Link>
           </div>}
           {!isLogged && !isAuthorizationRequired &&
@@ -46,7 +46,8 @@ class Header extends React.PureComponent {
 const mapStateToProps = (state, ownProps) =>
   Object.assign({}, ownProps, {
     isAuthorizationRequired: getAuthorizationStatus(state),
-    isLogged: getLoggedStatus(state)
+    isLogged: getLoggedStatus(state),
+    user: getUserData(state),
   });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -57,7 +58,7 @@ Header.propTypes = {
   isAuthorizationRequired: PropTypes.bool.PropTypes,
   isLogged: PropTypes.bool.isRequired,
   requireAuthorization: PropTypes.func.isRequired,
-  userAvatarUrl: PropTypes.string
+  user: PropTypes.object,
 };
 
 export {Header};

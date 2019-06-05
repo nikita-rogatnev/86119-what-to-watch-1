@@ -1,12 +1,8 @@
 const initialState = {
   isAuthorizationRequired: false,
   isLogged: false,
-  userId: null,
-  userEmail: null,
-  userName: null,
-  userAvatarUrl: null,
   userError: null,
-  isLoading: false
+  isLoading: false,
 };
 
 export const ActionType = {
@@ -75,13 +71,15 @@ export const reducer = (state = initialState, action) => {
     case ActionType.LOGIN_USER:
       return Object.assign({}, state, {
         isLogged: true,
-        userId: action.payload.id,
-        userEmail: action.payload.email,
-        userName: action.payload.name,
-        userAvatarUrl: action.payload.avatar_url,
         isAuthorizationRequired: false,
         userError: null,
-        isLoading: false
+        isLoading: false,
+        user: {
+          id: action.payload.data[`id`],
+          email: action.payload.data[`email`],
+          name: action.payload.data[`name`],
+          avatar: `https://es31-server.appspot.com/` + action.payload.data[`avatar_url`],
+        },
       });
 
     case ActionType.LOGIN_ERROR:

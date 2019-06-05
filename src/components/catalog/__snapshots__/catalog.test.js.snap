@@ -2,7 +2,7 @@
 
 exports[`Catalog renders correctly 1`] = `
 <section
-  className="catalog"
+  className="catalog "
 >
   <h2
     className="catalog__title visually-hidden"

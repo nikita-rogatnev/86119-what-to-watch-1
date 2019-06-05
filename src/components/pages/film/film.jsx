@@ -7,12 +7,7 @@ import Footer from "../../footer/footer";
 
 import {connect} from "react-redux";
 import {ActionCreators} from "../../../reducer/data/data.js";
-import {
-  getDataItemCurrent,
-  getFilterCurrent,
-  getFilters,
-  getFilteredData
-} from "../../../reducer/data/selectors";
+import {getDataItemCurrent, getFilterCurrent, getFilters, getFilteredData} from "../../../reducer/data/selectors";
 
 class Film extends React.Component {
   componentWillMount() {
@@ -43,22 +38,24 @@ class Film extends React.Component {
     } = this.props;
 
     return (
-      <main className="page-content">
+      <React.Fragment>
         <CardHero
           data={dataItemCurrent}
         />
-        <Catalog
-          data={data}
-          filters={filters}
-          currentFilter={currentFilter}
-          changeCurrentFilter={changeCurrentFilter}
-          maxCardsNumber={4}
-          catalogTitle={`More like this`}
-          showCatalogTitle={true}
-          showPlayButton={true}
-        />
-        <Footer/>
-      </main>
+        <main className="page-content">
+          <Catalog
+            data={data}
+            filters={filters}
+            currentFilter={currentFilter}
+            changeCurrentFilter={changeCurrentFilter}
+            maxCardsNumber={4}
+            catalogTitle={`More like this`}
+            showCatalogTitle={true}
+            showPlayButton={true}
+          />
+          <Footer/>
+        </main>
+      </React.Fragment>
     );
   }
 }
