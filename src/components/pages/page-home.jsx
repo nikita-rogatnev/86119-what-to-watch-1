@@ -29,7 +29,6 @@ class PageHome extends React.PureComponent {
             currentFilter={currentFilter}
             changeCurrentFilter={changeCurrentFilter}
             showMoreButton={true}
-            showPlayButton={false}
           />
           <Footer/>
         </main>

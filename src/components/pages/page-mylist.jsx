@@ -2,19 +2,27 @@ import React from 'react';
 import PropTypes from "prop-types";
 
 import Header from "../header/header";
-import Favorites from "../favorites/favorites";
+import Catalog from "../catalog/catalog";
 import Footer from '../footer/footer';
 
 class PageMyList extends React.PureComponent {
   render() {
     const {
-      dataFavorite,
+      data,
+      currentFilter,
+      changeCurrentFilter
     } = this.props;
 
     return (
       <React.Fragment>
         <Header/>
-        <Favorites data={dataFavorite}/>
+        <Catalog
+          data={data}
+          filters={[]}
+          currentFilter={currentFilter}
+          changeCurrentFilter={changeCurrentFilter}
+          showPlayButton={true}
+        />
         <Footer/>
       </React.Fragment>
     );
@@ -22,7 +30,9 @@ class PageMyList extends React.PureComponent {
 }
 
 PageMyList.propTypes = {
-  dataFavorite: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
+  currentFilter: PropTypes.string.isRequired,
+  changeCurrentFilter: PropTypes.func.isRequired,
 };
 
 export default PageMyList;

@@ -42,8 +42,9 @@ class PageFilm extends React.Component {
           filters={[]}
           currentFilter={currentFilter}
           changeCurrentFilter={changeCurrentFilter}
-          showMoreButton={false}
           showPlayButton={true}
+          catalogTitle={`More like this`}
+          showCatalogTitle={true}
         />
         <Footer/>
       </main>

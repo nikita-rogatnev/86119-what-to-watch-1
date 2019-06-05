@@ -16,13 +16,15 @@ class Catalog extends React.PureComponent {
       filters,
       currentFilter,
       changeCurrentFilter,
-      showMoreButton,
-      showPlayButton
+      showMoreButton = false,
+      showPlayButton = false,
+      catalogTitle = `Catalog`,
+      showCatalogTitle = false,
     } = this.props;
 
     return (
       <section className="catalog">
-        <h2 className="catalog__title visually-hidden">Catalog</h2>
+        <h2 className={`catalog__title ${showCatalogTitle ? `` : `visually-hidden`}`}>{catalogTitle}</h2>
 
         <FiltersListWithActiveItem filters={filters} currentFilter={currentFilter} changeCurrentFilter={changeCurrentFilter}/>
         <CardListWithActiveItem data={data} showPlayButton={showPlayButton}/>
@@ -42,8 +44,10 @@ Catalog.propTypes = {
   filters: PropTypes.array.isRequired,
   currentFilter: PropTypes.string.isRequired,
   changeCurrentFilter: PropTypes.func.isRequired,
-  showMoreButton: PropTypes.bool.isRequired,
-  showPlayButton: PropTypes.bool.isRequired,
+  showMoreButton: PropTypes.bool,
+  showPlayButton: PropTypes.bool,
+  catalogTitle: PropTypes.string,
+  showCatalogTitle: PropTypes.bool,
 };
 
 export default Catalog;
