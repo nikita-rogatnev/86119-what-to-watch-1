@@ -6,83 +6,99 @@ exports[`Filters renders correctly 1`] = `
 >
   <li
     className="catalog__genres-item catalog__genres-item--active"
+    key="All genres"
   >
-    <a
+    <Link
       className="catalog__genres-link"
       onClick={[Function]}
+      to="/?filter=All genres"
     >
       All genres
-    </a>
+    </Link>
   </li>
   <li
     className="catalog__genres-item "
+    key="Adventure"
   >
-    <a
+    <Link
       className="catalog__genres-link"
       onClick={[Function]}
+      to="/?filter=Adventure"
     >
       Adventure
-    </a>
+    </Link>
   </li>
   <li
     className="catalog__genres-item "
+    key="Action"
   >
-    <a
+    <Link
       className="catalog__genres-link"
       onClick={[Function]}
+      to="/?filter=Action"
     >
       Action
-    </a>
+    </Link>
   </li>
   <li
     className="catalog__genres-item "
+    key="Crime"
   >
-    <a
+    <Link
       className="catalog__genres-link"
       onClick={[Function]}
+      to="/?filter=Crime"
     >
       Crime
-    </a>
+    </Link>
   </li>
   <li
     className="catalog__genres-item "
+    key="Comedy"
   >
-    <a
+    <Link
       className="catalog__genres-link"
       onClick={[Function]}
+      to="/?filter=Comedy"
     >
       Comedy
-    </a>
+    </Link>
   </li>
   <li
     className="catalog__genres-item "
+    key="Drama"
   >
-    <a
+    <Link
       className="catalog__genres-link"
       onClick={[Function]}
+      to="/?filter=Drama"
     >
       Drama
-    </a>
+    </Link>
   </li>
   <li
     className="catalog__genres-item "
+    key="Fantasy"
   >
-    <a
+    <Link
       className="catalog__genres-link"
       onClick={[Function]}
+      to="/?filter=Fantasy"
     >
       Fantasy
-    </a>
+    </Link>
   </li>
   <li
     className="catalog__genres-item "
+    key="Thriller"
   >
-    <a
+    <Link
       className="catalog__genres-link"
       onClick={[Function]}
+      to="/?filter=Thriller"
     >
       Thriller
-    </a>
+    </Link>
   </li>
 </ul>
 `;

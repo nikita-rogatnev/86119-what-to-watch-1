@@ -1,20 +1,25 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import React from "react";
+import Enzyme, {shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import toJson from "enzyme-to-json";
 
-import Catalog from './catalog';
+import Catalog from "./catalog";
 
-import mockData from '../../mocks/mock-data';
-import mockFilters from '../../mocks/mock-filters';
+import mockData from "../../mocks/mock-data";
+import mockFilters from "../../mocks/mock-filters";
+
+Enzyme.configure({adapter: new Adapter()});
 
 it(`Catalog renders correctly`, () => {
-  const tree = renderer
-    .create(<Catalog
-      data={mockData}
-      filters={mockFilters}
-      currentFilter={`All genres`}
-      changeCurrentFilter={() => {
-      }}
-    />).toJSON();
+  const tree = shallow(<Catalog
+    data={mockData}
+    filters={mockFilters}
+    currentFilter={`All genres`}
+    changeCurrentFilter={() => {
+    }}
+    showMoreButton={false}
+    showPlayButton={false}
+  />);
 
-  expect(tree).toMatchSnapshot();
+  expect(toJson(tree)).toMatchSnapshot();
 });

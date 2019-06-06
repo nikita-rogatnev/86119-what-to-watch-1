@@ -1,7 +1,6 @@
-import axios from 'axios';
-import {ActionCreators as UserActionCreators} from './reducer/user/user.js';
+import axios from "axios";
 
-export const createAPI = (dispatch) => {
+export const createAPI = () => {
   const api = axios.create({
     baseURL: `https://es31-server.appspot.com/wtw`,
     timeout: 5000,
@@ -9,11 +8,12 @@ export const createAPI = (dispatch) => {
   });
 
   const onSuccess = (response) => response;
-  const onFail = (error) => {
-    if (error.response.status === 403) {
-      dispatch(UserActionCreators.requireAuthorization(true));
+
+  const onFail = (err) => {
+    if (err.response.status === 403) {
+      history.pushState(null, null, `/login`);
     }
-    return error;
+    return err;
   };
 
   api.interceptors.response.use(onSuccess, onFail);

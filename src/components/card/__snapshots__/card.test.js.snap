@@ -10,21 +10,29 @@ exports[`Card renders correctly 1`] = `
     className="small-movie-card__image"
   >
     <img
-      alt="Seven Years in Tibet"
+      alt="Matrix"
       height="175"
-      src="https://es31-server.appspot.com/wtw/static/film/preview/seven-years-in-tibet.jpg"
+      src="https://es31-server.appspot.com/wtw/static/film/preview/matrix.jpg"
       width="280"
     />
   </div>
   <h3
     className="small-movie-card__title"
   >
-    <a
+    <Link
       className="small-movie-card__link"
-      href="#"
+      to={
+        Object {
+          "pathname": "/films/1/",
+          "state": Object {
+            "currentDataFilter": "Action",
+            "currentDataItemId": 1,
+          },
+        }
+      }
     >
-      Seven Years in Tibet
-    </a>
+      Matrix
+    </Link>
   </h3>
 </article>
 `;

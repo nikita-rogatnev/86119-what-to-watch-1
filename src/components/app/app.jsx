@@ -1,67 +1,30 @@
-import React, {PureComponent} from 'react';
-import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
+import React from "react";
+import {Switch, Route} from "react-router-dom";
 
-import Header from '../header/header';
-import Catalog from '../catalog/catalog';
-import Footer from '../footer/footer';
+import PageHome from "../pages/home/home";
+import Login from "../pages/login/login";
+import PageFilm from "../pages/film/film";
+import Review from "../pages/review/review";
+import Mylist from "../pages/mylist/mylist";
+import Error from "../pages/error/error";
 
-import {ActionCreators} from '../../reducer/data/data.js';
+import withPrivateRoute from "../../hocs/with-private-route/with-private-route";
 
-import {
-  getFilters,
-  getCurrentFilter,
-  getFilteredData
-} from '../../reducer/data/selectors.js';
+const PrivateRoute = withPrivateRoute(Route);
 
-
-class App extends PureComponent {
+class App extends React.PureComponent {
   render() {
-    const {
-      data,
-      filters,
-      currentFilter,
-      changeCurrentFilter
-    } = this.props;
-
     return (
-      <React.Fragment>
-        <Header/>
-        <main className="page-content">
-          <Catalog
-            data={data}
-            filters={filters}
-            currentFilter={currentFilter}
-            changeCurrentFilter={changeCurrentFilter}
-          />
-          <Footer/>
-        </main>
-      </React.Fragment>
+      <Switch>
+        <Route path="/" exact component={PageHome}/>
+        <Route path="/login" component={Login}/>
+        <Route path="/films/:id" component={PageFilm}/>
+        <PrivateRoute path="/films/:id/review" exact component={Review}/>
+        <PrivateRoute path="/mylist" exact component={Mylist}/>
+        <Route component={Error}/>
+      </Switch>
     );
   }
 }
 
-App.propTypes = {
-  data: PropTypes.array.isRequired,
-  filters: PropTypes.array.isRequired,
-  currentFilter: PropTypes.string.isRequired,
-  changeCurrentFilter: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => {
-  return {
-    data: getFilteredData(state),
-    filters: getFilters(state),
-    currentFilter: getCurrentFilter(state),
-  };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  changeCurrentFilter: (genre) => {
-    dispatch(ActionCreators.changeActiveGenre(genre));
-  },
-});
-
-export {App};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

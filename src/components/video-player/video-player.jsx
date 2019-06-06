@@ -1,5 +1,5 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import React, {PureComponent} from "react";
+import PropTypes from "prop-types";
 
 class VideoPlayer extends PureComponent {
   constructor(props) {
@@ -9,8 +9,8 @@ class VideoPlayer extends PureComponent {
 
   render() {
     const {
-      previewImageSrc,
-      previewVideoSrc,
+      previewImage,
+      previewVideoLink,
       muted,
       autoPlay,
       controls
@@ -19,7 +19,7 @@ class VideoPlayer extends PureComponent {
     return (
       <React.Fragment>
         <video
-          poster={previewImageSrc}
+          poster={previewImage}
           muted={muted}
           autoPlay={autoPlay}
           controls={controls}
@@ -27,7 +27,7 @@ class VideoPlayer extends PureComponent {
           height="180"
           ref={this._videoRef}
         >
-          <source src={previewVideoSrc} type='video/mp4'/>
+          <source src={previewVideoLink} type="video/mp4"/>
         </video>
       </React.Fragment>
     );
@@ -35,8 +35,8 @@ class VideoPlayer extends PureComponent {
 }
 
 VideoPlayer.propTypes = {
-  previewVideoSrc: PropTypes.string.isRequired,
-  previewImageSrc: PropTypes.string.isRequired,
+  previewImage: PropTypes.string.isRequired,
+  previewVideoLink: PropTypes.string.isRequired,
   muted: PropTypes.bool,
   autoPlay: PropTypes.bool,
   controls: PropTypes.bool

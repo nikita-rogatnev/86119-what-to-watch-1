@@ -1,36 +1,40 @@
-import React from 'react';
-import Enzyme, {mount} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import React from "react";
+import Enzyme, {mount} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import {BrowserRouter} from "react-router-dom";
 
-import Card from './card';
+import Card from "./card";
+
+import mockData from "../../mocks/mock-data";
 
 Enzyme.configure({adapter: new Adapter()});
 
 jest.useFakeTimers();
 
 describe(`Card e2e`, () => {
-  const mockData = {
-    "id": 1,
-    "name": `Seven Years in Tibet`,
-    "previewImageSrc": `https://es31-server.appspot.com/wtw/static/film/preview/seven-years-in-tibet.jpg`,
-    "previewVideoSrc": `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
-  };
-
   it(`Card hover handles`, () => {
-    const tree = mount(<Card
-      id={mockData.id}
-      name={mockData.name}
-      previewVideoSrc={mockData.previewVideoSrc}
-      previewImageSrc={mockData.previewImageSrc}
-    />);
+    const tree = mount(<BrowserRouter>
+      <Card
+        id={mockData[0].id}
+        name={mockData[0].name}
+        genre={mockData[0].genre}
+        previewImage={mockData[0].previewImage}
+        previewVideoLink={mockData[0].previewVideoLink}
+        showPlayButton={false}
+      />
+    </BrowserRouter>);
+
+    let card = tree.find(Card);
+
+    expect(card.state(`isPreviewPlaying`)).toBe(false);
 
     // On mouse enter
-    tree.find(`article`).simulate(`mouseEnter`);
+    card.find(`article`).simulate(`mouseEnter`);
     jest.advanceTimersByTime(1000);
-    expect(tree.state(`isPreviewPlaying`)).toBe(true);
+    expect(card.state(`isPreviewPlaying`)).toBe(true);
 
     // On mouse leave
-    tree.simulate(`mouseleave`);
-    expect(tree.state(`isPreviewPlaying`)).toBe(false);
+    card.simulate(`mouseleave`);
+    expect(card.state(`isPreviewPlaying`)).toBe(false);
   });
 });

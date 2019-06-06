@@ -4,7 +4,7 @@ env:
   commonjs: true
   jest: true
 
-extends: ['htmlacademy/es6', 'plugin:react/recommended']
+extends: ["htmlacademy/es6", "plugin:react/recommended"]
 
 parserOptions:
   ecmaFeatures:
@@ -12,8 +12,8 @@ parserOptions:
   ecmaVersion: 6
   sourceType: module
 
-plugins: ['react']
+plugins: ["react"]
 
 settings:
   react:
-    version: '16'
+    version: "16"

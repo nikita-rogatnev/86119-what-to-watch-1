@@ -1,5 +1,5 @@
-import {createSelector} from 'reselect';
-import NameSpaces from '../name-spaces.js';
+import {createSelector} from "reselect";
+import NameSpaces from "../name-spaces.js";
 
 const NAME_SPACE = NameSpaces.DATA;
 
@@ -7,8 +7,20 @@ export const getData = (state) => {
   return state[NAME_SPACE].data;
 };
 
-export const getCurrentFilter = (state) => {
+export const getDataFavorites = (state) => {
+  return state[NAME_SPACE].dataFavorites;
+};
+
+export const getDataItemReviews = (state) => {
+  return state[NAME_SPACE].dataItemReviews;
+};
+
+export const getFilterCurrent = (state) => {
   return state[NAME_SPACE].currentFilter;
+};
+
+export const getDataItemCurrent = (state) => {
+  return state[NAME_SPACE].dataItemCurrent;
 };
 
 export const getAllFilters = createSelector(
@@ -21,7 +33,7 @@ export const getFilters = createSelector(
 
 export const getFilteredData = createSelector(
     getData,
-    getCurrentFilter,
+    getFilterCurrent,
     (data, currentFilter) => {
       return (currentFilter === `All genres`) ? data : data.filter((dataItem) => dataItem.genre === currentFilter);
     }

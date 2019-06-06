@@ -1,15 +1,19 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import React from "react";
+import Enzyme, {shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import toJson from "enzyme-to-json";
 
-import CardList from './card-list';
+import CardList from "./card-list";
 
-import mockData from '../../mocks/mock-data';
+import mockData from "../../mocks/mock-data";
+
+Enzyme.configure({adapter: new Adapter()});
 
 it(`CardList renders correctly`, () => {
-  const tree = renderer
-    .create(<CardList
-      data={mockData}
-    />).toJSON();
+  const tree = shallow(<CardList
+    data={mockData}
+    showPlayButton={false}
+  />);
 
-  expect(tree).toMatchSnapshot();
+  expect(toJson(tree)).toMatchSnapshot();
 });

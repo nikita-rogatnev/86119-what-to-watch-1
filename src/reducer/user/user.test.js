@@ -1,12 +1,6 @@
-import {reducer} from './user.js';
+import {reducer} from "./user";
 
 describe(`User reducer`, () => {
-  it(`Should return initial state by default`, () => {
-    expect(reducer(undefined, {})).toEqual({
-      isAuthorizationRequired: false,
-    });
-  });
-
   it(`Should change isAuthorizationRequired to true`, () => {
     expect(reducer({
       isAuthorizationRequired: false,

@@ -1,21 +1,20 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import React from "react";
+import Enzyme, {shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import toJson from "enzyme-to-json";
 
-import VideoPlayer from './video-player';
+import VideoPlayer from "./video-player";
 
-const mockData = {
-  "id": 1,
-  "name": `Seven Years in Tibet`,
-  "previewImageSrc": `https://es31-server.appspot.com/wtw/static/film/preview/seven-years-in-tibet.jpg`,
-  "previewVideoSrc": `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
-};
+import mockData from "../../mocks/mock-data";
+
+Enzyme.configure({adapter: new Adapter()});
 
 it(`VideoPlayer renders correctly`, () => {
-  const tree = renderer
-    .create(<VideoPlayer
-      previewVideoSrc={mockData.previewVideoSrc}
-      previewImageSrc={mockData.previewImageSrc}
-    />).toJSON();
+  const tree = shallow(<VideoPlayer
+    previewImage={mockData[0].previewImage}
+    previewVideoLink={mockData[0].previewVideoLink}
+  />);
 
-  expect(tree).toMatchSnapshot();
+  expect(toJson(tree)).toMatchSnapshot();
 });
+
