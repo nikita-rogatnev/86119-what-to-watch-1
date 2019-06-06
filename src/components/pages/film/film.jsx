@@ -21,6 +21,7 @@ class Film extends React.Component {
     const {
       changeCurrentFilter,
       changeDataItemCurrent,
+      loadDataItemReviews,
     } = this.props;
 
     const {
@@ -33,8 +34,7 @@ class Film extends React.Component {
 
     changeCurrentFilter(currentDataFilter);
     changeDataItemCurrent(currentDataItemId);
-
-    this.props.loadDataItemReviews(currentDataItemId);
+    loadDataItemReviews(currentDataItemId);
   }
 
   render() {
