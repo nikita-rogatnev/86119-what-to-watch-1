@@ -1,11 +1,14 @@
-import MockAdapter from 'axios-mock-adapter';
-import {createAPI} from '../../api.js';
-import {reducer, ActionType, Operations} from './data.js';
+import MockAdapter from "axios-mock-adapter";
+import {createAPI} from "../../api.js";
+import {reducer, ActionType, Operations} from "./data";
 
 describe(`Data reducer`, () => {
   it(`Should return initial state by default`, () => {
     expect(reducer(undefined, {})).toEqual({
       data: [],
+      dataFavorites: [],
+      dataItemCurrent: {},
+      dataItemReviews: [],
       currentFilter: `All genres`,
     });
   });

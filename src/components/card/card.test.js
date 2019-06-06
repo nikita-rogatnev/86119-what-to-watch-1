@@ -1,23 +1,24 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import React from "react";
+import Enzyme, {shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import toJson from "enzyme-to-json";
 
-import Card from './card';
+import Card from "./card";
 
-const mockData = {
-  "id": 1,
-  "name": `Seven Years in Tibet`,
-  "previewImageSrc": `https://es31-server.appspot.com/wtw/static/film/preview/seven-years-in-tibet.jpg`,
-  "previewVideoSrc": `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
-};
+import mockData from "../../mocks/mock-data";
+
+Enzyme.configure({adapter: new Adapter()});
 
 it(`Card renders correctly`, () => {
-  const tree = renderer
-    .create(<Card
-      key={mockData.id}
-      name={mockData.name}
-      previewVideoSrc={mockData.previewVideoSrc}
-      previewImageSrc={mockData.previewImageSrc}
-    />).toJSON();
+  const tree = shallow(<Card
+    key={mockData[0].id}
+    id={mockData[0].id}
+    name={mockData[0].name}
+    genre={mockData[0].genre}
+    previewImage={mockData[0].previewImage}
+    previewVideoLink={mockData[0].previewVideoLink}
+    showPlayButton={false}
+  />);
 
-  expect(tree).toMatchSnapshot();
+  expect(toJson(tree)).toMatchSnapshot();
 });

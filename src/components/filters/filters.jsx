@@ -1,5 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
 const Filters = (props) => {
   const {
@@ -13,7 +14,7 @@ const Filters = (props) => {
       {filters.map((filter) => {
         return (
           <li className={`catalog__genres-item ${filter === currentFilter ? `catalog__genres-item--active` : ``}`} key={filter}>
-            <a className="catalog__genres-link" onClick={() => changeCurrentFilter(filter)}>{filter}</a>
+            <Link to={`/?filter=${filter}`} className="catalog__genres-link" onClick={() => changeCurrentFilter(filter)}>{filter}</Link>
           </li>
         );
       })}

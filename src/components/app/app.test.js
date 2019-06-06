@@ -1,20 +1,14 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import React from "react";
+import Enzyme, {shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import toJson from "enzyme-to-json";
 
-import {App} from './app';
+import App from "./app";
 
-import mockData from '../../mocks/mock-data';
-import mockFilters from '../../mocks/mock-filters';
+Enzyme.configure({adapter: new Adapter()});
 
 it(`App renders correctly`, () => {
-  const tree = renderer
-    .create(<App
-      data={mockData}
-      filters={mockFilters}
-      currentFilter={`All genres`}
-      changeCurrentFilter={() => {
-      }}
-    />).toJSON();
+  const tree = shallow(<App/>);
 
-  expect(tree).toMatchSnapshot();
+  expect(toJson(tree)).toMatchSnapshot();
 });

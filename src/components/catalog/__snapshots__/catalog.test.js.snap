@@ -2,162 +2,65 @@
 
 exports[`Catalog renders correctly 1`] = `
 <section
-  className="catalog"
+  className="catalog "
 >
   <h2
     className="catalog__title visually-hidden"
   >
     Catalog
   </h2>
-  <ul
-    className="catalog__genres-list"
-  >
-    <li
-      className="catalog__genres-item catalog__genres-item--active"
-    >
-      <a
-        className="catalog__genres-link"
-        onClick={[Function]}
-      >
-        All genres
-      </a>
-    </li>
-    <li
-      className="catalog__genres-item "
-    >
-      <a
-        className="catalog__genres-link"
-        onClick={[Function]}
-      >
-        Adventure
-      </a>
-    </li>
-    <li
-      className="catalog__genres-item "
-    >
-      <a
-        className="catalog__genres-link"
-        onClick={[Function]}
-      >
-        Action
-      </a>
-    </li>
-    <li
-      className="catalog__genres-item "
-    >
-      <a
-        className="catalog__genres-link"
-        onClick={[Function]}
-      >
-        Crime
-      </a>
-    </li>
-    <li
-      className="catalog__genres-item "
-    >
-      <a
-        className="catalog__genres-link"
-        onClick={[Function]}
-      >
-        Comedy
-      </a>
-    </li>
-    <li
-      className="catalog__genres-item "
-    >
-      <a
-        className="catalog__genres-link"
-        onClick={[Function]}
-      >
-        Drama
-      </a>
-    </li>
-    <li
-      className="catalog__genres-item "
-    >
-      <a
-        className="catalog__genres-link"
-        onClick={[Function]}
-      >
-        Fantasy
-      </a>
-    </li>
-    <li
-      className="catalog__genres-item "
-    >
-      <a
-        className="catalog__genres-link"
-        onClick={[Function]}
-      >
-        Thriller
-      </a>
-    </li>
-  </ul>
-  <div
-    className="catalog__movies-list"
-  >
-    <article
-      className="small-movie-card catalog__movies-card"
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-    >
-      <div
-        className="small-movie-card__image"
-      >
-        <img
-          alt="Seven Years in Tibet"
-          height="175"
-          src="https://es31-server.appspot.com/wtw/static/film/preview/seven-years-in-tibet.jpg"
-          width="280"
-        />
-      </div>
-      <h3
-        className="small-movie-card__title"
-      >
-        <a
-          className="small-movie-card__link"
-          href="#"
-        >
-          Seven Years in Tibet
-        </a>
-      </h3>
-    </article>
-    <article
-      className="small-movie-card catalog__movies-card"
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-    >
-      <div
-        className="small-movie-card__image"
-      >
-        <img
-          alt="The Revenant"
-          height="175"
-          src="https://es31-server.appspot.com/wtw/static/film/preview/revenant.jpg"
-          width="280"
-        />
-      </div>
-      <h3
-        className="small-movie-card__title"
-      >
-        <a
-          className="small-movie-card__link"
-          href="#"
-        >
-          The Revenant
-        </a>
-      </h3>
-    </article>
-  </div>
-  <div
-    className="catalog__more"
-  >
-    <button
-      className="catalog__button"
-      type="button"
-    >
-      Show more
-    </button>
-  </div>
+  <withActiveItem(CardList)
+    data={
+      Array [
+        Object {
+          "backgroundColor": "#B9B27E",
+          "backgroundImage": "https://es31-server.appspot.com/wtw/static/film/background/matrix.jpg",
+          "description": "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
+          "director": "Wachowski Brothers",
+          "genre": "Action",
+          "id": 1,
+          "isFavorite": false,
+          "name": "Matrix",
+          "posterImage": "https://es31-server.appspot.com/wtw/static/film/poster/matrix.jpg",
+          "previewImage": "https://es31-server.appspot.com/wtw/static/film/preview/matrix.jpg",
+          "previewVideoLink": "https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4",
+          "rating": 8.7,
+          "released": 1999,
+          "runTime": 136,
+          "scoresCount": 1503092,
+          "starring": Array [
+            "Keanu Reeves",
+            "Laurence Fishburne",
+            "Carrie-Anne Moss",
+          ],
+          "videoLink": "http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4",
+        },
+        Object {
+          "backgroundColor": "#F0DBA2",
+          "backgroundImage": "https://es31-server.appspot.com/wtw/static/film/background/Johnny_English.jpg",
+          "description": "After a sudden attack on the MI5, Johnny English, Britain's most confident yet unintelligent spy, becomes Britain's only spy.",
+          "director": "Peter Howitt",
+          "genre": "Comedy",
+          "id": 2,
+          "isFavorite": false,
+          "name": "Johnny English",
+          "posterImage": "https://es31-server.appspot.com/wtw/static/film/poster/Johnny_English.jpg",
+          "previewImage": "https://es31-server.appspot.com/wtw/static/film/preview/johnny-english.jpg",
+          "previewVideoLink": "https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4",
+          "rating": 6.2,
+          "released": 2003,
+          "runTime": 88,
+          "scoresCount": 136843,
+          "starring": Array [
+            "Rowan Atkinson",
+            "John Malkovich",
+            "Natalie Imbruglia",
+          ],
+          "videoLink": "http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4",
+        },
+      ]
+    }
+    showPlayButton={false}
+  />
 </section>
 `;
