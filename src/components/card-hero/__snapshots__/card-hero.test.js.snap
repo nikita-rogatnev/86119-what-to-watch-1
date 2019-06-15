@@ -124,7 +124,15 @@ exports[`CardHero renders correctly 1`] = `
               <NavLink
                 className="movie-nav__link"
                 exact={true}
-                to="/films/1/"
+                to={
+                  Object {
+                    "pathname": "/films/1/",
+                    "state": Object {
+                      "currentDataFilter": "Action",
+                      "currentDataItemId": 1,
+                    },
+                  }
+                }
               >
                 Overview
               </NavLink>
@@ -134,7 +142,15 @@ exports[`CardHero renders correctly 1`] = `
             >
               <NavLink
                 className="movie-nav__link"
-                to="/films/1/details"
+                to={
+                  Object {
+                    "pathname": "/films/1/details/",
+                    "state": Object {
+                      "currentDataFilter": "Action",
+                      "currentDataItemId": 1,
+                    },
+                  }
+                }
               >
                 Details
               </NavLink>
@@ -144,7 +160,15 @@ exports[`CardHero renders correctly 1`] = `
             >
               <NavLink
                 className="movie-nav__link"
-                to="/films/1/reviews"
+                to={
+                  Object {
+                    "pathname": "/films/1/reviews/",
+                    "state": Object {
+                      "currentDataFilter": "Action",
+                      "currentDataItemId": 1,
+                    },
+                  }
+                }
               >
                 Reviews
               </NavLink>

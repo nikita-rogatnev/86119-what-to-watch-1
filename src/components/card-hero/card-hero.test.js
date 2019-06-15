@@ -13,7 +13,7 @@ Enzyme.configure({adapter: new Adapter()});
 it(`CardHero renders correctly`, () => {
   const tree = shallow(<CardHero
     data={mockData[0]}
-    reviews={mockReviews[0]}
+    reviews={mockReviews}
   />);
 
   expect(toJson(tree)).toMatchSnapshot();
