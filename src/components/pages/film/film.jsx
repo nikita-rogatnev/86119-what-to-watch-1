@@ -17,7 +17,6 @@ import {
 import {Operations} from "../../../reducer/data/data";
 
 class Film extends React.Component {
-
   componentDidMount() {
     // eslint-disable-next-line react/prop-types
     this.props.changeCurrentFilter(this.props.location.state.currentDataFilter);
@@ -27,9 +26,16 @@ class Film extends React.Component {
     this.props.loadDataItemReviews(this.props.location.state.currentDataItemId);
   }
 
-  componentWillUpdate() {
+  componentDidUpdate(prevProps) {
     // eslint-disable-next-line react/prop-types
-    this.props.changeDataItemCurrent(this.props.location.state.currentDataItemId);
+    const currentId = this.props.location.state.currentDataItemId;
+    // eslint-disable-next-line react/prop-types
+    const previousId = prevProps.location.state.currentDataItemId;
+
+    if (currentId !== previousId) {
+      this.props.changeDataItemCurrent(currentId);
+      this.props.loadDataItemReviews(currentId);
+    }
   }
 
   render() {
@@ -41,8 +47,6 @@ class Film extends React.Component {
       currentFilter,
       changeCurrentFilter,
     } = this.props;
-
-    console.log(this.props.location.state);
 
     return (
       <React.Fragment>
