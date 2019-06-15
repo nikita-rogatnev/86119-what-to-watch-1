@@ -130,6 +130,20 @@ const Reviews = (data) => {
 };
 
 class CardHero extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      pathname: null,
+    };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (window.location.pathname !== prevState.pathname) {
+      this.setState({pathname: window.location.pathname});
+    }
+  }
+
   render() {
     const {
       id,
@@ -140,6 +154,8 @@ class CardHero extends React.Component {
       isFavorite,
       posterImage,
     } = this.props.data;
+
+    console.log(this.state.pathname);
 
     return (
       <section className="movie-card movie-card--full">
@@ -198,7 +214,8 @@ class CardHero extends React.Component {
             <div className="movie-card__desc">
               <nav className="movie-nav movie-card__nav">
                 <ul className="movie-nav__list">
-                  <li className={`movie-nav__item`}>
+                  <li
+                    className={`movie-nav__item ${this.state.pathname === `/films/${id}/` ? `movie-nav__item--active` : ``}`}>
                     <NavLink
                       to={{
                         pathname: `/films/${id}/`,
@@ -208,9 +225,11 @@ class CardHero extends React.Component {
                         },
                       }}
                       exact
+                      onClick={() => this.setState({pathname: `/films/${id}/`})}
                       className="movie-nav__link">Overview</NavLink>
                   </li>
-                  <li className={`movie-nav__item`}>
+                  <li
+                    className={`movie-nav__item ${this.state.pathname === `/films/${id}/details/` ? `movie-nav__item--active` : ``}`}>
                     <NavLink
                       to={{
                         pathname: `/films/${id}/details/`,
@@ -219,9 +238,11 @@ class CardHero extends React.Component {
                           currentDataFilter: genre,
                         },
                       }}
+                      onClick={() => this.setState({pathname: `/films/${id}/details/`})}
                       className="movie-nav__link">Details</NavLink>
                   </li>
-                  <li className="movie-nav__item">
+                  <li
+                    className={`movie-nav__item ${this.state.pathname === `/films/${id}/reviews/` ? `movie-nav__item--active` : ``}`}>
                     <NavLink
                       to={{
                         pathname: `/films/${id}/reviews/`,
@@ -230,6 +251,7 @@ class CardHero extends React.Component {
                           currentDataFilter: genre,
                         },
                       }}
+                      onClick={() => this.setState({pathname: `/films/${id}/reviews/`})}
                       className="movie-nav__link">Reviews</NavLink>
                   </li>
                 </ul>
