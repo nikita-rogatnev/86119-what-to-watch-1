@@ -8,31 +8,26 @@ const initialState = {
 
 export const ActionType = {
   "LOAD_DATA": `LOAD_DATA`,
-  "LOAD_DATA_FAVORITE": `LOAD_DATA_FAVORITE`,
   "LOAD_DATA_REVIEWS": `LOAD_DATA_REVIEWS`,
   "CHANGE_FILTER": `CHANGE_FILTER`,
   "CHANGE_DATA_ACTIVE": `CHANGE_DATA_ACTIVE`,
+  "CHANGE_FAVORITE": `CHANGE_FAVORITE`,
+  "LOAD_DATA_FAVORITES": `LOAD_DATA_FAVORITES`,
+  "UPDATE_DATA_FAVORITES": `UPDATE_DATA_FAVORITES`,
 };
 
 export const ActionCreators = {
   loadData: (data) => {
     return {
       type: ActionType.LOAD_DATA,
-      payload: data
-    };
-  },
-
-  loadDataFavorites: (data) => {
-    return {
-      type: ActionType.LOAD_DATA_FAVORITE,
-      payload: data
+      payload: data,
     };
   },
 
   loadDataItemReviews: (data) => {
     return {
       type: ActionType.LOAD_DATA_REVIEWS,
-      payload: data
+      payload: data,
     };
   },
 
@@ -49,23 +44,50 @@ export const ActionCreators = {
       payload: id,
     };
   },
+
+  loadDataFavorites: (data) => {
+    return {
+      type: ActionType.LOAD_DATA_FAVORITES,
+      payload: data,
+    };
+  },
+
+  setToFavorites: (data) => {
+    return {
+      type: ActionType.UPDATE_DATA_FAVORITES,
+      payload: data,
+    };
+  },
 };
 
 export const Operations = {
   loadData: () => (dispatch, getState, api) => {
-    return api.get(`/films`)
+    return api
+      .get(`/films`)
       .then((response) => dispatch(ActionCreators.loadData(response.data)));
   },
 
+  loadDataItemReviews: (id) => (dispatch, getState, api) => {
+    return api
+      .get(`/comments/${id}`)
+      .then((response) => dispatch(ActionCreators.loadDataItemReviews(response.data)));
+  },
+
   loadDataFavorites: () => (dispatch, getState, api) => {
-    return api.get(`/favorite`)
+    return api
+      .get(`/favorite`)
       .then((response) => dispatch(ActionCreators.loadDataFavorites(response.data)));
   },
 
-  loadDataItemReviews: (id) => (dispatch, getState, api) => {
-    return api.get(`/comments/${id}`)
-      .then((response) => dispatch(ActionCreators.loadDataItemReviews(response.data)));
-  }
+  setToFavorites: (data) => (dispatch, getState, api) => {
+    return api
+      .post(`/favorite/${data.id}/${data.isFavorite ? 1 : 0}`)
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(ActionCreators.setToFavorites(response.data));
+        }
+      });
+  },
 };
 
 const mapData = (data) => {
@@ -96,12 +118,7 @@ export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.LOAD_DATA:
       return Object.assign({}, state, {
-        data: mapData(action.payload)
-      });
-
-    case ActionType.LOAD_DATA_FAVORITE:
-      return Object.assign({}, state, {
-        dataFavorites: mapData(action.payload)
+        data: mapData(action.payload),
       });
 
     case ActionType.CHANGE_FILTER:
@@ -116,7 +133,17 @@ export const reducer = (state = initialState, action) => {
 
     case ActionType.LOAD_DATA_REVIEWS:
       return Object.assign({}, state, {
-        dataItemReviews: action.payload
+        dataItemReviews: action.payload,
+      });
+
+    case ActionType.LOAD_DATA_FAVORITES:
+      return Object.assign({}, state, {
+        dataFavorites: mapData(action.payload),
+      });
+
+    case ActionType.UPDATE_DATA_FAVORITES:
+      return Object.assign({}, state, {
+        dataFavorites: state.dataFavorites.concat(action.payload),
       });
   }
 

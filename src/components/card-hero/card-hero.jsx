@@ -3,6 +3,12 @@ import PropTypes from "prop-types";
 import {Switch, Route, NavLink, Link} from "react-router-dom";
 
 import Header from "../header/header";
+import {connect} from "react-redux";
+import {
+  getDataFavorites,
+  getDataItemCurrent,
+} from "../../reducer/data/selectors";
+import {Operations} from "../../reducer/data/data";
 
 const Overview = (data) => {
   const {
@@ -161,19 +167,22 @@ class CardHero extends React.Component {
                   </svg>
                   <span>Play</span>
                 </button>
-                {isFavorite ?
-                  <Link to="/mylist" className="btn btn--list movie-card__button">
-                    <svg viewBox="0 0 18 14" width="18" height="14">
+
+                <button
+                  type="button"
+                  className="btn btn--list movie-card__button"
+                  onClick={() => this.props.setToFavorites(this.props.data)}
+                >
+                  <svg viewBox="0 0 18 14" width="18" height="14">
+                    {isFavorite ?
                       <use xlinkHref="#in-list"></use>
-                    </svg>
-                    <span>My list</span>
-                  </Link> :
-                  <button type="button" className="btn btn--list movie-card__button">
-                    <svg viewBox="0 0 18 14" width="18" height="14">
+                      :
                       <use xlinkHref="#add"></use>
-                    </svg>
-                    <span>My list</span>
-                  </button>}
+                    }
+                  </svg>
+                  <span>My list</span>
+                </button>
+
                 <Link to={`/films/${id}/review`} className="btn movie-card__button">Add review</Link>
               </div>
             </div>
@@ -243,7 +252,25 @@ class CardHero extends React.Component {
 CardHero.propTypes = {
   data: PropTypes.object.isRequired,
   reviews: PropTypes.array.isRequired,
+  setToFavorites: PropTypes.func.isRequired,
 };
 
+const mapStateToProps = (state) => {
+  return {
+    dataFavorites: getDataFavorites(state),
+    dataItemCurrent: getDataItemCurrent(state),
+  };
+};
 
-export default CardHero;
+const mapDispatchToProps = (dispatch) => ({
+  setToFavorites: (data) => {
+    dispatch(Operations.setToFavorites(data));
+  },
+  loadDataItemReviews: (id) => {
+    dispatch(Operations.loadDataItemReviews(id));
+  },
+});
+
+export {CardHero};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CardHero);
