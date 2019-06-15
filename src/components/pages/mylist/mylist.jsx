@@ -19,7 +19,7 @@ class Mylist extends React.PureComponent {
 
     return (
       <div className="user-page">
-        <Header/>
+        <Header title={`My list`}/>
         <Catalog
           data={favorites}
           filters={filters}
