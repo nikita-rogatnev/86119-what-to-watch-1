@@ -195,16 +195,21 @@ class CardHero extends React.Component {
                     <span>My list</span>
                   </Link>
                   :
-                  <button
-                    type="button"
-                    className="btn btn--list movie-card__button"
-                    onClick={() => this.props.setToFavorites(this.props.data)}
-                  >
-                    <svg viewBox="0 0 18 14" width="18" height="14">
-                      {isFavorite ? <use xlinkHref="#in-list"/> : <use xlinkHref="#add"/>}
-                    </svg>
-                    <span>My list</span>
-                  </button>
+                  <Route render={({history}) => (
+                    <button
+                      type="button"
+                      className="btn btn--list movie-card__button"
+                      onClick={() => {
+                        this.props.setToFavorites(this.props.data);
+                        history.push(`/mylist`);
+                      }}
+                    >
+                      <svg viewBox="0 0 18 14" width="18" height="14">
+                        {isFavorite ? <use xlinkHref="#in-list"/> : <use xlinkHref="#add"/>}
+                      </svg>
+                      <span>My list</span>
+                    </button>
+                  )}/>
                 }
 
                 <Link to={`/films/${id}/review`} className="btn movie-card__button">Add review</Link>
