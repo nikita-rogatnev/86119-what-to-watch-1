@@ -12,29 +12,24 @@ import {
   getFilterCurrent,
   getFilters,
   getFilteredData,
-  getDataItemReviews
+  getDataItemReviews,
 } from "../../../reducer/data/selectors";
 import {Operations} from "../../../reducer/data/data";
 
 class Film extends React.Component {
-  componentWillMount() {
-    const {
-      changeCurrentFilter,
-      changeDataItemCurrent,
-      loadDataItemReviews,
-    } = this.props;
 
-    const {
-      // eslint-disable-next-line react/prop-types
-      currentDataItemId,
-      // eslint-disable-next-line react/prop-types
-      currentDataFilter,
-      // eslint-disable-next-line react/prop-types
-    } = this.props.location.state;
+  componentDidMount() {
+    // eslint-disable-next-line react/prop-types
+    this.props.changeCurrentFilter(this.props.location.state.currentDataFilter);
+    // eslint-disable-next-line react/prop-types
+    this.props.changeDataItemCurrent(this.props.location.state.currentDataItemId);
+    // eslint-disable-next-line react/prop-types
+    this.props.loadDataItemReviews(this.props.location.state.currentDataItemId);
+  }
 
-    changeCurrentFilter(currentDataFilter);
-    changeDataItemCurrent(currentDataItemId);
-    loadDataItemReviews(currentDataItemId);
+  componentWillUpdate() {
+    // eslint-disable-next-line react/prop-types
+    this.props.changeDataItemCurrent(this.props.location.state.currentDataItemId);
   }
 
   render() {
@@ -46,6 +41,8 @@ class Film extends React.Component {
       currentFilter,
       changeCurrentFilter,
     } = this.props;
+
+    console.log(this.props.location.state);
 
     return (
       <React.Fragment>

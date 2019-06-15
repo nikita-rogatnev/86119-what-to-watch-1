@@ -51,11 +51,11 @@ const mapStateToProps = (state, ownProps) =>
   });
 
 const mapDispatchToProps = (dispatch) => ({
-  requireAuthorization: (status) => dispatch(ActionCreator.requireAuthorization(status))
+  requireAuthorization: (status) => dispatch(ActionCreator.requireAuthorization(status)),
 });
 
 Header.propTypes = {
-  isAuthorizationRequired: PropTypes.bool.PropTypes,
+  isAuthorizationRequired: PropTypes.bool.isRequired,
   isLogged: PropTypes.bool.isRequired,
   requireAuthorization: PropTypes.func.isRequired,
   user: PropTypes.object,

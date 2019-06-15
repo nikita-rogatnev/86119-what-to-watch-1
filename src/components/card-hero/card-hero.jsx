@@ -10,7 +10,7 @@ const Overview = (data) => {
     scoresCount,
     director,
     starring,
-    description
+    description,
   } = data;
 
   return (
@@ -40,7 +40,7 @@ const Details = (data) => {
     starring,
     runTime,
     genre,
-    released
+    released,
   } = data;
 
   return (
@@ -190,13 +190,38 @@ class CardHero extends React.Component {
               <nav className="movie-nav movie-card__nav">
                 <ul className="movie-nav__list">
                   <li className={`movie-nav__item`}>
-                    <NavLink to={`/films/${id}/`} exact className="movie-nav__link">Overview</NavLink>
+                    <NavLink
+                      to={{
+                        pathname: `/films/${id}/`,
+                        state: {
+                          currentDataItemId: id,
+                          currentDataFilter: genre,
+                        },
+                      }}
+                      exact
+                      className="movie-nav__link">Overview</NavLink>
                   </li>
                   <li className={`movie-nav__item`}>
-                    <NavLink to={`/films/${id}/details`} className="movie-nav__link">Details</NavLink>
+                    <NavLink
+                      to={{
+                        pathname: `/films/${id}/details/`,
+                        state: {
+                          currentDataItemId: id,
+                          currentDataFilter: genre,
+                        },
+                      }}
+                      className="movie-nav__link">Details</NavLink>
                   </li>
                   <li className="movie-nav__item">
-                    <NavLink to={`/films/${id}/reviews`} className="movie-nav__link">Reviews</NavLink>
+                    <NavLink
+                      to={{
+                        pathname: `/films/${id}/reviews/`,
+                        state: {
+                          currentDataItemId: id,
+                          currentDataFilter: genre,
+                        },
+                      }}
+                      className="movie-nav__link">Reviews</NavLink>
                   </li>
                 </ul>
               </nav>
@@ -217,7 +242,7 @@ class CardHero extends React.Component {
 
 CardHero.propTypes = {
   data: PropTypes.object.isRequired,
-  reviews: PropTypes.object.isRequired,
+  reviews: PropTypes.array.isRequired,
 };
 
 
