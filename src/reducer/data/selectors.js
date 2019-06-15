@@ -7,10 +7,6 @@ export const getData = (state) => {
   return state[NAME_SPACE].data;
 };
 
-export const getDataFavorites = (state) => {
-  return state[NAME_SPACE].dataFavorites;
-};
-
 export const getDataItemReviews = (state) => {
   return state[NAME_SPACE].dataItemReviews;
 };
@@ -38,3 +34,7 @@ export const getFilteredData = createSelector(
       return (currentFilter === `All genres`) ? data : data.filter((dataItem) => dataItem.genre === currentFilter);
     }
 );
+
+export const getDataFavorites = createSelector(getData, (data) => {
+  return data.filter((item) => item.isFavorite === true);
+});

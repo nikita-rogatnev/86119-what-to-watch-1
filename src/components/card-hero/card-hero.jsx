@@ -4,11 +4,12 @@ import {Switch, Route, NavLink, Link} from "react-router-dom";
 
 import Header from "../header/header";
 import {connect} from "react-redux";
-import {
-  getDataFavorites,
-  getDataItemCurrent,
-} from "../../reducer/data/selectors";
+
+import {getDataItemCurrent} from "../../reducer/data/selectors";
 import {Operations} from "../../reducer/data/data";
+
+import {getLoggedStatus} from "../../reducer/user/selectors";
+import {ActionCreator} from "../../reducer/user/user";
 
 const Overview = (data) => {
   const {
@@ -155,7 +156,9 @@ class CardHero extends React.Component {
       posterImage,
     } = this.props.data;
 
-    console.log(this.state.pathname);
+    const {
+      isLogged,
+    } = this.props;
 
     return (
       <section className="movie-card movie-card--full">
@@ -184,20 +187,25 @@ class CardHero extends React.Component {
                   <span>Play</span>
                 </button>
 
-                <button
-                  type="button"
-                  className="btn btn--list movie-card__button"
-                  onClick={() => this.props.setToFavorites(this.props.data)}
-                >
-                  <svg viewBox="0 0 18 14" width="18" height="14">
-                    {isFavorite ?
-                      <use xlinkHref="#in-list"></use>
-                      :
+                {!isLogged ?
+                  <Link to="/login" className="btn btn--list movie-card__button">
+                    <svg viewBox="0 0 18 14" width="18" height="14">
                       <use xlinkHref="#add"></use>
-                    }
-                  </svg>
-                  <span>My list</span>
-                </button>
+                    </svg>
+                    <span>My list</span>
+                  </Link>
+                  :
+                  <button
+                    type="button"
+                    className="btn btn--list movie-card__button"
+                    onClick={() => this.props.setToFavorites(this.props.data)}
+                  >
+                    <svg viewBox="0 0 18 14" width="18" height="14">
+                      {isFavorite ? <use xlinkHref="#in-list"/> : <use xlinkHref="#add"/>}
+                    </svg>
+                    <span>My list</span>
+                  </button>
+                }
 
                 <Link to={`/films/${id}/review`} className="btn movie-card__button">Add review</Link>
               </div>
@@ -275,16 +283,20 @@ CardHero.propTypes = {
   data: PropTypes.object.isRequired,
   reviews: PropTypes.array.isRequired,
   setToFavorites: PropTypes.func.isRequired,
+  isLogged: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
-    dataFavorites: getDataFavorites(state),
+    isLogged: getLoggedStatus(state),
     dataItemCurrent: getDataItemCurrent(state),
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  requireAuthorization: (status) => {
+    dispatch(ActionCreator.requireAuthorization(status));
+  },
   setToFavorites: (data) => {
     dispatch(Operations.setToFavorites(data));
   },
