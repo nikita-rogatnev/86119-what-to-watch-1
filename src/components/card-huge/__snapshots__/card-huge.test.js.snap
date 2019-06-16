@@ -59,9 +59,16 @@ exports[`CardHuge renders correctly 1`] = `
         <div
           className="movie-card__buttons"
         >
-          <button
+          <Link
             className="btn btn--play movie-card__button"
-            type="button"
+            to={
+              Object {
+                "pathname": "/player",
+                "state": Object {
+                  "data": "mock",
+                },
+              }
+            }
           >
             <svg
               height="19"
@@ -75,7 +82,7 @@ exports[`CardHuge renders correctly 1`] = `
             <span>
               Play
             </span>
-          </button>
+          </Link>
           <Link
             className="btn btn--list movie-card__button"
             to="/mylist"

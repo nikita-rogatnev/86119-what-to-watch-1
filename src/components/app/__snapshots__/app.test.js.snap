@@ -31,6 +31,10 @@ exports[`App renders correctly 1`] = `
     }
     path="/films/:id"
   />
+  <Route
+    component={[Function]}
+    path="/player"
+  />
   <ConnectFunction
     component={[Function]}
     exact={true}

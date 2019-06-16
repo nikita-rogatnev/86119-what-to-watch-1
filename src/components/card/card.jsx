@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import VideoPlayer from "../video-player/video-player";
+import VideoPreview from "../video-preview/video-preview";
 import {Link} from "react-router-dom";
 
 class Card extends React.PureComponent {
@@ -47,7 +47,7 @@ class Card extends React.PureComponent {
         {showPlayButton ? <button className="small-movie-card__play-btn" type="button">Play</button> : ``}
         <div className="small-movie-card__image">
           {
-            isPreviewPlaying ? <VideoPlayer
+            isPreviewPlaying ? <VideoPreview
               previewVideoLink={previewVideoLink}
               previewImage={previewImage}
               muted={true}
