@@ -3,6 +3,13 @@ import PropTypes from "prop-types";
 import {Switch, Route, NavLink, Link} from "react-router-dom";
 
 import Header from "../header/header";
+import {connect} from "react-redux";
+
+import {getDataItemCurrent} from "../../reducer/data/selectors";
+import {Operations} from "../../reducer/data/data";
+
+import {getLoggedStatus} from "../../reducer/user/selectors";
+import {ActionCreator} from "../../reducer/user/user";
 
 const Overview = (data) => {
   const {
@@ -10,7 +17,7 @@ const Overview = (data) => {
     scoresCount,
     director,
     starring,
-    description
+    description,
   } = data;
 
   return (
@@ -40,7 +47,7 @@ const Details = (data) => {
     starring,
     runTime,
     genre,
-    released
+    released,
   } = data;
 
   return (
@@ -124,6 +131,20 @@ const Reviews = (data) => {
 };
 
 class CardHero extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      pathname: null,
+    };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (window.location.pathname !== prevState.pathname) {
+      this.setState({pathname: window.location.pathname});
+    }
+  }
+
   render() {
     const {
       id,
@@ -134,6 +155,10 @@ class CardHero extends React.Component {
       isFavorite,
       posterImage,
     } = this.props.data;
+
+    const {
+      isLogged,
+    } = this.props;
 
     return (
       <section className="movie-card movie-card--full">
@@ -155,25 +180,43 @@ class CardHero extends React.Component {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <Link to={{
+                  pathname: `/player`,
+                  state: {
+                    data: this.props.data,
+                  },
+                }} className="btn btn--play movie-card__button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
-                </button>
-                {isFavorite ?
-                  <Link to="/mylist" className="btn btn--list movie-card__button">
-                    <svg viewBox="0 0 18 14" width="18" height="14">
-                      <use xlinkHref="#in-list"></use>
-                    </svg>
-                    <span>My list</span>
-                  </Link> :
-                  <button type="button" className="btn btn--list movie-card__button">
+                </Link>
+
+                {!isLogged ?
+                  <Link to="/login" className="btn btn--list movie-card__button">
                     <svg viewBox="0 0 18 14" width="18" height="14">
                       <use xlinkHref="#add"></use>
                     </svg>
                     <span>My list</span>
-                  </button>}
+                  </Link>
+                  :
+                  <Route render={({history}) => (
+                    <button
+                      type="button"
+                      className="btn btn--list movie-card__button"
+                      onClick={() => {
+                        this.props.setToFavorites(this.props.data);
+                        history.push(`/mylist`);
+                      }}
+                    >
+                      <svg viewBox="0 0 18 14" width="18" height="14">
+                        {isFavorite ? <use xlinkHref="#in-list"/> : <use xlinkHref="#add"/>}
+                      </svg>
+                      <span>My list</span>
+                    </button>
+                  )}/>
+                }
+
                 <Link to={`/films/${id}/review`} className="btn movie-card__button">Add review</Link>
               </div>
             </div>
@@ -189,14 +232,45 @@ class CardHero extends React.Component {
             <div className="movie-card__desc">
               <nav className="movie-nav movie-card__nav">
                 <ul className="movie-nav__list">
-                  <li className={`movie-nav__item`}>
-                    <NavLink to={`/films/${id}/`} exact className="movie-nav__link">Overview</NavLink>
+                  <li
+                    className={`movie-nav__item ${this.state.pathname === `/films/${id}/` ? `movie-nav__item--active` : ``}`}>
+                    <NavLink
+                      to={{
+                        pathname: `/films/${id}/`,
+                        state: {
+                          currentDataItemId: id,
+                          currentDataFilter: genre,
+                        },
+                      }}
+                      exact
+                      onClick={() => this.setState({pathname: `/films/${id}/`})}
+                      className="movie-nav__link">Overview</NavLink>
                   </li>
-                  <li className={`movie-nav__item`}>
-                    <NavLink to={`/films/${id}/details`} className="movie-nav__link">Details</NavLink>
+                  <li
+                    className={`movie-nav__item ${this.state.pathname === `/films/${id}/details/` ? `movie-nav__item--active` : ``}`}>
+                    <NavLink
+                      to={{
+                        pathname: `/films/${id}/details/`,
+                        state: {
+                          currentDataItemId: id,
+                          currentDataFilter: genre,
+                        },
+                      }}
+                      onClick={() => this.setState({pathname: `/films/${id}/details/`})}
+                      className="movie-nav__link">Details</NavLink>
                   </li>
-                  <li className="movie-nav__item">
-                    <NavLink to={`/films/${id}/reviews`} className="movie-nav__link">Reviews</NavLink>
+                  <li
+                    className={`movie-nav__item ${this.state.pathname === `/films/${id}/reviews/` ? `movie-nav__item--active` : ``}`}>
+                    <NavLink
+                      to={{
+                        pathname: `/films/${id}/reviews/`,
+                        state: {
+                          currentDataItemId: id,
+                          currentDataFilter: genre,
+                        },
+                      }}
+                      onClick={() => this.setState({pathname: `/films/${id}/reviews/`})}
+                      className="movie-nav__link">Reviews</NavLink>
                   </li>
                 </ul>
               </nav>
@@ -217,8 +291,30 @@ class CardHero extends React.Component {
 
 CardHero.propTypes = {
   data: PropTypes.object.isRequired,
-  reviews: PropTypes.object.isRequired,
+  reviews: PropTypes.array.isRequired,
+  setToFavorites: PropTypes.func.isRequired,
+  isLogged: PropTypes.bool.isRequired,
 };
 
+const mapStateToProps = (state) => {
+  return {
+    isLogged: getLoggedStatus(state),
+    dataItemCurrent: getDataItemCurrent(state),
+  };
+};
 
-export default CardHero;
+const mapDispatchToProps = (dispatch) => ({
+  requireAuthorization: (status) => {
+    dispatch(ActionCreator.requireAuthorization(status));
+  },
+  setToFavorites: (data) => {
+    dispatch(Operations.setToFavorites(data));
+  },
+  loadDataItemReviews: (id) => {
+    dispatch(Operations.loadDataItemReviews(id));
+  },
+});
+
+export {CardHero};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CardHero);

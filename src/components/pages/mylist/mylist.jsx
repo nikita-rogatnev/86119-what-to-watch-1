@@ -6,27 +6,22 @@ import Catalog from "../../catalog/catalog";
 import Footer from "../../footer/footer";
 
 import {connect} from "react-redux";
-import {Operations} from "../../../reducer/data/data";
 import {ActionCreators} from "../../../reducer/data/data.js";
 import {getFilterCurrent, getFilters, getDataFavorites} from "../../../reducer/data/selectors";
 
 class Mylist extends React.PureComponent {
-  componentWillMount() {
-    this.props.loadDataFavorites();
-  }
-
   render() {
     const {
-      dataFavorites,
+      favorites,
       filters,
       changeCurrentFilter,
     } = this.props;
 
     return (
       <div className="user-page">
-        <Header/>
+        <Header title={`My list`}/>
         <Catalog
-          data={dataFavorites}
+          data={favorites}
           filters={filters}
           currentFilter={`All genres`}
           changeCurrentFilter={changeCurrentFilter}
@@ -41,25 +36,21 @@ class Mylist extends React.PureComponent {
 }
 
 Mylist.propTypes = {
-  dataFavorites: PropTypes.array.isRequired,
+  favorites: PropTypes.array.isRequired,
   filters: PropTypes.array.isRequired,
   currentFilter: PropTypes.string.isRequired,
   changeCurrentFilter: PropTypes.func.isRequired,
-  loadDataFavorites: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
-    dataFavorites: getDataFavorites(state),
+    favorites: getDataFavorites(state),
     filters: getFilters(state),
     currentFilter: getFilterCurrent(state),
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  loadDataFavorites: () => {
-    dispatch(Operations.loadDataFavorites());
-  },
   changeCurrentFilter: (genre) => {
     dispatch(ActionCreators.changeCurrentFilter(genre));
   },

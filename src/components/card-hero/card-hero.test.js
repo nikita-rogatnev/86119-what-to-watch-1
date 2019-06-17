@@ -8,13 +8,20 @@ import CardHero from "./card-hero";
 import mockData from "../../mocks/mock-data";
 import mockReviews from "../../mocks/mock-reviews";
 
+import {Provider} from "react-redux";
+import configureMockStore from "redux-mock-store";
+const mockStore = configureMockStore();
+const store = mockStore({});
+
 Enzyme.configure({adapter: new Adapter()});
 
 it(`CardHero renders correctly`, () => {
-  const tree = shallow(<CardHero
-    data={mockData[0]}
-    reviews={mockReviews[0]}
-  />);
+  const tree = shallow(<Provider store={store}>
+    <CardHero
+      data={mockData[0]}
+      reviews={mockReviews}
+    />
+  </Provider>);
 
   expect(toJson(tree)).toMatchSnapshot();
 });

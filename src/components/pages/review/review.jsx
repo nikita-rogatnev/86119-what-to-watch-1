@@ -1,8 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import CardHero from "../../card-hero/card-hero";
 import AddReview from "../../add-review/add-review";
-import PropTypes from "prop-types";
 
 class Review extends React.PureComponent {
   render() {
