@@ -158,18 +158,18 @@ class CardHero extends React.PureComponent {
     super(props);
 
     this.state = {
-      pathname: null,
+      activeTab: `Overview`,
       isInReviewMode: false,
     };
   }
 
   componentWillUnmount() {
-    this.setState({isInReviewMode: true});
+    this.setState({activeTab: `Overview`, isInReviewMode: false});
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (window.location.pathname !== prevState.pathname) {
-      this.setState({pathname: window.location.pathname});
+  componentDidUpdate(prevProps) {
+    if (prevProps.data.id !== this.props.data.id) {
+      this.setState({activeTab: `Overview`});
     }
 
     if (window.location.pathname !== `/film/${prevProps.data.id}/review`) {
@@ -289,7 +289,7 @@ class CardHero extends React.PureComponent {
               <nav className="movie-nav movie-card__nav">
                 <ul className="movie-nav__list">
                   <li
-                    className={`movie-nav__item ${this.state.pathname === `/film/${id}` ? `movie-nav__item--active` : ``}`}>
+                    className={`movie-nav__item ${this.state.activeTab === `Overview` ? `movie-nav__item--active` : ``}`}>
                     <NavLink
                       to={{
                         pathname: `/film/${id}`,
@@ -299,11 +299,12 @@ class CardHero extends React.PureComponent {
                         },
                       }}
                       exact
-                      onClick={() => this.setState({pathname: `/film/${id}`})}
+                      onClick={() => this.setState({activeTab: `Overview`})}
                       className="movie-nav__link">Overview</NavLink>
                   </li>
+
                   <li
-                    className={`movie-nav__item ${this.state.pathname === `/film/${id}/details` ? `movie-nav__item--active` : ``}`}>
+                    className={`movie-nav__item ${this.state.activeTab === `Details` ? `movie-nav__item--active` : ``}`}>
                     <NavLink
                       to={{
                         pathname: `/film/${id}/details`,
@@ -312,11 +313,13 @@ class CardHero extends React.PureComponent {
                           currentDataFilter: genre,
                         },
                       }}
-                      onClick={() => this.setState({pathname: `/film/${id}/details`})}
+                      exact
+                      onClick={() => this.setState({activeTab: `Details`})}
                       className="movie-nav__link">Details</NavLink>
                   </li>
+
                   <li
-                    className={`movie-nav__item ${this.state.pathname === `/film/${id}/reviews` ? `movie-nav__item--active` : ``}`}>
+                    className={`movie-nav__item ${this.state.activeTab === `Reviews` ? `movie-nav__item--active` : ``}`}>
                     <NavLink
                       to={{
                         pathname: `/film/${id}/reviews`,
@@ -325,7 +328,8 @@ class CardHero extends React.PureComponent {
                           currentDataFilter: genre,
                         },
                       }}
-                      onClick={() => this.setState({pathname: `/film/${id}/reviews`})}
+                      exact
+                      onClick={() => this.setState({activeTab: `Reviews`})}
                       className="movie-nav__link">Reviews</NavLink>
                   </li>
                 </ul>
@@ -333,15 +337,15 @@ class CardHero extends React.PureComponent {
 
               <Switch>
                 <Route path={`/film/${id}`} exact render={() => (<Overview {...this.props.data}/>)}/>
-                <Route path={`/film/${id}/details`} render={() => (<Details {...this.props.data}/>)}/>
-                <Route path={`/film/${id}/reviews`} render={() => (<Reviews {...this.props.reviews}/>)}/>
+                <Route path={`/film/${id}/details`} exact render={() => (<Details {...this.props.data}/>)}/>
+                <Route path={`/film/${id}/reviews`} exact render={() => (<Reviews {...this.props.reviews}/>)}/>
               </Switch>
             </div>
           </div>
         </div>
         }
 
-        <PrivateRoute path="/film/:id/review" component={AddReview}/>
+        <PrivateRoute path="/film/:id/review" exact component={AddReview}/>
       </section>
     );
   }

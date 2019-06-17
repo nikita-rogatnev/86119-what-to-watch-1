@@ -45,6 +45,7 @@ exports[`App renders correctly 1`] = `
         "type": [Function],
       }
     }
+    exact={true}
     path="/mylist"
   />
   <Route

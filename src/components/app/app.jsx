@@ -32,7 +32,7 @@ class App extends React.PureComponent {
         />
         <Route path="/player" component={Player}/>
         <Route path="/film/:id" component={Film}/>
-        <PrivateRoute path="/mylist" component={Mylist}/>
+        <PrivateRoute path="/mylist" exact component={Mylist}/>
         <Route
           render={() => (
             <div className="user-page">
