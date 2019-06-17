@@ -24,6 +24,7 @@ const Overview = (data) => {
     description,
   } = data;
 
+
   return (
     <div className="movie-card__text">
       <div className="movie-rating">
@@ -39,7 +40,7 @@ const Overview = (data) => {
       <div className="movie-card__text">
         <p>{description}</p>
         <p className="movie-card__director"><strong>Director: {director}</strong></p>
-        <p className="movie-card__starring"><strong>Starring: {starring} and other</strong></p>
+        <p className="movie-card__starring"><strong>Starring: {starring.join(`, `)} and other</strong></p>
       </div>
     </div>
   );
@@ -64,7 +65,7 @@ const Details = (data) => {
         <p className="movie-card__details-item">
           <strong className="movie-card__details-name">Starring</strong>
           <span className="movie-card__details-value">
-            {starring}
+            {starring.join(`, `)}
           </span>
         </p>
       </div>
@@ -101,8 +102,16 @@ const Reviews = (data) => {
                   <p className="review__text">{item.comment}</p>
                   <footer className="review__details">
                     <cite className="review__author">{item.user.name}</cite>
-                    <time className="review__date" dateTime={item.date}>
-                      {item.date}
+                    <time className="review__date" dateTime={new Date(item.date).toLocaleDateString(`en-US`, {
+                      month: `numeric`,
+                      year: `numeric`,
+                      day: `numeric`,
+                    })}>
+                      {new Date(item.date).toLocaleDateString(`en-US`, {
+                        month: `long`,
+                        year: `numeric`,
+                        day: `numeric`,
+                      })}
                     </time>
                   </footer>
                 </blockquote>
@@ -122,7 +131,17 @@ const Reviews = (data) => {
                   <p className="review__text">{item.comment}</p>
                   <footer className="review__details">
                     <cite className="review__author">{item.user.name}</cite>
-                    <time className="review__date" dateTime="2016-12-24">{item.date}</time>
+                    <time className="review__date" dateTime={new Date(item.date).toLocaleDateString(`en-US`, {
+                      month: `numeric`,
+                      year: `numeric`,
+                      day: `numeric`,
+                    })}>
+                      {new Date(item.date).toLocaleDateString(`en-US`, {
+                        month: `long`,
+                        year: `numeric`,
+                        day: `numeric`,
+                      })}
+                    </time>
                   </footer>
                 </blockquote>
                 <div className="review__rating">{item.rating}</div>
