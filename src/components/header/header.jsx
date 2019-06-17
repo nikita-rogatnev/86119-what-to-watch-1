@@ -18,15 +18,19 @@ class Header extends React.PureComponent {
       isLogged,
       isAuthorizationRequired,
       user,
+      title = ``,
     } = this.props;
+
+    const pathname = window.location.pathname;
 
     return (
       <header
-        className={`page-header ${!isLogged && !isAuthorizationRequired ? `movie-card__head` : `user-page__head`}`}>
+        className={`page-header ${pathname === `/login` || `/mylist` ? `user-page__head` : `movie-card__head`}`}>
         <Logo/>
 
-        {isAuthorizationRequired && <h1 className="page-title user-page__title">Sign in</h1>}
+        <h1 className="page-title user-page__title">{title}</h1>
 
+        {pathname !== `/login` &&
         <div className="user-block">
           {isLogged && <div className="user-block__avatar">
             <Link to="/mylist">
@@ -38,6 +42,7 @@ class Header extends React.PureComponent {
             Sign in
           </Link>}
         </div>
+        }
       </header>
     );
   }
@@ -51,14 +56,15 @@ const mapStateToProps = (state, ownProps) =>
   });
 
 const mapDispatchToProps = (dispatch) => ({
-  requireAuthorization: (status) => dispatch(ActionCreator.requireAuthorization(status))
+  requireAuthorization: (status) => dispatch(ActionCreator.requireAuthorization(status)),
 });
 
 Header.propTypes = {
-  isAuthorizationRequired: PropTypes.bool.PropTypes,
+  isAuthorizationRequired: PropTypes.bool.isRequired,
   isLogged: PropTypes.bool.isRequired,
   requireAuthorization: PropTypes.func.isRequired,
   user: PropTypes.object,
+  title: PropTypes.string,
 };
 
 export {Header};

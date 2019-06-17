@@ -8,7 +8,7 @@ class Login extends React.PureComponent {
   render() {
     return (
       <div className="user-page">
-        <Header/>
+        <Header title={`Sign in`}/>
         <SignIn/>
         <Footer/>
       </div>

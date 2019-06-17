@@ -12,29 +12,30 @@ import {
   getFilterCurrent,
   getFilters,
   getFilteredData,
-  getDataItemReviews
+  getDataItemReviews,
 } from "../../../reducer/data/selectors";
 import {Operations} from "../../../reducer/data/data";
 
 class Film extends React.Component {
-  componentWillMount() {
-    const {
-      changeCurrentFilter,
-      changeDataItemCurrent,
-      loadDataItemReviews,
-    } = this.props;
+  componentDidMount() {
+    // eslint-disable-next-line react/prop-types
+    this.props.changeCurrentFilter(this.props.location.state.currentDataFilter);
+    // eslint-disable-next-line react/prop-types
+    this.props.changeDataItemCurrent(this.props.location.state.currentDataItemId);
+    // eslint-disable-next-line react/prop-types
+    this.props.loadDataItemReviews(this.props.location.state.currentDataItemId);
+  }
 
-    const {
-      // eslint-disable-next-line react/prop-types
-      currentDataItemId,
-      // eslint-disable-next-line react/prop-types
-      currentDataFilter,
-      // eslint-disable-next-line react/prop-types
-    } = this.props.location.state;
+  componentDidUpdate(prevProps) {
+    // eslint-disable-next-line react/prop-types
+    const currentId = this.props.location.state.currentDataItemId;
+    // eslint-disable-next-line react/prop-types
+    const previousId = prevProps.location.state.currentDataItemId;
 
-    changeCurrentFilter(currentDataFilter);
-    changeDataItemCurrent(currentDataItemId);
-    loadDataItemReviews(currentDataItemId);
+    if (currentId !== previousId) {
+      this.props.changeDataItemCurrent(currentId);
+      this.props.loadDataItemReviews(currentId);
+    }
   }
 
   render() {
