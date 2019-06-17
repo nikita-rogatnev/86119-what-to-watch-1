@@ -20,6 +20,10 @@ exports[`App renders correctly 1`] = `
     render={[Function]}
   />
   <Route
+    component={[Function]}
+    path="/player"
+  />
+  <Route
     component={
       Object {
         "$$typeof": Symbol(react.memo),
@@ -30,14 +34,6 @@ exports[`App renders correctly 1`] = `
       }
     }
     path="/film/:id"
-  />
-  <Route
-    component={[Function]}
-    path="/player"
-  />
-  <ConnectFunction
-    component={[Function]}
-    path="/film/:id/review"
   />
   <ConnectFunction
     component={
