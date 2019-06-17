@@ -6,13 +6,13 @@ import AddReview from "../../add-review/add-review";
 
 class Review extends React.PureComponent {
   render() {
-    const {data, reviews} = this.props;
+    const {data} = this.props;
 
     return (
       <React.Fragment>
         <CardHero
+          fullMode={true}
           data={data}
-          reviews={reviews}
         />
         <AddReview/>
       </React.Fragment>

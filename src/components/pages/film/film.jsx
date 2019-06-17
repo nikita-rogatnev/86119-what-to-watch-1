@@ -51,6 +51,7 @@ class Film extends React.Component {
     return (
       <React.Fragment>
         <CardHero
+          fullMode={true}
           data={dataItemCurrent}
           reviews={dataItemReviews}
         />

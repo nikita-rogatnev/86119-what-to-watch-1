@@ -1,16 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import CardHuge from "../../card-huge/card-huge";
+import CardHero from "../../card-hero/card-hero";
 import Catalog from "../../catalog/catalog";
 import Footer from "../../footer/footer";
 
 import {connect} from "react-redux";
 import {ActionCreators} from "../../../reducer/data/data.js";
+
 import {getFilters, getFilterCurrent, getFilteredData} from "../../../reducer/data/selectors.js";
 import {getAuthorizationStatus} from "../../../reducer/user/selectors";
 
-class Home extends React.PureComponent {
+class Home extends React.Component {
   render() {
     const {
       data,
@@ -21,7 +22,9 @@ class Home extends React.PureComponent {
 
     return (
       <React.Fragment>
-        <CardHuge/>
+        <CardHero
+          data={data}
+        />
         <main className="page-content">
           <Catalog
             data={data}
@@ -50,7 +53,7 @@ const mapStateToProps = (state) => {
     data: getFilteredData(state),
     filters: getFilters(state),
     currentFilter: getFilterCurrent(state),
-    isAuthorizationRequired: getAuthorizationStatus(state)
+    isAuthorizationRequired: getAuthorizationStatus(state),
   };
 };
 

@@ -23,7 +23,7 @@ exports[`Card renders correctly 1`] = `
       className="small-movie-card__link"
       to={
         Object {
-          "pathname": "/films/1/",
+          "pathname": "/film/1",
           "state": Object {
             "currentDataFilter": "Action",
             "currentDataItemId": 1,

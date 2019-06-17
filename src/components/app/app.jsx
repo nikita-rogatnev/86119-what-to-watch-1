@@ -2,13 +2,15 @@ import React from "react";
 import {Switch, Route} from "react-router-dom";
 
 import Home from "../pages/home/home";
-import Login from "../pages/login/login";
 import Film from "../pages/film/film";
 import Review from "../pages/review/review";
 import Mylist from "../pages/mylist/mylist";
-import Error from "../pages/error/error";
 
+import Header from "../header/header";
+import SignIn from "../sign-in/sign-in";
 import Player from "../video-player/video-player";
+import Footer from "../footer/footer";
+import NotFound from "../not-found/not-found";
 
 import withPrivateRoute from "../../hocs/with-private-route/with-private-route";
 
@@ -19,12 +21,29 @@ class App extends React.PureComponent {
     return (
       <Switch>
         <Route path="/" exact component={Home}/>
-        <Route path="/login" component={Login}/>
-        <Route path="/films/:id" component={Film}/>
+        <Route
+          path="/login"
+          render={() => (
+            <div className="user-page">
+              <Header title={`Sign in`}/>
+              <SignIn/>
+              <Footer/>
+            </div>
+          )}
+        />
+        <Route path="/film/:id" component={Film}/>
         <Route path="/player" component={Player}/>
-        <PrivateRoute path="/films/:id/review" exact component={Review}/>
-        <PrivateRoute path="/mylist" exact component={Mylist}/>
-        <Route component={Error}/>
+        <PrivateRoute path="/film/:id/review" component={Review}/>
+        <PrivateRoute path="/mylist" component={Mylist}/>
+        <Route
+          render={() => (
+            <div className="user-page">
+              <Header/>
+              <NotFound/>
+              <Footer/>
+            </div>
+          )}
+        />
       </Switch>
     );
   }

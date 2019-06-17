@@ -20,19 +20,19 @@ export const getDataItemCurrent = (state) => {
 };
 
 export const getAllFilters = createSelector(
-    getData, (data) => data.map((dataItem) => dataItem.genre)
+  getData, (data) => data.map((dataItem) => dataItem.genre),
 );
 
 export const getFilters = createSelector(
-    getAllFilters, (filters) => ([`All genres`, ...new Set(filters)])
+  getAllFilters, (filters) => ([`All genres`, ...new Set(filters)]),
 );
 
 export const getFilteredData = createSelector(
-    getData,
-    getFilterCurrent,
-    (data, currentFilter) => {
-      return (currentFilter === `All genres`) ? data : data.filter((dataItem) => dataItem.genre === currentFilter);
-    }
+  getData,
+  getFilterCurrent,
+  (data, currentFilter) => {
+    return (currentFilter === `All genres`) ? data : data.filter((dataItem) => dataItem.genre === currentFilter);
+  },
 );
 
 export const getDataFavorites = createSelector(getData, (data) => {

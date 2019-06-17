@@ -157,12 +157,13 @@ class CardHero extends React.Component {
     } = this.props.data;
 
     const {
+      fullMode,
       isLogged,
     } = this.props;
 
     return (
-      <section className="movie-card movie-card--full">
-        <div className="movie-card__hero">
+      <section className={`movie-card ${fullMode ? `movie-card--full` : ``}`}>
+        <div className={fullMode && `movie-card__hero`}>
           <div className="movie-card__bg">
             <img src={backgroundImage} alt={name}/>
           </div>
@@ -200,29 +201,34 @@ class CardHero extends React.Component {
                     <span>My list</span>
                   </Link>
                   :
-                  <Route render={({history}) => (
-                    <button
-                      type="button"
-                      className="btn btn--list movie-card__button"
-                      onClick={() => {
-                        this.props.setToFavorites(this.props.data);
-                        history.push(`/mylist`);
-                      }}
-                    >
-                      <svg viewBox="0 0 18 14" width="18" height="14">
-                        {isFavorite ? <use xlinkHref="#in-list"/> : <use xlinkHref="#add"/>}
-                      </svg>
-                      <span>My list</span>
-                    </button>
-                  )}/>
+                  <Link
+                    to={`/mylist`}
+                    className="btn btn--list movie-card__button"
+                    onClick={() => this.props.setToFavorites(this.props.data)}>
+                    <svg viewBox="0 0 18 14" width="18" height="14">
+                      {isFavorite ? <use xlinkHref="#in-list"/> : <use xlinkHref="#add"/>}
+                    </svg>
+                    <span>My list</span>
+                  </Link>
                 }
 
-                <Link to={`/films/${id}/review`} className="btn movie-card__button">Add review</Link>
+                {fullMode && <Link
+                  to={{
+                    pathname: `/film/${id}/review`,
+                    state: {
+                      currentDataItemId: id,
+                    },
+                  }}
+                  className="btn movie-card__button">
+                  Add review
+                </Link>
+                }
               </div>
             </div>
           </div>
         </div>
 
+        {fullMode &&
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
@@ -233,57 +239,58 @@ class CardHero extends React.Component {
               <nav className="movie-nav movie-card__nav">
                 <ul className="movie-nav__list">
                   <li
-                    className={`movie-nav__item ${this.state.pathname === `/films/${id}/` ? `movie-nav__item--active` : ``}`}>
+                    className={`movie-nav__item ${this.state.pathname === `/film/${id}` ? `movie-nav__item--active` : ``}`}>
                     <NavLink
                       to={{
-                        pathname: `/films/${id}/`,
+                        pathname: `/film/${id}`,
                         state: {
                           currentDataItemId: id,
                           currentDataFilter: genre,
                         },
                       }}
                       exact
-                      onClick={() => this.setState({pathname: `/films/${id}/`})}
+                      onClick={() => this.setState({pathname: `/film/${id}`})}
                       className="movie-nav__link">Overview</NavLink>
                   </li>
                   <li
-                    className={`movie-nav__item ${this.state.pathname === `/films/${id}/details/` ? `movie-nav__item--active` : ``}`}>
+                    className={`movie-nav__item ${this.state.pathname === `/film/${id}/details` ? `movie-nav__item--active` : ``}`}>
                     <NavLink
                       to={{
-                        pathname: `/films/${id}/details/`,
+                        pathname: `/film/${id}/details`,
                         state: {
                           currentDataItemId: id,
                           currentDataFilter: genre,
                         },
                       }}
-                      onClick={() => this.setState({pathname: `/films/${id}/details/`})}
+                      onClick={() => this.setState({pathname: `/film/${id}/details`})}
                       className="movie-nav__link">Details</NavLink>
                   </li>
                   <li
-                    className={`movie-nav__item ${this.state.pathname === `/films/${id}/reviews/` ? `movie-nav__item--active` : ``}`}>
+                    className={`movie-nav__item ${this.state.pathname === `/film/${id}/reviews` ? `movie-nav__item--active` : ``}`}>
                     <NavLink
                       to={{
-                        pathname: `/films/${id}/reviews/`,
+                        pathname: `/film/${id}/reviews`,
                         state: {
                           currentDataItemId: id,
                           currentDataFilter: genre,
                         },
                       }}
-                      onClick={() => this.setState({pathname: `/films/${id}/reviews/`})}
+                      onClick={() => this.setState({pathname: `/film/${id}/reviews`})}
                       className="movie-nav__link">Reviews</NavLink>
                   </li>
                 </ul>
               </nav>
 
               <Switch>
-                <Route path={`/films/${id}/`} exact render={() => (<Overview {...this.props.data}/>)}/>
-                <Route path={`/films/${id}/details`} render={() => (<Details {...this.props.data}/>)}/>
-                <Route path={`/films/${id}/reviews`} render={() => (<Reviews {...this.props.reviews}/>)}/>
+                <Route path={`/film/${id}`} exact render={() => (<Overview {...this.props.data}/>)}/>
+                <Route path={`/film/${id}/details`} render={() => (<Details {...this.props.data}/>)}/>
+                <Route path={`/film/${id}/reviews`} render={() => (<Reviews {...this.props.reviews}/>)}/>
               </Switch>
 
             </div>
           </div>
         </div>
+        }
       </section>
     );
   }
@@ -291,8 +298,9 @@ class CardHero extends React.Component {
 
 CardHero.propTypes = {
   data: PropTypes.object.isRequired,
-  reviews: PropTypes.array.isRequired,
+  reviews: PropTypes.array,
   setToFavorites: PropTypes.func.isRequired,
+  fullMode: PropTypes.bool,
   isLogged: PropTypes.bool.isRequired,
 };
 
