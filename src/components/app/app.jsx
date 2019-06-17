@@ -3,7 +3,6 @@ import {Switch, Route} from "react-router-dom";
 
 import Home from "../pages/home/home";
 import Film from "../pages/film/film";
-import Review from "../pages/review/review";
 import Mylist from "../pages/mylist/mylist";
 
 import Header from "../header/header";
@@ -31,9 +30,8 @@ class App extends React.PureComponent {
             </div>
           )}
         />
-        <Route path="/film/:id" component={Film}/>
         <Route path="/player" component={Player}/>
-        <PrivateRoute path="/film/:id/review" component={Review}/>
+        <Route path="/film/:id" component={Film}/>
         <PrivateRoute path="/mylist" component={Mylist}/>
         <Route
           render={() => (

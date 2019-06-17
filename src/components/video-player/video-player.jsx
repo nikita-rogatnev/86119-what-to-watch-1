@@ -10,7 +10,6 @@ class VideoPlayer extends React.Component {
 
     this.videoRef = React.createRef();
 
-    this._goBack = this._goBack.bind(this);
     this._toggleVideo = this._toggleVideo.bind(this);
     this._moveCurrentTime = this._moveCurrentTime.bind(this);
 
@@ -25,11 +24,6 @@ class VideoPlayer extends React.Component {
 
     video.pause();
     this.setState({isVideoPlaying: false, progress: 0});
-  }
-
-  _goBack() {
-    // eslint-disable-next-line react/prop-types
-    this.props.history.goBack();
   }
 
   _toggleVideo() {
@@ -91,7 +85,8 @@ class VideoPlayer extends React.Component {
           <source src={videoLink} type="video/mp4"/>
         </video>
 
-        <button type="button" className="player__exit" onClick={this._goBack}>Exit</button>
+        {/* eslint-disable-next-line react/prop-types */}
+        <button type="button" className="player__exit" onClick={() => this.props.history.goBack()}>Exit</button>
 
         <div className="player__controls">
           <div className="player__controls-row">

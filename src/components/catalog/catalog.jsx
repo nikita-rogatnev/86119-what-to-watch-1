@@ -28,24 +28,24 @@ class Catalog extends React.Component {
       <section className={`catalog ${showCatalogTitle ? `catalog--like-this` : ``}`}>
         <h2 className={`catalog__title ${showCatalogTitle ? `` : `visually-hidden`}`}>{catalogTitle}</h2>
 
-        {showFilters ?
-          <FiltersListWithActiveItem
-            filters={filters}
-            currentFilter={currentFilter}
-            changeCurrentFilter={changeCurrentFilter}
-          />
-          : ``}
+        {showFilters &&
+        <FiltersListWithActiveItem
+          filters={filters}
+          currentFilter={currentFilter}
+          changeCurrentFilter={changeCurrentFilter}
+        />
+        }
 
         <CardListWithActiveItem
           data={data.slice(0, maxCardsNumber)}
           showPlayButton={showPlayButton}
         />
 
-        {showMoreButton ?
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
-          : ``}
+        {showMoreButton &&
+        <div className="catalog__more">
+          <button className="catalog__button" type="button">Show more</button>
+        </div>
+        }
       </section>
     );
   }

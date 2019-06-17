@@ -1,14 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {Link} from "react-router-dom";
-
+import {Link, withRouter} from "react-router-dom";
 import Logo from "../logo/logo";
 
 import {getAuthorizationStatus, getLoggedStatus, getUserData} from "../../reducer/user/selectors";
 import {ActionCreator} from "../../reducer/user/user";
 
-class Header extends React.PureComponent {
+class Header extends React.Component {
   _onClick() {
     this.props.requireAuthorization(true);
   }
@@ -18,7 +17,10 @@ class Header extends React.PureComponent {
       isLogged,
       isAuthorizationRequired,
       user,
-      title = ``,
+      title,
+      breadcrumbsId,
+      breadcrumbsName,
+      breadcrumbsGenre,
     } = this.props;
 
     const pathname = window.location.pathname;
@@ -29,11 +31,22 @@ class Header extends React.PureComponent {
 
         <Logo/>
 
-        {pathname === `/film/:id/review` &&
+        {breadcrumbsId &&
         <nav className="breadcrumbs">
           <ul className="breadcrumbs__list">
             <li className="breadcrumbs__item">
-              <a href="movie-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
+              <Link
+                to={{
+                  pathname: `/film/${breadcrumbsId}`,
+                  state: {
+                    currentDataItemId: breadcrumbsId,
+                    currentDataFilter: breadcrumbsGenre,
+                  },
+                }}
+                onClick={() => this.setState({isInReviewMode: false})}
+                className="breadcrumbs__link">
+                {breadcrumbsName}
+              </Link>
             </li>
             <li className="breadcrumbs__item">
               <a className="breadcrumbs__link">Add review</a>
@@ -79,10 +92,13 @@ Header.propTypes = {
   requireAuthorization: PropTypes.func.isRequired,
   user: PropTypes.object,
   title: PropTypes.string,
+  breadcrumbsId: PropTypes.number,
+  breadcrumbsName: PropTypes.string,
+  breadcrumbsGenre: PropTypes.string,
 };
 
 export {Header};
 
 const HeaderWrapped = connect(mapStateToProps, mapDispatchToProps)(Header);
 
-export default HeaderWrapped;
+export default withRouter(HeaderWrapped);

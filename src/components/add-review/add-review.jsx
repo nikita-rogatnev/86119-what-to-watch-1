@@ -1,6 +1,6 @@
 import React from "react";
 
-class AddReview extends React.PureComponent {
+class AddReview extends React.Component {
   render() {
     return (
       <div className="add-review">
@@ -13,7 +13,7 @@ class AddReview extends React.PureComponent {
               <input className="rating__input" id="star-2" type="radio" name="rating" value="2"/>
               <label className="rating__label" htmlFor="star-2">Rating 2</label>
 
-              <input className="rating__input" id="star-3" type="radio" name="rating" value="3" checked=""/>
+              <input className="rating__input" id="star-3" type="radio" name="rating" value="3" defaultChecked={true}/>
               <label className="rating__label" htmlFor="star-3">Rating 3</label>
 
               <input className="rating__input" id="star-4" type="radio" name="rating" value="4"/>

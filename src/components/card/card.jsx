@@ -44,7 +44,7 @@ class Card extends React.PureComponent {
         className="small-movie-card catalog__movies-card"
         onMouseEnter={this._onHoverEnter}
         onMouseLeave={this._onHoverLeave}>
-        {showPlayButton ? <button className="small-movie-card__play-btn" type="button">Play</button> : ``}
+        {showPlayButton && <button className="small-movie-card__play-btn" type="button">Play</button>}
         <div className="small-movie-card__image">
           {
             isPreviewPlaying ? <VideoPreview
