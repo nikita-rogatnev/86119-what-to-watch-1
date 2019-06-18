@@ -1,5 +1,6 @@
 const initialState = {
   data: [],
+  dataFavorites: [],
   dataItemCurrent: {},
   dataItemReviews: [],
   currentFilter: `All genres`,
@@ -8,6 +9,7 @@ const initialState = {
 export const ActionType = {
   "LOAD_DATA": `LOAD_DATA`,
   "LOAD_DATA_REVIEWS": `LOAD_DATA_REVIEWS`,
+  "LOAD_DATA_FAVORITES": `LOAD_DATA_FAVORITES`,
   "CHANGE_FILTER": `CHANGE_FILTER`,
   "CHANGE_DATA_ACTIVE": `CHANGE_DATA_ACTIVE`,
   "CHANGE_FAVORITE": `CHANGE_FAVORITE`,
@@ -28,6 +30,14 @@ export const ActionCreators = {
       payload: data,
     };
   },
+
+  loadDataFavorites: (data) => {
+    return {
+      type: ActionType.LOAD_DATA_FAVORITES,
+      payload: data,
+    };
+  },
+
 
   changeCurrentFilter: (data) => {
     return {
@@ -62,6 +72,12 @@ export const Operations = {
     return api
       .get(`/comments/${id}`)
       .then((response) => dispatch(ActionCreators.loadDataItemReviews(response.data)));
+  },
+
+  loadDataFavorites: () => (dispatch, getState, api) => {
+    return api
+      .get(`/favorite`)
+      .then((response) => dispatch(ActionCreators.loadDataFavorites(response.data)));
   },
 
   setToFavorites: (data) => (dispatch, getState, api) => {
@@ -104,6 +120,11 @@ export const reducer = (state = initialState, action) => {
     case ActionType.LOAD_DATA:
       return Object.assign({}, state, {
         data: mapData(action.payload),
+      });
+
+    case ActionType.LOAD_DATA_FAVORITES:
+      return Object.assign({}, state, {
+        dataFavorites: mapData(action.payload),
       });
 
     case ActionType.CHANGE_FILTER:

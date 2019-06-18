@@ -9,7 +9,6 @@ import {connect} from "react-redux";
 import {getDataItemCurrent} from "../../reducer/data/selectors";
 import {Operations} from "../../reducer/data/data";
 import {getLoggedStatus} from "../../reducer/user/selectors";
-import {ActionCreator} from "../../reducer/user/user";
 
 import withPrivateRoute from "../../hocs/with-private-route/with-private-route";
 
@@ -195,7 +194,7 @@ class CardHero extends React.PureComponent {
 
     return (
       <section className={`movie-card ${fullMode ? `movie-card--full` : ``}`}>
-        <div className={this.state.isInReviewMode ? `movie-card__header` : `movie-card__hero`}>
+        <div className={`${fullMode ? `movie-card__header` : ``} ${fullMode ? `movie-card__hero` : ``}`}>
           <div className="movie-card__bg">
             <img src={backgroundImage} alt={name}/>
           </div>
@@ -218,62 +217,103 @@ class CardHero extends React.PureComponent {
                 <img src={posterImage} alt={name} width="218" height="327"/>
               </div>
               :
-              <div className="movie-card__desc">
-                <h2 className="movie-card__title">{name}</h2>
-                <p className="movie-card__meta">
-                  <span className="movie-card__genre">{genre}</span>
-                  <span className="movie-card__year">{released}</span>
-                </p>
+              <React.Fragment>
+                {fullMode ?
+                  <div className="movie-card__desc">
+                    <h2 className="movie-card__title">{name}</h2>
+                    <p className="movie-card__meta">
+                      <span className="movie-card__genre">{genre}</span>
+                      <span className="movie-card__year">{released}</span>
+                    </p>
 
-                <div className="movie-card__buttons">
-                  <Link to={{
-                    pathname: `/player`,
-                    state: {
-                      data: this.props.data,
-                    },
-                  }} className="btn btn--play movie-card__button">
-                    <svg viewBox="0 0 19 19" width="19" height="19">
-                      <use xlinkHref="#play-s"></use>
-                    </svg>
-                    <span>Play</span>
-                  </Link>
+                    <div className="movie-card__buttons">
+                      <Link to={{
+                        pathname: `/player`,
+                        state: {
+                          data: this.props.data,
+                        },
+                      }} className="btn btn--play movie-card__button">
+                        <svg viewBox="0 0 19 19" width="19" height="19">
+                          <use xlinkHref="#play-s"></use>
+                        </svg>
+                        <span>Play</span>
+                      </Link>
 
-                  {!isLogged ?
-                    <Link to="/login" className="btn btn--list movie-card__button">
-                      <svg viewBox="0 0 18 14" width="18" height="14">
-                        <use xlinkHref="#add"></use>
-                      </svg>
-                      <span>My list</span>
-                    </Link>
-                    :
-                    <Link
-                      to={`/mylist`}
-                      className="btn btn--list movie-card__button"
-                      onClick={() => this.props.setToFavorites(this.props.data)}>
-                      <svg viewBox="0 0 18 14" width="18" height="14">
-                        {isFavorite ? <use xlinkHref="#in-list"/> : <use xlinkHref="#add"/>}
-                      </svg>
-                      <span>My list</span>
-                    </Link>
-                  }
+                      {isLogged && fullMode ?
+                        <React.Fragment>
+                          <Link
+                            to={`/mylist`}
+                            className="btn btn--list movie-card__button"
+                            onClick={() => this.props.setToFavorites(this.props.data)}>
+                            <svg viewBox="0 0 18 14" width="18" height="14">
+                              {isFavorite ? <use xlinkHref="#in-list"/> : <use xlinkHref="#add"/>}
+                            </svg>
+                            <span>My list</span>
+                          </Link>
+                          <Link
+                            to={{
+                              pathname: `/film/${id}/review`,
+                              state: {
+                                currentDataItemId: id,
+                              },
+                            }}
+                            onClick={() => this.setState({isInReviewMode: true})}
+                            className="btn movie-card__button">
+                            Add review
+                          </Link>
+                        </React.Fragment>
+                        :
+                        <React.Fragment>
+                          <Link to="/login" className="btn btn--list movie-card__button">
+                            <svg viewBox="0 0 18 14" width="18" height="14">
+                              <use xlinkHref="#add"></use>
+                            </svg>
+                            <span>My list</span>
+                          </Link>
+                          <Link to={`/login`} className="btn movie-card__button">Add review</Link>
+                        </React.Fragment>
+                      }
+                    </div>
+                  </div>
+                  :
+                  <div className="movie-card__info">
+                    <div className="movie-card__poster">
+                      <img src={posterImage} alt={`${name} poster`} width="218" height="327"/>
+                    </div>
+                    <div className="movie-card__desc">
+                      <h2 className="movie-card__title">{name}</h2>
+                      <p className="movie-card__meta">
+                        <span className="movie-card__genre">{genre}</span>
+                        <span className="movie-card__year">{released}</span>
+                      </p>
 
-                  {fullMode && !isLogged &&
-                  <Link to={`/login`} className="btn movie-card__button">Add review</Link>}
+                      <div className="movie-card__buttons">
+                        <Link to={{
+                          pathname: `/player`,
+                          state: {
+                            data: this.props.data,
+                          },
+                        }} className="btn btn--play movie-card__button">
+                          <svg viewBox="0 0 19 19" width="19" height="19">
+                            <use xlinkHref="#play-s"></use>
+                          </svg>
+                          <span>Play</span>
+                        </Link>
 
-                  {fullMode && isLogged && <Link
-                    to={{
-                      pathname: `/film/${id}/review`,
-                      state: {
-                        currentDataItemId: id,
-                      },
-                    }}
-                    onClick={() => this.setState({isInReviewMode: true})}
-                    className="btn movie-card__button">
-                    Add review
-                  </Link>
-                  }
-                </div>
-              </div>
+                        {isLogged && <Link
+                          to={`/mylist`}
+                          className="btn btn--list movie-card__button">
+                          <svg viewBox="0 0 18 14" width="18" height="14">
+                            <use xlinkHref="#in-list"/>
+                          </svg>
+                          <span>My list</span>
+                        </Link>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                }
+              </React.Fragment>
             }
           </div>
         </div>
@@ -367,9 +407,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  requireAuthorization: (status) => {
-    dispatch(ActionCreator.requireAuthorization(status));
-  },
   setToFavorites: (data) => {
     dispatch(Operations.setToFavorites(data));
   },

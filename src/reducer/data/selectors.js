@@ -19,13 +19,9 @@ export const getDataItemCurrent = (state) => {
   return state[NAME_SPACE].dataItemCurrent;
 };
 
-export const getAllFilters = createSelector(
-  getData, (data) => data.map((dataItem) => dataItem.genre),
-);
+export const getAllFilters = createSelector(getData, (data) => data.map((dataItem) => dataItem.genre));
 
-export const getFilters = createSelector(
-  getAllFilters, (filters) => ([`All genres`, ...new Set(filters)]),
-);
+export const getFilters = createSelector(getAllFilters, (filters) => ([`All genres`, ...new Set(filters)]));
 
 export const getFilteredData = createSelector(
   getData,
@@ -37,4 +33,8 @@ export const getFilteredData = createSelector(
 
 export const getDataFavorites = createSelector(getData, (data) => {
   return data.filter((item) => item.isFavorite === true);
+});
+
+export const getDataRandom = createSelector(getData, (data) => {
+  return data[0];
 });

@@ -31,29 +31,29 @@ class Header extends React.Component {
 
         <Logo/>
 
-        {breadcrumbsId &&
-        <nav className="breadcrumbs">
-          <ul className="breadcrumbs__list">
-            <li className="breadcrumbs__item">
-              <Link
-                to={{
-                  pathname: `/film/${breadcrumbsId}`,
-                  state: {
-                    currentDataItemId: breadcrumbsId,
-                    currentDataFilter: breadcrumbsGenre,
-                  },
-                }}
-                onClick={() => this.setState({isInReviewMode: false})}
-                className="breadcrumbs__link">
-                {breadcrumbsName}
-              </Link>
-            </li>
-            <li className="breadcrumbs__item">
-              <a className="breadcrumbs__link">Add review</a>
-            </li>
-          </ul>
-        </nav>
-        }
+        {/*{breadcrumbsId &&*/}
+        {/*<nav className="breadcrumbs">*/}
+        {/*  <ul className="breadcrumbs__list">*/}
+        {/*    <li className="breadcrumbs__item">*/}
+        {/*      <Link*/}
+        {/*        to={{*/}
+        {/*          pathname: `/film/${breadcrumbsId}`,*/}
+        {/*          state: {*/}
+        {/*            currentDataItemId: breadcrumbsId,*/}
+        {/*            currentDataFilter: breadcrumbsGenre,*/}
+        {/*          },*/}
+        {/*        }}*/}
+        {/*        onClick={() => this.setState({isInReviewMode: false})}*/}
+        {/*        className="breadcrumbs__link">*/}
+        {/*        {breadcrumbsName}*/}
+        {/*      </Link>*/}
+        {/*    </li>*/}
+        {/*    <li className="breadcrumbs__item">*/}
+        {/*      <a className="breadcrumbs__link">Add review</a>*/}
+        {/*    </li>*/}
+        {/*  </ul>*/}
+        {/*</nav>*/}
+        {/*}*/}
 
         <h1 className="page-title user-page__title">{title}</h1>
 

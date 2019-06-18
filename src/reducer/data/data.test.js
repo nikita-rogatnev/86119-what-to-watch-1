@@ -6,6 +6,7 @@ describe(`Data reducer`, () => {
   it(`Should return initial state by default`, () => {
     expect(reducer(undefined, {})).toEqual({
       data: [],
+      dataFavorites: [],
       dataItemCurrent: {},
       dataItemReviews: [],
       currentFilter: `All genres`,
@@ -17,7 +18,7 @@ describe(`Data reducer`, () => {
       currentFilter: `All genres`,
     }, {
       type: `CHANGE_FILTER`,
-      payload: `Comedies`
+      payload: `Comedies`,
     })).toEqual({
       currentFilter: `Comedies`,
     });
@@ -38,7 +39,7 @@ describe(`Data reducer`, () => {
         expect(dispatch).toHaveBeenCalled();
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_DATA,
-          payload: [{fake: true}]
+          payload: [{fake: true}],
         });
       });
   });
