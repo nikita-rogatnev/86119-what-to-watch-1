@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import CardHero from "../../card-hero/card-hero";
 import Catalog from "../../catalog/catalog";
 import Footer from "../../footer/footer";
+import Heading from "../../heading/heading";
 
 import {connect} from "react-redux";
 import {Operations, ActionCreators} from "../../../reducer/data/data";
@@ -26,34 +27,35 @@ class Home extends React.Component {
       isLogged,
     } = this.props;
 
-    // eslint-disable-next-line no-console
-    console.log(data, dataFavorites);
+    if (data.length) {
+      return (
+        <React.Fragment>
+          {isLogged && dataFavorites.length ?
+            <CardHero
+              data={[...dataFavorites][Math.floor(Math.random() * dataFavorites.length)]}
+            />
+            :
+            <CardHero
+              data={[...data][Math.floor(Math.random() * data.length)]}
+            />
+          }
 
-    return (
-      <React.Fragment>
-        {isLogged && dataFavorites ?
-          <CardHero
-            data={[...dataFavorites][Math.floor(Math.random() * dataFavorites.length)]}
-          />
-          :
-          <CardHero
-            data={[...data][Math.floor(Math.random() * data.length)]}
-          />
-        }
+          <main className="page-content">
+            <Catalog
+              data={data}
+              filters={filters}
+              currentFilter={currentFilter}
+              changeCurrentFilter={changeCurrentFilter}
+              showFilters={true}
+              showMoreButton={true}
+            />
+            <Footer/>
+          </main>
+        </React.Fragment>
+      );
+    }
 
-        <main className="page-content">
-          <Catalog
-            data={data}
-            filters={filters}
-            currentFilter={currentFilter}
-            changeCurrentFilter={changeCurrentFilter}
-            showFilters={true}
-            showMoreButton={true}
-          />
-          <Footer/>
-        </main>
-      </React.Fragment>
-    );
+    return <Heading title="Loading..."/>;
   }
 }
 

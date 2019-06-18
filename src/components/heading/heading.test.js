@@ -3,12 +3,12 @@ import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import toJson from "enzyme-to-json";
 
-import NotFound from "./not-found";
+import Heading from "./heading.test";
 
 Enzyme.configure({adapter: new Adapter()});
 
-it(`NotFound renders correctly`, () => {
-  const tree = shallow(<NotFound/>);
+it(`Heading renders correctly`, () => {
+  const tree = shallow(<Heading/>);
 
   expect(toJson(tree)).toMatchSnapshot();
 });
