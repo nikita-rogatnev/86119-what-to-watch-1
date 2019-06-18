@@ -18,7 +18,6 @@ const Overview = (data) => {
     description,
   } = data;
 
-
   return (
     <div className="movie-card__text">
       <div className="movie-rating">
@@ -295,14 +294,25 @@ class CardHero extends React.PureComponent {
                           <span>Play</span>
                         </Link>
 
-                        {isLogged && <Link
-                          to={`/mylist`}
-                          className="btn btn--list movie-card__button">
-                          <svg viewBox="0 0 18 14" width="18" height="14">
-                            <use xlinkHref="#in-list"/>
-                          </svg>
-                          <span>My list</span>
-                        </Link>
+                        {isLogged ?
+                          <Link
+                            to={`/mylist`}
+                            className="btn btn--list movie-card__button"
+                            onClick={() => this.props.setToFavorites(this.props.data)}>
+                            <svg viewBox="0 0 18 14" width="18" height="14">
+                              {isFavorite ? <use xlinkHref="#in-list"/> : <use xlinkHref="#add"/>}
+                            </svg>
+                            <span>My list</span>
+                          </Link>
+                          :
+                          <Link
+                            to={`/login`}
+                            className="btn btn--list movie-card__button">
+                            <svg viewBox="0 0 18 14" width="18" height="14">
+                              <use xlinkHref="#add"/>
+                            </svg>
+                            <span>My list</span>
+                          </Link>
                         }
                       </div>
                     </div>
