@@ -55,7 +55,7 @@ class Home extends React.Component {
       );
     }
 
-    return <Heading title="Loading..."/>;
+    return <Heading title={`Loading...`}/>;
   }
 }
 
