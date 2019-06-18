@@ -16,9 +16,6 @@ import {
 import {getAuthorizationStatus, getLoggedStatus} from "../../../reducer/user/selectors";
 
 class Home extends React.Component {
-  componentDidMount() {
-  }
-
   render() {
     const {
       data,
