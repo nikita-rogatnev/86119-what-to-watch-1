@@ -1,5 +1,5 @@
 import MockAdapter from "axios-mock-adapter";
-import {createAPI} from "../../api.js";
+import {createAPI} from "../../api";
 import {reducer, ActionType, Operations} from "./data";
 
 describe(`Data reducer`, () => {

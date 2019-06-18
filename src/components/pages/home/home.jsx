@@ -6,7 +6,6 @@ import Catalog from "../../catalog/catalog";
 import Footer from "../../footer/footer";
 
 import {connect} from "react-redux";
-
 import {Operations, ActionCreators} from "../../../reducer/data/data";
 import {
   getDataFavorites,
@@ -21,8 +20,8 @@ class Home extends React.Component {
     super(props);
 
     this.state = {
-      randomDataItem: {},
-      randomDataFavoriteItem: {},
+      randomDataItem: [...this.props.data][Math.floor(Math.random() * this.props.data.length)],
+      randomDataFavoriteItem: [...this.props.dataFavorites][Math.floor(Math.random() * this.props.dataFavorites.length)],
     };
   }
 
@@ -48,23 +47,19 @@ class Home extends React.Component {
       isLogged,
     } = this.props;
 
-
+    // eslint-disable-next-line no-console
     console.log(this.state);
 
     return (
       <React.Fragment>
         {isLogged && dataFavorites ?
-          <React.Fragment>
-            <CardHero
-              data={this.state.randomDataFavoriteItem}
-            />
-          </React.Fragment>
+          <CardHero
+            data={this.state.randomDataFavoriteItem}
+          />
           :
-          <React.Fragment>
-            <CardHero
-              data={this.state.randomDataItem}
-            />
-          </React.Fragment>
+          <CardHero
+            data={this.state.randomDataItem}
+          />
         }
 
         <main className="page-content">

@@ -1,8 +1,8 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 
 import VideoPreview from "../video-preview/video-preview";
-import {Link} from "react-router-dom";
 
 class Card extends React.PureComponent {
   constructor(props) {

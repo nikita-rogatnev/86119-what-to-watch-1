@@ -1,18 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
 import {Switch, Route, NavLink, Link} from "react-router-dom";
+import PropTypes from "prop-types";
 
 import Header from "../header/header";
-import AddReview from "../add-review/add-review";
 
 import {connect} from "react-redux";
 import {getDataItemCurrent} from "../../reducer/data/selectors";
 import {Operations} from "../../reducer/data/data";
 import {getLoggedStatus} from "../../reducer/user/selectors";
-
-import withPrivateRoute from "../../hocs/with-private-route/with-private-route";
-
-const PrivateRoute = withPrivateRoute(Route);
 
 const Overview = (data) => {
   const {
@@ -384,8 +379,6 @@ class CardHero extends React.PureComponent {
           </div>
         </div>
         }
-
-        <PrivateRoute path="/film/:id/review" exact component={AddReview}/>
       </section>
     );
   }

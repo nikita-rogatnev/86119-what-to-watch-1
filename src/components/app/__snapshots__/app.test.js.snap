@@ -36,6 +36,10 @@ exports[`App renders correctly 1`] = `
     path="/film/:id"
   />
   <ConnectFunction
+    component={[Function]}
+    path="/film/:id/review"
+  />
+  <ConnectFunction
     component={
       Object {
         "$$typeof": Symbol(react.memo),

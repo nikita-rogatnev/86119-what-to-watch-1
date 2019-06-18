@@ -1,5 +1,5 @@
 import {createSelector} from "reselect";
-import NameSpaces from "../name-spaces.js";
+import NameSpaces from "../name-spaces";
 
 const NAME_SPACE = NameSpaces.DATA;
 

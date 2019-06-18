@@ -6,7 +6,7 @@ import Catalog from "../../catalog/catalog";
 import Footer from "../../footer/footer";
 
 import {connect} from "react-redux";
-import {ActionCreators} from "../../../reducer/data/data.js";
+import {ActionCreators} from "../../../reducer/data/data";
 import {getFilterCurrent, getFilters, getDataFavorites} from "../../../reducer/data/selectors";
 
 class Mylist extends React.PureComponent {
