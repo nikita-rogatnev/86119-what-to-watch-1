@@ -16,25 +16,7 @@ import {
 import {getAuthorizationStatus, getLoggedStatus} from "../../../reducer/user/selectors";
 
 class Home extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      randomDataItem: [...this.props.data][Math.floor(Math.random() * this.props.data.length)],
-      randomDataFavoriteItem: [...this.props.dataFavorites][Math.floor(Math.random() * this.props.dataFavorites.length)],
-    };
-  }
-
   componentDidMount() {
-    const {
-      data,
-      dataFavorites,
-    } = this.props;
-
-    this.setState({
-      randomDataItem: [...data][Math.floor(Math.random() * data.length)],
-      randomDataFavoriteItem: [...dataFavorites][Math.floor(Math.random() * dataFavorites.length)],
-    });
   }
 
   render() {
@@ -48,17 +30,17 @@ class Home extends React.Component {
     } = this.props;
 
     // eslint-disable-next-line no-console
-    console.log(this.state);
+    console.log(data, dataFavorites);
 
     return (
       <React.Fragment>
         {isLogged && dataFavorites ?
           <CardHero
-            data={this.state.randomDataFavoriteItem}
+            data={[...dataFavorites][Math.floor(Math.random() * dataFavorites.length)]}
           />
           :
           <CardHero
-            data={this.state.randomDataItem}
+            data={[...data][Math.floor(Math.random() * data.length)]}
           />
         }
 
