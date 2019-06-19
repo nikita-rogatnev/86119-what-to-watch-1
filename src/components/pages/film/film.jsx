@@ -6,7 +6,7 @@ import Catalog from "../../catalog/catalog";
 import Footer from "../../footer/footer";
 
 import {connect} from "react-redux";
-import {ActionCreators} from "../../../reducer/data/data.js";
+import {ActionCreators} from "../../../reducer/data/data";
 import {
   getDataItemCurrent,
   getFilterCurrent,
@@ -51,6 +51,7 @@ class Film extends React.Component {
     return (
       <React.Fragment>
         <CardHero
+          fullMode={true}
           data={dataItemCurrent}
           reviews={dataItemReviews}
         />

@@ -41,8 +41,8 @@ exports[`AddReview renders correctly 1`] = `
           Rating 2
         </label>
         <input
-          checked=""
           className="rating__input"
+          defaultChecked={true}
           id="star-3"
           name="rating"
           type="radio"

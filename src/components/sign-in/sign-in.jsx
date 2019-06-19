@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
 
+import {connect} from "react-redux";
 import {Operations} from "../../reducer/user/user";
 import {getUserError, getLoadingStatus} from "../../reducer/user/selectors";
 

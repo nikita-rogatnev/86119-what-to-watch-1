@@ -1,14 +1,14 @@
 import React from "react";
+import {Link, withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import {Link} from "react-router-dom";
 
 import Logo from "../logo/logo";
 
+import {connect} from "react-redux";
 import {getAuthorizationStatus, getLoggedStatus, getUserData} from "../../reducer/user/selectors";
 import {ActionCreator} from "../../reducer/user/user";
 
-class Header extends React.PureComponent {
+class Header extends React.Component {
   _onClick() {
     this.props.requireAuthorization(true);
   }
@@ -18,7 +18,10 @@ class Header extends React.PureComponent {
       isLogged,
       isAuthorizationRequired,
       user,
-      title = ``,
+      title,
+      breadcrumbsId,
+      breadcrumbsName,
+      breadcrumbsGenre,
     } = this.props;
 
     const pathname = window.location.pathname;
@@ -26,7 +29,32 @@ class Header extends React.PureComponent {
     return (
       <header
         className={`page-header ${pathname === `/login` || `/mylist` ? `user-page__head` : `movie-card__head`}`}>
+
         <Logo/>
+
+        {breadcrumbsId &&
+        <nav className="breadcrumbs">
+          <ul className="breadcrumbs__list">
+            <li className="breadcrumbs__item">
+              <Link
+                to={{
+                  pathname: `/film/${breadcrumbsId}`,
+                  state: {
+                    currentDataItemId: breadcrumbsId,
+                    currentDataFilter: breadcrumbsGenre,
+                  },
+                }}
+                onClick={() => this.setState({isInReviewMode: false})}
+                className="breadcrumbs__link">
+                {breadcrumbsName}
+              </Link>
+            </li>
+            <li className="breadcrumbs__item">
+              <a className="breadcrumbs__link">Add review</a>
+            </li>
+          </ul>
+        </nav>
+        }
 
         <h1 className="page-title user-page__title">{title}</h1>
 
@@ -65,10 +93,13 @@ Header.propTypes = {
   requireAuthorization: PropTypes.func.isRequired,
   user: PropTypes.object,
   title: PropTypes.string,
+  breadcrumbsId: PropTypes.number,
+  breadcrumbsName: PropTypes.string,
+  breadcrumbsGenre: PropTypes.string,
 };
 
 export {Header};
 
 const HeaderWrapped = connect(mapStateToProps, mapDispatchToProps)(Header);
 
-export default HeaderWrapped;
+export default withRouter(HeaderWrapped);
