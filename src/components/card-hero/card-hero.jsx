@@ -156,10 +156,6 @@ class CardHero extends React.PureComponent {
     };
   }
 
-  componentWillUnmount() {
-    this.setState({activeTab: `Overview`, isInReviewMode: false});
-  }
-
   componentDidUpdate(prevProps) {
     if (prevProps.data.id !== this.props.data.id) {
       this.setState({activeTab: `Overview`});
@@ -233,7 +229,7 @@ class CardHero extends React.PureComponent {
                         <span>Play</span>
                       </Link>
 
-                      {isLogged && fullMode ?
+                      {isLogged ?
                         <React.Fragment>
                           <Link
                             to={`/mylist`}
