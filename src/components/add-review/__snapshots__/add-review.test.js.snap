@@ -5,8 +5,8 @@ exports[`AddReview renders correctly 1`] = `
   className="add-review"
 >
   <form
-    action="#"
     className="add-review__form"
+    onSubmit={[Function]}
   >
     <div
       className="rating"
@@ -18,6 +18,7 @@ exports[`AddReview renders correctly 1`] = `
           className="rating__input"
           id="star-1"
           name="rating"
+          onChange={[Function]}
           type="radio"
           value="1"
         />
@@ -31,6 +32,7 @@ exports[`AddReview renders correctly 1`] = `
           className="rating__input"
           id="star-2"
           name="rating"
+          onChange={[Function]}
           type="radio"
           value="2"
         />
@@ -45,6 +47,7 @@ exports[`AddReview renders correctly 1`] = `
           defaultChecked={true}
           id="star-3"
           name="rating"
+          onChange={[Function]}
           type="radio"
           value="3"
         />
@@ -58,6 +61,7 @@ exports[`AddReview renders correctly 1`] = `
           className="rating__input"
           id="star-4"
           name="rating"
+          onChange={[Function]}
           type="radio"
           value="4"
         />
@@ -71,6 +75,7 @@ exports[`AddReview renders correctly 1`] = `
           className="rating__input"
           id="star-5"
           name="rating"
+          onChange={[Function]}
           type="radio"
           value="5"
         />
@@ -89,6 +94,7 @@ exports[`AddReview renders correctly 1`] = `
         className="add-review__textarea"
         id="review-text"
         name="review-text"
+        onKeyUp={[Function]}
         placeholder="Review text"
       />
       <div

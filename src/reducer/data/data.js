@@ -13,6 +13,7 @@ export const ActionType = {
   "CHANGE_FILTER": `CHANGE_FILTER`,
   "CHANGE_DATA_ACTIVE": `CHANGE_DATA_ACTIVE`,
   "CHANGE_FAVORITE": `CHANGE_FAVORITE`,
+  "POST_REVIEW": "POST_REVIEW",
   "UPDATE_DATA_FAVORITES": `UPDATE_DATA_FAVORITES`,
 };
 
@@ -53,6 +54,13 @@ export const ActionCreators = {
     };
   },
 
+  postReview: (data) => {
+    return {
+      type: ActionType.POST_REVIEW,
+      payload: data,
+    };
+  },
+
   setToFavorites: (data) => {
     return {
       type: ActionType.UPDATE_DATA_FAVORITES,
@@ -78,6 +86,12 @@ export const Operations = {
     return api
       .get(`/favorite`)
       .then((response) => dispatch(ActionCreators.loadDataFavorites(response.data)));
+  },
+
+  postReview: (id, rating, comment) => (dispatch, getState, api) => {
+    return api
+      .post(`/comments/${id}`, {rating, comment})
+      .then((response) => dispatch(ActionCreators.postReview(response.data)));
   },
 
   setToFavorites: (data) => (dispatch, getState, api) => {
@@ -140,6 +154,11 @@ export const reducer = (state = initialState, action) => {
     case ActionType.LOAD_DATA_REVIEWS:
       return Object.assign({}, state, {
         dataItemReviews: action.payload,
+      });
+
+    case ActionType.POST_REVIEW:
+      return Object.assign({}, state, {
+        comments: action.payload,
       });
 
     case ActionType.UPDATE_DATA_FAVORITES:
