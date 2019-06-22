@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Redirect} from "react-router-dom";
 
 import {connect} from "react-redux";
 import {Operations} from "../../reducer/data/data";
@@ -9,6 +10,8 @@ class AddReview extends React.PureComponent {
     super(props);
 
     this.state = {
+      redirect: false,
+      isBlocked: false,
       rating: 3,
       text: null,
     };
@@ -28,6 +31,11 @@ class AddReview extends React.PureComponent {
 
   render() {
     const {id} = this.props;
+    const {redirect} = this.state;
+
+    if (redirect) {
+      return <Redirect to={{pathname: `/film/${id}`}}/>;
+    }
 
     return (
       <div className="add-review">
@@ -35,7 +43,9 @@ class AddReview extends React.PureComponent {
           className="add-review__form"
           onSubmit={(e) => {
             e.preventDefault();
+            this.setState({isBlocked: true});
             this.props.postReview(id, this.state.rating, this.state.text);
+            this.setState({redirect: true});
           }}>
           <div className="rating">
             <div className="rating__stars">
@@ -97,10 +107,12 @@ class AddReview extends React.PureComponent {
               name="review-text"
               id="review-text"
               placeholder="Review text"
+              minLength={50}
+              maxLength={400}
               onKeyUp={(e) => this._onChangeText(e.target.value)}
             />
             <div className="add-review__submit">
-              <button className="add-review__btn" type="submit">Post</button>
+              <button className="add-review__btn" type="submit" disabled={this.state.isBlocked}>Post</button>
             </div>
           </div>
         </form>
