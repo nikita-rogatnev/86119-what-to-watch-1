@@ -198,8 +198,7 @@ class CardHero extends React.PureComponent {
               breadcrumbsGenre={genre}
             />
             :
-            <Header/>
-          }
+            <Header/>}
 
           <div className="movie-card__wrap">
             {this.state.isInReviewMode ?
@@ -261,8 +260,7 @@ class CardHero extends React.PureComponent {
                             <span>My list</span>
                           </Link>
                           <Link to={`/login`} className="btn movie-card__button">Add review</Link>
-                        </React.Fragment>
-                      }
+                        </React.Fragment>}
                     </div>
                   </div>
                   :
@@ -308,14 +306,11 @@ class CardHero extends React.PureComponent {
                               <use xlinkHref="#add"/>
                             </svg>
                             <span>My list</span>
-                          </Link>
-                        }
+                          </Link>}
                       </div>
                     </div>
-                  </div>
-                }
-              </React.Fragment>
-            }
+                  </div>}
+              </React.Fragment>}
           </div>
         </div>
 

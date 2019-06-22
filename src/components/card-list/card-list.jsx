@@ -14,8 +14,7 @@ export class CardList extends React.PureComponent {
             key={item.id}
             showPlayButton={showPlayButton}
             {...item}
-          />
-        )}
+          />)}
       </div>
     );
   }

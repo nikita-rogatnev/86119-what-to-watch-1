@@ -7,24 +7,11 @@ import VideoPreview from "../video-preview/video-preview";
 class Card extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.timeoutId = null;
-    this._onHoverEnter = this._onHoverEnter.bind(this);
-    this._onHoverLeave = this._onHoverLeave.bind(this);
 
+    this.timeoutId = null;
     this.state = {
       isPreviewPlaying: false,
     };
-  }
-
-  _onHoverEnter() {
-    this.timeoutId = setTimeout(() => {
-      this.setState({isPreviewPlaying: true});
-    }, 1000);
-  }
-
-  _onHoverLeave() {
-    clearTimeout(this.timeoutId);
-    this.setState({isPreviewPlaying: false});
   }
 
   render() {
@@ -42,24 +29,30 @@ class Card extends React.PureComponent {
     return (
       <article
         className="small-movie-card catalog__movies-card"
-        onMouseEnter={this._onHoverEnter}
-        onMouseLeave={this._onHoverLeave}>
+        onMouseEnter={() => {
+          this.timeoutId = setTimeout(() => {
+            this.setState({isPreviewPlaying: true});
+          }, 1000);
+        }}
+        onMouseLeave={() => {
+          clearTimeout(this.timeoutId);
+          this.setState({isPreviewPlaying: false});
+        }}>
         {showPlayButton && <button className="small-movie-card__play-btn" type="button">Play</button>}
         <div className="small-movie-card__image">
-          {
-            isPreviewPlaying ? <VideoPreview
+          {isPreviewPlaying ?
+            <VideoPreview
               previewVideoLink={previewVideoLink}
               previewImage={previewImage}
               muted={true}
               autoPlay={true}
               controls={false}
             /> :
-              <img
-                src={previewImage}
-                alt={name}
-                width="280"
-                height="175"/>
-          }
+            <img
+              src={previewImage}
+              alt={name}
+              width="280"
+              height="175"/>}
         </div>
         <h3 className="small-movie-card__title">
           <Link to={{
@@ -67,7 +60,7 @@ class Card extends React.PureComponent {
             state: {
               currentDataItemId: id,
               currentDataFilter: genre,
-            }
+            },
           }} className="small-movie-card__link">
             {name}
           </Link>

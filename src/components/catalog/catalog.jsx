@@ -33,8 +33,7 @@ class Catalog extends React.Component {
           filters={filters}
           currentFilter={currentFilter}
           changeCurrentFilter={changeCurrentFilter}
-        />
-        }
+        />}
 
         <CardListWithActiveItem
           data={data.slice(0, maxCardsNumber)}
@@ -44,8 +43,7 @@ class Catalog extends React.Component {
         {showMoreButton &&
         <div className="catalog__more">
           <button className="catalog__button" type="button">Show more</button>
-        </div>
-        }
+        </div>}
       </section>
     );
   }

@@ -10,25 +10,24 @@ const withActiveItem = (Component) => {
     constructor(props) {
       super(props);
 
+      this.handleChange = this.handleChange.bind(this);
       this.state = {
         activeItem: undefined,
       };
-
-      this.handleChange = this.handleChange.bind(this);
-    }
-
-    render() {
-      return <Component activeItem={this.state.activeItem} onChange={this.handleChange} {...this.props}/>;
     }
 
     handleChange(value) {
       this.setState({
-        activeItem: value
+        activeItem: value,
       });
 
       if (this.props.onActiveItemChange) {
         this.props.onActiveItemChange(value);
       }
+    }
+
+    render() {
+      return <Component activeItem={this.state.activeItem} onChange={this.handleChange} {...this.props}/>;
     }
   }
 

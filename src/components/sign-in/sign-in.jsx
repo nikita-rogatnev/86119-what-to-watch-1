@@ -12,31 +12,33 @@ class SignIn extends React.PureComponent {
     this.state = {
       email: null,
       password: null,
-      error: null
+      error: null,
     };
   }
 
   _onChangeEmail(value) {
     this.setState({
       email: value,
-      error: value.length ? null : `Please enter a valid email address`
+      error: value.length ? null : `Please enter a valid email address`,
     });
   }
 
   _onChangePassword(value) {
     this.setState({
-      password: value
+      password: value,
     });
   }
 
   render() {
     return (
       <section className="sign-in user-page__content">
-        <form className="sign-in__form"
+        <form
+          className="sign-in__form"
           onSubmit={(e) => {
             this.props.loginUser(this.state.email, this.state.password);
             e.preventDefault();
           }}>
+
           {this.props.userError && <div className="sign-in__message">
             <p>{this.props.userError}</p>
           </div>}
@@ -44,6 +46,7 @@ class SignIn extends React.PureComponent {
           {this.state.error && <div className="sign-in__message">
             <p>{this.state.error}</p>
           </div>}
+
           <div className="sign-in__fields">
             <div className={`sign-in__field ${this.state.error ? `sign-in__field--error` : ``}`}>
               <input
@@ -58,6 +61,7 @@ class SignIn extends React.PureComponent {
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
+
             <div className="sign-in__field">
               <input
                 className="sign-in__input"
@@ -72,6 +76,7 @@ class SignIn extends React.PureComponent {
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>
           </div>
+
           <div className="sign-in__submit">
             <button className="sign-in__btn" type="submit">
               {this.props.isLoading ? `Please wait...` : `Sign in`}
@@ -86,19 +91,19 @@ class SignIn extends React.PureComponent {
 SignIn.propTypes = {
   userError: PropTypes.string,
   loginUser: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
 };
 
 const mapStateToProps = (state, ownProps) =>
   Object.assign({}, ownProps, {
     userError: getUserError(state),
-    isLoading: getLoadingStatus(state)
+    isLoading: getLoadingStatus(state),
   });
 
 const mapDispatchToProps = (dispatch) => ({
   loginUser: (email, password) => {
     dispatch(Operations.loginUser(email, password));
-  }
+  },
 });
 
 export {SignIn};

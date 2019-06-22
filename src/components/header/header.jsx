@@ -53,8 +53,7 @@ class Header extends React.Component {
               <a className="breadcrumbs__link">Add review</a>
             </li>
           </ul>
-        </nav>
-        }
+        </nav>}
 
         <h1 className="page-title user-page__title">{title}</h1>
 
@@ -65,12 +64,12 @@ class Header extends React.Component {
               <img src={user.avatar} width="63" height="63" alt={`${user.name} avatar`}/>
             </Link>
           </div>}
+
           {!isLogged && !isAuthorizationRequired &&
           <Link to="/login" className="user-block__link" onClick={() => this._onClick()}>
             Sign in
           </Link>}
-        </div>
-        }
+        </div>}
       </header>
     );
   }
