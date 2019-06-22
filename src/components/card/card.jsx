@@ -9,9 +9,23 @@ class Card extends React.PureComponent {
     super(props);
 
     this.timeoutId = null;
+    this._onHoverEnter = this._onHoverEnter.bind(this);
+    this._onHoverLeave = this._onHoverLeave.bind(this);
+
     this.state = {
       isPreviewPlaying: false,
     };
+  }
+
+  _onHoverEnter() {
+    this.timeoutId = setTimeout(() => {
+      this.setState({isPreviewPlaying: true});
+    }, 1000);
+  }
+
+  _onHoverLeave() {
+    clearTimeout(this.timeoutId);
+    this.setState({isPreviewPlaying: false});
   }
 
   render() {
@@ -29,15 +43,8 @@ class Card extends React.PureComponent {
     return (
       <article
         className="small-movie-card catalog__movies-card"
-        onMouseEnter={() => {
-          this.timeoutId = setTimeout(() => {
-            this.setState({isPreviewPlaying: true});
-          }, 1000);
-        }}
-        onMouseLeave={() => {
-          clearTimeout(this.timeoutId);
-          this.setState({isPreviewPlaying: false});
-        }}>
+        onMouseEnter={this._onHoverEnter}
+        onMouseLeave={this._onHoverLeave}>
         {showPlayButton && <button className="small-movie-card__play-btn" type="button">Play</button>}
         <div className="small-movie-card__image">
           {isPreviewPlaying ?
