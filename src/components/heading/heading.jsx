@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Header from "../header/header";
 import Footer from "../footer/footer";
 
-class Heading extends React.Component {
+class Heading extends React.PureComponent {
   render() {
     const {title} = this.props;
 

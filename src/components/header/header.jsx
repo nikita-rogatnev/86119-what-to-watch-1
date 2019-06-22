@@ -8,7 +8,7 @@ import {connect} from "react-redux";
 import {getAuthorizationStatus, getLoggedStatus, getUserData} from "../../reducer/user/selectors";
 import {ActionCreator} from "../../reducer/user/user";
 
-class Header extends React.Component {
+class Header extends React.PureComponent {
   _onClick() {
     this.props.requireAuthorization(true);
   }

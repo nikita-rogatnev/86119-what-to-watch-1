@@ -16,7 +16,7 @@ import {
 } from "../../../reducer/data/selectors";
 import {getAuthorizationStatus, getLoggedStatus} from "../../../reducer/user/selectors";
 
-class Home extends React.Component {
+class Home extends React.PureComponent {
   render() {
     const {
       data,

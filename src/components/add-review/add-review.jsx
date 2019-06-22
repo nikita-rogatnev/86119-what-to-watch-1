@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Operations} from "../../reducer/data/data";
 
-class AddReview extends React.Component {
+class AddReview extends React.PureComponent {
   constructor(props) {
     super(props);
 
