@@ -3,6 +3,7 @@ import {Switch, Route, NavLink, Link} from "react-router-dom";
 import PropTypes from "prop-types";
 
 import Header from "../header/header";
+import AddReview from "../add-review/add-review";
 
 import {connect} from "react-redux";
 import {getDataItemCurrent} from "../../reducer/data/selectors";
@@ -184,7 +185,8 @@ class CardHero extends React.PureComponent {
 
     return (
       <section className={`movie-card ${fullMode ? `movie-card--full` : ``}`}>
-        <div className={`${fullMode ? `movie-card__header` : ``} ${fullMode ? `movie-card__hero` : ``}`}>
+        <div
+          className={`${fullMode ? `movie-card__header` : ``} ${fullMode && !this.state.isInReviewMode ? `movie-card__hero` : ``}`}>
           <div className="movie-card__bg">
             <img src={backgroundImage} alt={name}/>
           </div>
@@ -198,8 +200,7 @@ class CardHero extends React.PureComponent {
               breadcrumbsGenre={genre}
             />
             :
-            <Header/>
-          }
+            <Header/>}
 
           <div className="movie-card__wrap">
             {this.state.isInReviewMode ?
@@ -224,7 +225,7 @@ class CardHero extends React.PureComponent {
                         },
                       }} className="btn btn--play movie-card__button">
                         <svg viewBox="0 0 19 19" width="19" height="19">
-                          <use xlinkHref="#play-s"></use>
+                          <use xlinkHref="#play-s"/>
                         </svg>
                         <span>Play</span>
                       </Link>
@@ -256,13 +257,12 @@ class CardHero extends React.PureComponent {
                         <React.Fragment>
                           <Link to="/login" className="btn btn--list movie-card__button">
                             <svg viewBox="0 0 18 14" width="18" height="14">
-                              <use xlinkHref="#add"></use>
+                              <use xlinkHref="#add"/>
                             </svg>
                             <span>My list</span>
                           </Link>
                           <Link to={`/login`} className="btn movie-card__button">Add review</Link>
-                        </React.Fragment>
-                      }
+                        </React.Fragment>}
                     </div>
                   </div>
                   :
@@ -285,7 +285,7 @@ class CardHero extends React.PureComponent {
                           },
                         }} className="btn btn--play movie-card__button">
                           <svg viewBox="0 0 19 19" width="19" height="19">
-                            <use xlinkHref="#play-s"></use>
+                            <use xlinkHref="#play-s"/>
                           </svg>
                           <span>Play</span>
                         </Link>
@@ -308,16 +308,15 @@ class CardHero extends React.PureComponent {
                               <use xlinkHref="#add"/>
                             </svg>
                             <span>My list</span>
-                          </Link>
-                        }
+                          </Link>}
                       </div>
                     </div>
-                  </div>
-                }
-              </React.Fragment>
-            }
+                  </div>}
+              </React.Fragment>}
           </div>
         </div>
+
+        {this.state.isInReviewMode && <AddReview id={id}/>}
 
         {fullMode && !this.state.isInReviewMode &&
         <div className="movie-card__wrap movie-card__translate-top">

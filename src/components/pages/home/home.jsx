@@ -4,75 +4,69 @@ import PropTypes from "prop-types";
 import CardHero from "../../card-hero/card-hero";
 import Catalog from "../../catalog/catalog";
 import Footer from "../../footer/footer";
-import Heading from "../../heading/heading";
 
 import {connect} from "react-redux";
 import {Operations, ActionCreators} from "../../../reducer/data/data";
 import {
-  getDataFavorites,
+  getDataPromo,
   getFilters,
   getFilterCurrent,
   getFilteredData,
 } from "../../../reducer/data/selectors";
 import {getAuthorizationStatus, getLoggedStatus} from "../../../reducer/user/selectors";
 
-class Home extends React.Component {
+class Home extends React.PureComponent {
+  componentWillMount() {
+    const {loadDataPromo} = this.props;
+
+    loadDataPromo();
+  }
+
   render() {
     const {
       data,
-      dataFavorites,
+      dataPromo,
       filters,
       currentFilter,
       changeCurrentFilter,
-      isLogged,
     } = this.props;
 
-    if (data.length) {
-      return (
-        <React.Fragment>
-          {isLogged && dataFavorites.length ?
-            <CardHero
-              data={[...dataFavorites][Math.floor(Math.random() * dataFavorites.length)]}
-            />
-            :
-            <CardHero
-              data={[...data][Math.floor(Math.random() * data.length)]}
-            />
-          }
+    return (
+      <React.Fragment>
+        <CardHero
+          data={dataPromo}
+        />
 
-          <main className="page-content">
-            <Catalog
-              data={data}
-              filters={filters}
-              currentFilter={currentFilter}
-              changeCurrentFilter={changeCurrentFilter}
-              showFilters={true}
-              showMoreButton={true}
-            />
-            <Footer/>
-          </main>
-        </React.Fragment>
-      );
-    }
-
-    return <Heading title={`Loading...`}/>;
+        <main className="page-content">
+          <Catalog
+            data={data}
+            filters={filters}
+            currentFilter={currentFilter}
+            changeCurrentFilter={changeCurrentFilter}
+            showFilters={true}
+            showMoreButton={true}
+          />
+          <Footer/>
+        </main>
+      </React.Fragment>
+    );
   }
 }
 
 Home.propTypes = {
   data: PropTypes.array.isRequired,
-  dataFavorites: PropTypes.array.isRequired,
+  dataPromo: PropTypes.object.isRequired,
+  loadDataPromo: PropTypes.func.isRequired,
   filters: PropTypes.array.isRequired,
   currentFilter: PropTypes.string.isRequired,
   changeCurrentFilter: PropTypes.func.isRequired,
-  loadDataFavorites: PropTypes.func.isRequired,
   isLogged: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => {
   return {
     data: getFilteredData(state),
-    dataFavorites: getDataFavorites(state),
+    dataPromo: getDataPromo(state),
     filters: getFilters(state),
     currentFilter: getFilterCurrent(state),
     isAuthorizationRequired: getAuthorizationStatus(state),
@@ -81,8 +75,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  loadDataFavorites: () => {
-    dispatch(Operations.loadDataFavorites());
+  loadDataPromo: () => {
+    dispatch(Operations.loadDataPromo());
   },
   changeCurrentFilter: (genre) => {
     dispatch(ActionCreators.changeCurrentFilter(genre));

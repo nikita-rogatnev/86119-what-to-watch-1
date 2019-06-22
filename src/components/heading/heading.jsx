@@ -4,24 +4,29 @@ import PropTypes from "prop-types";
 import Header from "../header/header";
 import Footer from "../footer/footer";
 
-class Heading extends React.Component {
-  render() {
-    const {title} = this.props;
+const Heading = (props) => {
+  const {title, isSimplified} = props;
 
-    return (
-      <div className="user-page">
-        <Header/>
-        <div className="error">
-          <h1>{title}</h1>
-        </div>
-        <Footer/>
+  return (
+    <div className="user-page">
+      {!isSimplified &&
+      <Header/>
+      }
+
+      <div className="error">
+        <h1>{title}</h1>
       </div>
-    );
-  }
-}
+
+      {!isSimplified &&
+      <Footer/>
+      }
+    </div>
+  );
+};
 
 Heading.propTypes = {
   title: PropTypes.string.isRequired,
+  isSimplified: PropTypes.bool,
 };
 
 export default Heading;

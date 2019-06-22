@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import ProgressBar from "../progress-bar/progress-bar";
 
-class VideoPlayer extends React.Component {
+class VideoPlayer extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -108,7 +108,7 @@ class VideoPlayer extends React.Component {
               className="player__play"
               onClick={this._toggleVideo.bind(this)}>
               <svg viewBox="0 0 19 19" width="19" height="19">
-                {this.state.isVideoPlaying ? <use xlinkHref="#pause"/> : <use xlinkHref="#play-s"></use>}
+                {this.state.isVideoPlaying ? <use xlinkHref="#pause"/> : <use xlinkHref="#play-s"/>}
               </svg>
               <span>Play</span>
             </button>
@@ -120,7 +120,7 @@ class VideoPlayer extends React.Component {
               className="player__full-screen"
               onClick={this._fullScreen.bind(this)}>
               <svg viewBox="0 0 27 27" width="27" height="27">
-                <use xlinkHref="#full-screen"></use>
+                <use xlinkHref="#full-screen"/>
               </svg>
               <span>Full screen</span>
             </button>

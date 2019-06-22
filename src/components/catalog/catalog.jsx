@@ -9,7 +9,7 @@ import withActiveItem from "../../hocs/with-active-item/with-active-item";
 const FiltersListWithActiveItem = withActiveItem(Filters);
 const CardListWithActiveItem = withActiveItem(CardList);
 
-class Catalog extends React.Component {
+class Catalog extends React.PureComponent {
   render() {
     const {
       data,
@@ -33,19 +33,18 @@ class Catalog extends React.Component {
           filters={filters}
           currentFilter={currentFilter}
           changeCurrentFilter={changeCurrentFilter}
-        />
-        }
+        />}
 
+        {data &&
         <CardListWithActiveItem
           data={data.slice(0, maxCardsNumber)}
           showPlayButton={showPlayButton}
-        />
+        />}
 
         {showMoreButton &&
         <div className="catalog__more">
           <button className="catalog__button" type="button">Show more</button>
-        </div>
-        }
+        </div>}
       </section>
     );
   }

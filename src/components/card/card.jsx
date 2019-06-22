@@ -7,6 +7,7 @@ import VideoPreview from "../video-preview/video-preview";
 class Card extends React.PureComponent {
   constructor(props) {
     super(props);
+
     this.timeoutId = null;
     this._onHoverEnter = this._onHoverEnter.bind(this);
     this._onHoverLeave = this._onHoverLeave.bind(this);
@@ -46,20 +47,19 @@ class Card extends React.PureComponent {
         onMouseLeave={this._onHoverLeave}>
         {showPlayButton && <button className="small-movie-card__play-btn" type="button">Play</button>}
         <div className="small-movie-card__image">
-          {
-            isPreviewPlaying ? <VideoPreview
+          {isPreviewPlaying ?
+            <VideoPreview
               previewVideoLink={previewVideoLink}
               previewImage={previewImage}
               muted={true}
               autoPlay={true}
               controls={false}
             /> :
-              <img
-                src={previewImage}
-                alt={name}
-                width="280"
-                height="175"/>
-          }
+            <img
+              src={previewImage}
+              alt={name}
+              width="280"
+              height="175"/>}
         </div>
         <h3 className="small-movie-card__title">
           <Link to={{
@@ -67,7 +67,7 @@ class Card extends React.PureComponent {
             state: {
               currentDataItemId: id,
               currentDataFilter: genre,
-            }
+            },
           }} className="small-movie-card__link">
             {name}
           </Link>
