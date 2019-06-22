@@ -224,7 +224,7 @@ class CardHero extends React.PureComponent {
                         },
                       }} className="btn btn--play movie-card__button">
                         <svg viewBox="0 0 19 19" width="19" height="19">
-                          <use xlinkHref="#play-s"></use>
+                          <use xlinkHref="#play-s"/>
                         </svg>
                         <span>Play</span>
                       </Link>
@@ -256,7 +256,7 @@ class CardHero extends React.PureComponent {
                         <React.Fragment>
                           <Link to="/login" className="btn btn--list movie-card__button">
                             <svg viewBox="0 0 18 14" width="18" height="14">
-                              <use xlinkHref="#add"></use>
+                              <use xlinkHref="#add"/>
                             </svg>
                             <span>My list</span>
                           </Link>
@@ -285,7 +285,7 @@ class CardHero extends React.PureComponent {
                           },
                         }} className="btn btn--play movie-card__button">
                           <svg viewBox="0 0 19 19" width="19" height="19">
-                            <use xlinkHref="#play-s"></use>
+                            <use xlinkHref="#play-s"/>
                           </svg>
                           <span>Play</span>
                         </Link>
