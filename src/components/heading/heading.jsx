@@ -4,27 +4,25 @@ import PropTypes from "prop-types";
 import Header from "../header/header";
 import Footer from "../footer/footer";
 
-class Heading extends React.PureComponent {
-  render() {
-    const {title, isSimplified} = this.props;
+const Heading = (props) => {
+  const {title, isSimplified} = props;
 
-    return (
-      <div className="user-page">
-        {!isSimplified &&
-        <Header/>
-        }
+  return (
+    <div className="user-page">
+      {!isSimplified &&
+      <Header/>
+      }
 
-        <div className="error">
-          <h1>{title}</h1>
-        </div>
-
-        {!isSimplified &&
-        <Footer/>
-        }
+      <div className="error">
+        <h1>{title}</h1>
       </div>
-    );
-  }
-}
+
+      {!isSimplified &&
+      <Footer/>
+      }
+    </div>
+  );
+};
 
 Heading.propTypes = {
   title: PropTypes.string.isRequired,

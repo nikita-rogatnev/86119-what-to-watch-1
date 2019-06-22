@@ -49,55 +49,22 @@ class AddReview extends React.PureComponent {
           }}>
           <div className="rating">
             <div className="rating__stars">
-              <input
-                className="rating__input"
-                id="star-1"
-                onChange={(e) => this._onChangeRating(e.target.value)}
-                type="radio"
-                name="rating"
-                value="1"
-              />
-              <label className="rating__label" htmlFor="star-1">Rating 1</label>
-
-              <input
-                className="rating__input"
-                id="star-2"
-                onChange={(e) => this._onChangeRating(e.target.value)}
-                type="radio"
-                name="rating"
-                value="2"
-              />
-              <label className="rating__label" htmlFor="star-2">Rating 2</label>
-
-              <input
-                className="rating__input"
-                id="star-3"
-                onChange={(e) => this._onChangeRating(e.target.value)}
-                type="radio"
-                name="rating"
-                value="3"
-                defaultChecked={true}/>
-              <label className="rating__label" htmlFor="star-3">Rating 3</label>
-
-              <input
-                className="rating__input"
-                id="star-4"
-                onChange={(e) => this._onChangeRating(e.target.value)}
-                type="radio"
-                name="rating"
-                value="4"
-              />
-              <label className="rating__label" htmlFor="star-4">Rating 4</label>
-
-              <input
-                className="rating__input"
-                id="star-5"
-                onChange={(e) => this._onChangeRating(e.target.value)}
-                type="radio"
-                name="rating"
-                value="5"
-              />
-              <label className="rating__label" htmlFor="star-5">Rating 5</label>
+              {
+                new Array(5).fill(1).map((el, index) => (
+                  <React.Fragment key={index}>
+                    <input
+                      className="rating__input"
+                      id={`star-${index + 1}`}
+                      type="radio"
+                      name="rating"
+                      value={index + 1}
+                      onChange={(e) => this._onChangeRating(e.target.value)}
+                      checked={this.state.rating === index + 1}
+                    />
+                    <label className="rating__label" htmlFor={`star-${index + 1}`}>Rating {index + 1}</label>
+                  </React.Fragment>
+                ))
+              }
             </div>
           </div>
 
