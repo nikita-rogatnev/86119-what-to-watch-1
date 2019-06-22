@@ -93,6 +93,8 @@ exports[`AddReview renders correctly 1`] = `
       <textarea
         className="add-review__textarea"
         id="review-text"
+        maxLength={400}
+        minLength={50}
         name="review-text"
         onKeyUp={[Function]}
         placeholder="Review text"
@@ -102,6 +104,7 @@ exports[`AddReview renders correctly 1`] = `
       >
         <button
           className="add-review__btn"
+          disabled={false}
           type="submit"
         >
           Post

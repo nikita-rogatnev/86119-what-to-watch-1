@@ -1,5 +1,6 @@
 const initialState = {
   data: [],
+  dataPromo: {},
   dataFavorites: [],
   dataItemCurrent: {},
   dataItemReviews: [],
@@ -8,6 +9,7 @@ const initialState = {
 
 export const ActionType = {
   "LOAD_DATA": `LOAD_DATA`,
+  "LOAD_DATA_PROMO": `LOAD_DATA_PROMO`,
   "LOAD_DATA_REVIEWS": `LOAD_DATA_REVIEWS`,
   "LOAD_DATA_FAVORITES": `LOAD_DATA_FAVORITES`,
   "CHANGE_FILTER": `CHANGE_FILTER`,
@@ -25,6 +27,13 @@ export const ActionCreators = {
     };
   },
 
+  loadDataPromo: (data) => {
+    return {
+      type: ActionType.LOAD_DATA_PROMO,
+      payload: data,
+    };
+  },
+
   loadDataItemReviews: (data) => {
     return {
       type: ActionType.LOAD_DATA_REVIEWS,
@@ -38,7 +47,6 @@ export const ActionCreators = {
       payload: data,
     };
   },
-
 
   changeCurrentFilter: (data) => {
     return {
@@ -74,6 +82,12 @@ export const Operations = {
     return api
       .get(`/films`)
       .then((response) => dispatch(ActionCreators.loadData(response.data)));
+  },
+
+  loadDataPromo: () => (dispatch, getState, api) => {
+    return api
+      .get(`/films/promo`)
+      .then((response) => dispatch(ActionCreators.loadDataPromo(response.data)));
   },
 
   loadDataItemReviews: (id) => (dispatch, getState, api) => {
@@ -134,6 +148,11 @@ export const reducer = (state = initialState, action) => {
     case ActionType.LOAD_DATA:
       return Object.assign({}, state, {
         data: mapData(action.payload),
+      });
+
+    case ActionType.LOAD_DATA_PROMO:
+      return Object.assign({}, state, {
+        dataPromo: mapData([action.payload])[0],
       });
 
     case ActionType.LOAD_DATA_FAVORITES:

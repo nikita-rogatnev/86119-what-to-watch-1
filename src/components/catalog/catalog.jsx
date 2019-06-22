@@ -35,10 +35,11 @@ class Catalog extends React.PureComponent {
           changeCurrentFilter={changeCurrentFilter}
         />}
 
+        {data &&
         <CardListWithActiveItem
           data={data.slice(0, maxCardsNumber)}
           showPlayButton={showPlayButton}
-        />
+        />}
 
         {showMoreButton &&
         <div className="catalog__more">
