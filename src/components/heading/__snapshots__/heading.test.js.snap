@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Heading renders correctly 1`] = `
+<div
+  className="user-page"
+>
+  <withRouter(Connect(Header)) />
+  <div
+    className="error"
+  >
+    <h1>
+      Test title
+    </h1>
+  </div>
+  <Footer />
+</div>
+`;

@@ -16,8 +16,12 @@ exports[`App renders correctly 1`] = `
     path="/"
   />
   <Route
-    component={[Function]}
     path="/login"
+    render={[Function]}
+  />
+  <Route
+    component={[Function]}
+    path="/player"
   />
   <Route
     component={
@@ -29,16 +33,11 @@ exports[`App renders correctly 1`] = `
         "type": [Function],
       }
     }
-    path="/films/:id"
-  />
-  <Route
-    component={[Function]}
-    path="/player"
+    path="/film/:id"
   />
   <ConnectFunction
     component={[Function]}
-    exact={true}
-    path="/films/:id/review"
+    path="/film/:id/review"
   />
   <ConnectFunction
     component={
@@ -54,7 +53,7 @@ exports[`App renders correctly 1`] = `
     path="/mylist"
   />
   <Route
-    component={[Function]}
+    render={[Function]}
   />
 </Switch>
 `;

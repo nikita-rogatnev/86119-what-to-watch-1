@@ -1,8 +1,8 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 
 import VideoPreview from "../video-preview/video-preview";
-import {Link} from "react-router-dom";
 
 class Card extends React.PureComponent {
   constructor(props) {
@@ -44,7 +44,7 @@ class Card extends React.PureComponent {
         className="small-movie-card catalog__movies-card"
         onMouseEnter={this._onHoverEnter}
         onMouseLeave={this._onHoverLeave}>
-        {showPlayButton ? <button className="small-movie-card__play-btn" type="button">Play</button> : ``}
+        {showPlayButton && <button className="small-movie-card__play-btn" type="button">Play</button>}
         <div className="small-movie-card__image">
           {
             isPreviewPlaying ? <VideoPreview
@@ -63,7 +63,7 @@ class Card extends React.PureComponent {
         </div>
         <h3 className="small-movie-card__title">
           <Link to={{
-            pathname: `/films/${id}/`,
+            pathname: `/film/${id}`,
             state: {
               currentDataItemId: id,
               currentDataFilter: genre,

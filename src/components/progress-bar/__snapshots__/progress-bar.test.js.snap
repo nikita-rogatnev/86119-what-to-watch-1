@@ -5,6 +5,6 @@ exports[`ProgressBar renders correctly 1`] = `
   className="player__progress"
   max="100"
   onClick={[Function]}
-  value="10"
+  value={10}
 />
 `;

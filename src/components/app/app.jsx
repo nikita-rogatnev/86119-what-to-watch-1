@@ -2,13 +2,15 @@ import React from "react";
 import {Switch, Route} from "react-router-dom";
 
 import Home from "../pages/home/home";
-import Login from "../pages/login/login";
 import Film from "../pages/film/film";
-import Review from "../pages/review/review";
 import Mylist from "../pages/mylist/mylist";
-import Error from "../pages/error/error";
 
+import Header from "../header/header";
+import SignIn from "../sign-in/sign-in";
 import Player from "../video-player/video-player";
+import AddReview from "../add-review/add-review";
+import Footer from "../footer/footer";
+import Heading from "../heading/heading";
 
 import withPrivateRoute from "../../hocs/with-private-route/with-private-route";
 
@@ -19,12 +21,21 @@ class App extends React.PureComponent {
     return (
       <Switch>
         <Route path="/" exact component={Home}/>
-        <Route path="/login" component={Login}/>
-        <Route path="/films/:id" component={Film}/>
+        <Route
+          path="/login"
+          render={() => (
+            <div className="user-page">
+              <Header title={`Sign in`}/>
+              <SignIn/>
+              <Footer/>
+            </div>
+          )}
+        />
         <Route path="/player" component={Player}/>
-        <PrivateRoute path="/films/:id/review" exact component={Review}/>
+        <Route path="/film/:id" component={Film}/>
+        <PrivateRoute path="/film/:id/review" component={AddReview}/>
         <PrivateRoute path="/mylist" exact component={Mylist}/>
-        <Route component={Error}/>
+        <Route render={() => <Heading title={`Error 404`}/>}/>
       </Switch>
     );
   }

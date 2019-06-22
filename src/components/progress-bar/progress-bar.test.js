@@ -9,7 +9,7 @@ Enzyme.configure({adapter: new Adapter()});
 
 it(`ProgressBar renders correctly`, () => {
   const tree = shallow(<ProgressBar
-    progress="10"
+    progress={10}
   />);
 
   expect(toJson(tree)).toMatchSnapshot();
