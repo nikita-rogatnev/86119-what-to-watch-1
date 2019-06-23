@@ -16,7 +16,7 @@ import {
 } from "../../../reducer/data/selectors";
 import {Operations} from "../../../reducer/data/data";
 
-class Film extends React.Component {
+class Film extends React.PureComponent {
   componentDidMount() {
     // eslint-disable-next-line react/prop-types
     this.props.changeCurrentFilter(this.props.location.state.currentDataFilter);

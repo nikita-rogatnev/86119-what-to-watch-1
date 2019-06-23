@@ -11,6 +11,7 @@ const withPrivateRoute = (Component) => {
       if (this.props.user) {
         return <Component {...this.props} />;
       }
+
       return <Redirect to="/login"/>;
     }
   }

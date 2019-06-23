@@ -2,17 +2,24 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Header from "../../header/header";
+import Heading from "../../heading/heading";
 import Catalog from "../../catalog/catalog";
 import Footer from "../../footer/footer";
 
 import {connect} from "react-redux";
-import {ActionCreators} from "../../../reducer/data/data";
+import {Operations, ActionCreators} from "../../../reducer/data/data";
 import {getFilterCurrent, getFilters, getDataFavorites} from "../../../reducer/data/selectors";
 
 class Mylist extends React.PureComponent {
+  componentWillMount() {
+    const {loadDataFavorites} = this.props;
+
+    loadDataFavorites();
+  }
+
   render() {
     const {
-      favorites,
+      dataFavorites,
       filters,
       changeCurrentFilter,
     } = this.props;
@@ -20,15 +27,19 @@ class Mylist extends React.PureComponent {
     return (
       <div className="user-page">
         <Header title={`My list`}/>
-        <Catalog
-          data={favorites}
-          filters={filters}
-          currentFilter={`All genres`}
-          changeCurrentFilter={changeCurrentFilter}
-          maxCardsNumber={9999}
-          showCatalogTitle={false}
-          showPlayButton={true}
-        />
+
+        {dataFavorites.length ?
+          <Catalog
+            data={dataFavorites}
+            filters={filters}
+            currentFilter={`All genres`}
+            changeCurrentFilter={changeCurrentFilter}
+            maxCardsNumber={9999}
+            showCatalogTitle={false}
+            showPlayButton={true}
+          />
+          :
+          <Heading title={`No data`} isSimplified={true}/>}
         <Footer/>
       </div>
     );
@@ -36,7 +47,8 @@ class Mylist extends React.PureComponent {
 }
 
 Mylist.propTypes = {
-  favorites: PropTypes.array.isRequired,
+  dataFavorites: PropTypes.array.isRequired,
+  loadDataFavorites: PropTypes.func.isRequired,
   filters: PropTypes.array.isRequired,
   currentFilter: PropTypes.string.isRequired,
   changeCurrentFilter: PropTypes.func.isRequired,
@@ -44,13 +56,16 @@ Mylist.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    favorites: getDataFavorites(state),
+    dataFavorites: getDataFavorites(state),
     filters: getFilters(state),
     currentFilter: getFilterCurrent(state),
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  loadDataFavorites: () => {
+    dispatch(Operations.loadDataFavorites());
+  },
   changeCurrentFilter: (genre) => {
     dispatch(ActionCreators.changeCurrentFilter(genre));
   },

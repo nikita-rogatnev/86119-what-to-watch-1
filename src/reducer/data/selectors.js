@@ -7,6 +7,14 @@ export const getData = (state) => {
   return state[NAME_SPACE].data;
 };
 
+export const getDataPromo = (state) => {
+  return state[NAME_SPACE].dataPromo;
+};
+
+export const getDataFavorites = (state) => {
+  return state[NAME_SPACE].dataFavorites;
+};
+
 export const getDataItemReviews = (state) => {
   return state[NAME_SPACE].dataItemReviews;
 };
@@ -24,17 +32,8 @@ export const getAllFilters = createSelector(getData, (data) => data.map((dataIte
 export const getFilters = createSelector(getAllFilters, (filters) => ([`All genres`, ...new Set(filters)]));
 
 export const getFilteredData = createSelector(
-  getData,
-  getFilterCurrent,
-  (data, currentFilter) => {
-    return (currentFilter === `All genres`) ? data : data.filter((dataItem) => dataItem.genre === currentFilter);
-  },
-);
-
-export const getDataFavorites = createSelector(getData, (data) => {
-  return data.filter((item) => item.isFavorite === true);
-});
-
-export const getDataRandom = createSelector(getData, (data) => {
-  return data[0];
-});
+    getData,
+    getFilterCurrent,
+    (data, currentFilter) => {
+      return (currentFilter === `All genres`) ? data : data.filter((dataItem) => dataItem.genre === currentFilter);
+    });
