@@ -129,7 +129,7 @@ const mapData = (data) => {
       backgroundImage: dataItem[`background_image`],
       backgroundColor: dataItem[`background_color`],
       description: dataItem[`description`],
-      rating: dataItem[`rating`],
+      rating: dataItem[`rating`] * 2,
       scoresCount: dataItem[`scores_count`],
       director: dataItem[`director`],
       starring: dataItem[`starring`],

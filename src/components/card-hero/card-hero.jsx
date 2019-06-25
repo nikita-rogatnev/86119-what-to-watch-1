@@ -11,6 +11,7 @@ import {getDataItemCurrent} from "../../reducer/data/selectors";
 import {Operations} from "../../reducer/data/data";
 import {getLoggedStatus} from "../../reducer/user/selectors";
 
+
 const Overview = (data) => {
   const {
     rating,
@@ -20,13 +21,30 @@ const Overview = (data) => {
     description,
   } = data;
 
+  const getRatingText = (ratingItem) => {
+    switch (true) {
+      case (ratingItem === 10):
+        return `Awesome`;
+      case (ratingItem >= 8 && ratingItem < 10):
+        return `Very good`;
+      case (ratingItem >= 5 && ratingItem < 8):
+        return `Good`;
+      case (ratingItem >= 3 && ratingItem < 5):
+        return `Normal`;
+      case (ratingItem >= 0 && ratingItem < 3):
+        return `Bad`;
+      default:
+        return `Sorry no rating`;
+    }
+  };
+
   return (
     <div className="movie-card__text">
       <div className="movie-rating">
         <div className="movie-rating__score">{rating}</div>
         <p className="movie-rating__meta">
           <span className="movie-rating__level">
-            {[`Bad`, `Bad`, `Normal`, `Normal`, `Good`, `Good`, `Good`, `Very good`, `Very good`, `Awesome`][Math.floor(rating)] || `Unknown`}
+            {getRatingText(rating)}
           </span>
           <span className="movie-rating__count">{scoresCount} ratings</span>
         </p>
