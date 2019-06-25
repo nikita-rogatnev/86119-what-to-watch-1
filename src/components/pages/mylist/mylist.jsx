@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {dataItemShape} from "../../../models";
 
 import Header from "../../header/header";
 import Heading from "../../heading/heading";
@@ -47,9 +48,9 @@ class Mylist extends React.PureComponent {
 }
 
 Mylist.propTypes = {
-  dataFavorites: PropTypes.array.isRequired,
+  dataFavorites: PropTypes.arrayOf(dataItemShape),
   loadDataFavorites: PropTypes.func.isRequired,
-  filters: PropTypes.array.isRequired,
+  filters: PropTypes.arrayOf(PropTypes.string),
   currentFilter: PropTypes.string.isRequired,
   changeCurrentFilter: PropTypes.func.isRequired,
 };

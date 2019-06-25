@@ -1,6 +1,7 @@
 import React from "react";
 import {Link, withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
+import {userShape} from "../../models";
 
 import Logo from "../logo/logo";
 
@@ -90,7 +91,7 @@ Header.propTypes = {
   isAuthorizationRequired: PropTypes.bool.isRequired,
   isLogged: PropTypes.bool.isRequired,
   requireAuthorization: PropTypes.func.isRequired,
-  user: PropTypes.object,
+  user: userShape,
   title: PropTypes.string,
   breadcrumbsId: PropTypes.number,
   breadcrumbsName: PropTypes.string,

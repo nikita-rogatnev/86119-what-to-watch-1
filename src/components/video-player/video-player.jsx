@@ -1,6 +1,7 @@
 import React from "react";
 import {withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
+import {dataItemShape} from "../../models";
 
 import ProgressBar from "../progress-bar/progress-bar";
 
@@ -135,7 +136,7 @@ VideoPlayer.propTypes = {
   runTime: PropTypes.string,
   location: PropTypes.shape({
     state: PropTypes.shape({
-      data: PropTypes.array.isRequired,
+      data: dataItemShape,
     }),
   }),
   history: PropTypes.shape({

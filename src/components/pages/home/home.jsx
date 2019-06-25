@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {dataItemShape} from "../../../models";
 
 import CardHero from "../../card-hero/card-hero";
 import Catalog from "../../catalog/catalog";
@@ -54,10 +55,10 @@ class Home extends React.PureComponent {
 }
 
 Home.propTypes = {
-  data: PropTypes.array.isRequired,
-  dataPromo: PropTypes.object.isRequired,
+  data: PropTypes.arrayOf(dataItemShape),
+  dataPromo: dataItemShape,
   loadDataPromo: PropTypes.func.isRequired,
-  filters: PropTypes.array.isRequired,
+  filters: PropTypes.arrayOf(PropTypes.string),
   currentFilter: PropTypes.string.isRequired,
   changeCurrentFilter: PropTypes.func.isRequired,
   isLogged: PropTypes.bool.isRequired,

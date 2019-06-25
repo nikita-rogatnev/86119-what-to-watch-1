@@ -1,6 +1,7 @@
 import React from "react";
 import {Switch, Route, NavLink, Link} from "react-router-dom";
 import PropTypes from "prop-types";
+import {dataItemShape, reviewItemShape} from "../../models";
 
 import Header from "../header/header";
 import AddReview from "../add-review/add-review";
@@ -390,28 +391,8 @@ class CardHero extends React.PureComponent {
 }
 
 CardHero.propTypes = {
-  data: PropTypes.shape(
-    {
-      id: PropTypes.string,
-      name: PropTypes.string,
-      posterImage: PropTypes.string,
-      previewImage: PropTypes.string,
-      backgroundImage: PropTypes.string,
-      backgroundColor: PropTypes.string,
-      description: PropTypes.string,
-      rating: PropTypes.number,
-      scoresCount: PropTypes.number,
-      director: PropTypes.string,
-      starring: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.string), PropTypes.string]),
-      runTime: PropTypes.number,
-      genre: PropTypes.string,
-      released: PropTypes.number,
-      isFavorite: PropTypes.bool,
-      videoLink: PropTypes.string,
-      previewVideoLink: PropTypes.string,
-    },
-  ),
-  reviews: PropTypes.array,
+  data: dataItemShape,
+  reviews: PropTypes.arrayOf(reviewItemShape),
   setToFavorites: PropTypes.func.isRequired,
   fullMode: PropTypes.bool,
   isLogged: PropTypes.bool.isRequired,

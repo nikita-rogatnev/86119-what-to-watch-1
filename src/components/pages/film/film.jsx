@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {dataItemShape, reviewItemShape} from "../../../models";
 
 import CardHero from "../../card-hero/card-hero";
 import Catalog from "../../catalog/catalog";
@@ -69,10 +70,10 @@ class Film extends React.PureComponent {
 }
 
 Film.propTypes = {
-  data: PropTypes.array.isRequired,
-  dataItemCurrent: PropTypes.object.isRequired,
-  dataItemReviews: PropTypes.array.isRequired,
-  filters: PropTypes.array.isRequired,
+  data: PropTypes.arrayOf(dataItemShape),
+  dataItemCurrent: dataItemShape,
+  dataItemReviews: PropTypes.arrayOf(reviewItemShape),
+  filters: PropTypes.arrayOf(PropTypes.string),
   currentFilter: PropTypes.string.isRequired,
   changeCurrentFilter: PropTypes.func.isRequired,
   changeDataItemCurrent: PropTypes.func.isRequired,

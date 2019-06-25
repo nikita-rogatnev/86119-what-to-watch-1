@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {dataItemShape} from "../../models";
 
 import Card from "../card/card";
 
@@ -21,7 +22,7 @@ export class CardList extends React.PureComponent {
 }
 
 CardList.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.arrayOf(dataItemShape),
   showPlayButton: PropTypes.bool.isRequired,
 };
 
