@@ -10,7 +10,7 @@ import {getAuthorizationStatus, getLoggedStatus, getUserData} from "../../reduce
 import {ActionCreator} from "../../reducer/user/user";
 
 class Header extends React.PureComponent {
-  _onClick() {
+  _handleClick() {
     this.props.requireAuthorization(true);
   }
 
@@ -67,7 +67,7 @@ class Header extends React.PureComponent {
           </div>}
 
           {!isLogged && !isAuthorizationRequired &&
-          <Link to="/login" className="user-block__link" onClick={() => this._onClick()}>
+          <Link to="/login" className="user-block__link" onClick={() => this._handleClick()}>
             Sign in
           </Link>}
         </div>}

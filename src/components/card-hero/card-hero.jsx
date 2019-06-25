@@ -21,6 +21,7 @@ const Overview = (data) => {
     description,
   } = data;
 
+  // TODO
   const getRatingText = (ratingItem) => {
     switch (true) {
       case (ratingItem === 10):

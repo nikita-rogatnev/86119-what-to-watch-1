@@ -45,22 +45,55 @@ class Card extends React.PureComponent {
         className="small-movie-card catalog__movies-card"
         onMouseEnter={this._onHoverEnter}
         onMouseLeave={this._onHoverLeave}>
-        {showPlayButton && <button className="small-movie-card__play-btn" type="button">Play</button>}
-        <div className="small-movie-card__image">
-          {isPreviewPlaying ?
+
+        {showPlayButton &&
+        <Link to={{
+          pathname: `/film/${id}`,
+          state: {
+            currentDataItemId: id,
+            currentDataFilter: genre,
+          },
+        }} className="small-movie-card__play-btn">
+          Play
+        </Link>}
+
+        {isPreviewPlaying ?
+          <div className="small-movie-card__image">
             <VideoPreview
               previewVideoLink={previewVideoLink}
               previewImage={previewImage}
               muted={true}
               autoPlay={true}
               controls={false}
-            /> :
-            <img
-              src={previewImage}
-              alt={name}
-              width="280"
-              height="175"/>}
-        </div>
+            />
+          </div>
+          :
+          <React.Fragment>
+            {showPlayButton ?
+              <Link to={{
+                pathname: `/film/${id}`,
+                state: {
+                  currentDataItemId: id,
+                  currentDataFilter: genre,
+                },
+              }} className="small-movie-card__image">
+                <img
+                  src={previewImage}
+                  alt={name}
+                  width="280"
+                  height="175"/>
+              </Link>
+              :
+              <div className="small-movie-card__image">
+                <img
+                  src={previewImage}
+                  alt={name}
+                  width="280"
+                  height="175"/>
+              </div>
+            }
+          </React.Fragment>
+        }
         <h3 className="small-movie-card__title">
           <Link to={{
             pathname: `/film/${id}`,

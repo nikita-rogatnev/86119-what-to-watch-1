@@ -18,14 +18,14 @@ class SignIn extends React.PureComponent {
     };
   }
 
-  _onChangeEmail(value) {
+  _handleChangeEmail(value) {
     this.setState({
       email: value,
       error: value.length ? null : `Please enter a valid email address`,
     });
   }
 
-  _onChangePassword(value) {
+  _handleChangePassword(value) {
     this.setState({
       password: value,
     });
@@ -67,7 +67,7 @@ class SignIn extends React.PureComponent {
                 id="user-email"
                 autoComplete="username email"
                 required="required"
-                onKeyUp={(e) => this._onChangeEmail(e.target.value)}
+                onKeyUp={(e) => this._handleChangeEmail(e.target.value)}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
@@ -81,7 +81,7 @@ class SignIn extends React.PureComponent {
                 id="user-password"
                 autoComplete="current-password"
                 required="required"
-                onKeyUp={(e) => this._onChangePassword(e.target.value)}
+                onKeyUp={(e) => this._handleChangePassword(e.target.value)}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>

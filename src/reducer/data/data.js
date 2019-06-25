@@ -110,7 +110,7 @@ export const Operations = {
 
   setToFavorites: (data) => (dispatch, getState, api) => {
     return api
-      .post(`/favorite/${data.id}/${data.isFavorite ? 1 : 0}`)
+      .post(`/favorite/${data.id}/${data.isFavorite ? 0 : 1}`)
       .then((response) => {
         if (response.status === 200) {
           dispatch(ActionCreators.setToFavorites(response.data));

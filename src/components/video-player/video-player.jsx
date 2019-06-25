@@ -11,8 +11,8 @@ class VideoPlayer extends React.PureComponent {
 
     this.videoRef = React.createRef();
 
-    this._toggleVideo = this._toggleVideo.bind(this);
-    this._moveCurrentTime = this._moveCurrentTime.bind(this);
+    this._onToggleVideo = this._onToggleVideo.bind(this);
+    this._onChangeCurrentTime = this._onChangeCurrentTime.bind(this);
 
     this.state = {
       isVideoPlaying: false,
@@ -27,7 +27,7 @@ class VideoPlayer extends React.PureComponent {
     this.setState({isVideoPlaying: false, progress: 0});
   }
 
-  _toggleVideo() {
+  _onToggleVideo() {
     const video = this.videoRef.current;
 
     if (video.paused) {
@@ -45,21 +45,17 @@ class VideoPlayer extends React.PureComponent {
     }
   }
 
-  _moveCurrentTime(progress) {
+  _onChangeCurrentTime(progress) {
     const video = this.videoRef.current;
 
     this.setState({progress});
     video.currentTime = progress * video.duration;
   }
 
-  _fullScreen() {
+  _handleFullScreen() {
     const video = this.videoRef.current;
 
     video.requestFullscreen();
-  }
-
-  static _convertTime(minutes) {
-    return new Date(minutes * 60 * 1000).toISOString().substr(11, 8);
   }
 
   render() {
@@ -92,20 +88,22 @@ class VideoPlayer extends React.PureComponent {
             <div className="player__time">
 
               <ProgressBar
-                moveCurrentTime={this._moveCurrentTime}
+                moveCurrentTime={this._onChangeCurrentTime}
                 progress={this.state.progress}
               />
 
               <div className="player__toggler" style={{left: this.state.progress + `%`}}>Toggler</div>
             </div>
-            <div className="player__time-value">{VideoPlayer._convertTime(runTime)}</div>
+            <div className="player__time-value">
+              {new Date(runTime * 60 * 1000).toISOString().substr(11, 8)}
+            </div>
           </div>
 
           <div className="player__controls-row">
             <button
               type="button"
               className="player__play"
-              onClick={this._toggleVideo.bind(this)}>
+              onClick={this._onToggleVideo.bind(this)}>
               <svg viewBox="0 0 19 19" width="19" height="19">
                 {this.state.isVideoPlaying ? <use xlinkHref="#pause"/> : <use xlinkHref="#play-s"/>}
               </svg>
@@ -117,7 +115,7 @@ class VideoPlayer extends React.PureComponent {
             <button
               type="button"
               className="player__full-screen"
-              onClick={this._fullScreen.bind(this)}>
+              onClick={this._handleFullScreen.bind(this)}>
               <svg viewBox="0 0 27 27" width="27" height="27">
                 <use xlinkHref="#full-screen"/>
               </svg>

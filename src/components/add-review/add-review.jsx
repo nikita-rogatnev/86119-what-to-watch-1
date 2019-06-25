@@ -17,13 +17,13 @@ class AddReview extends React.PureComponent {
     };
   }
 
-  _onChangeRating(value) {
+  _handleChangeRating(value) {
     this.setState({
       rating: value,
     });
   }
 
-  _onChangeText(value) {
+  _handleChangeText(value) {
     if (value.length > 50 && value.length < 400) {
       this.setState({isBlocked: false, text: value});
     } else {
@@ -63,7 +63,7 @@ class AddReview extends React.PureComponent {
                       type="radio"
                       name="rating"
                       value={index + 1}
-                      onChange={(e) => this._onChangeRating(e.target.value)}
+                      onChange={(e) => this._handleChangeRating(e.target.value)}
                       defaultChecked={this.state.rating === index + 1}
                     />
                     <label className="rating__label" htmlFor={`star-${index + 1}`}>Rating {index + 1}</label>
@@ -81,7 +81,7 @@ class AddReview extends React.PureComponent {
               placeholder="Review text"
               minLength={50}
               maxLength={400}
-              onKeyUp={(e) => this._onChangeText(e.target.value)}
+              onKeyUp={(e) => this._handleChangeText(e.target.value)}
             />
             <div className="add-review__submit">
               <button className="add-review__btn" type="submit">Post</button>
