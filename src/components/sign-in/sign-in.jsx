@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Redirect} from "react-router-dom";
 
 import {connect} from "react-redux";
 import {Operations} from "../../reducer/user/user";
-import {getUserError, getLoadingStatus} from "../../reducer/user/selectors";
+import {getUserError, getLoadingStatus, getLoggedStatus} from "../../reducer/user/selectors";
 
 class SignIn extends React.PureComponent {
   constructor(props) {
@@ -13,23 +14,31 @@ class SignIn extends React.PureComponent {
       email: null,
       password: null,
       error: null,
+      redirect: false,
     };
   }
 
-  _onChangeEmail(value) {
+  _handleChangeEmail(value) {
     this.setState({
       email: value,
       error: value.length ? null : `Please enter a valid email address`,
     });
   }
 
-  _onChangePassword(value) {
+  _handleChangePassword(value) {
     this.setState({
       password: value,
     });
   }
 
   render() {
+    const {redirect} = this.state;
+    const {isLogged} = this.props;
+
+    if (redirect && isLogged) {
+      return <Redirect to={`/`}/>;
+    }
+
     return (
       <section className="sign-in user-page__content">
         <form
@@ -37,6 +46,7 @@ class SignIn extends React.PureComponent {
           onSubmit={(e) => {
             this.props.loginUser(this.state.email, this.state.password);
             e.preventDefault();
+            this.setState({redirect: true});
           }}>
 
           {this.props.userError && <div className="sign-in__message">
@@ -57,7 +67,7 @@ class SignIn extends React.PureComponent {
                 id="user-email"
                 autoComplete="username email"
                 required="required"
-                onKeyUp={(e) => this._onChangeEmail(e.target.value)}
+                onKeyUp={(e) => this._handleChangeEmail(e.target.value)}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
@@ -71,7 +81,7 @@ class SignIn extends React.PureComponent {
                 id="user-password"
                 autoComplete="current-password"
                 required="required"
-                onKeyUp={(e) => this._onChangePassword(e.target.value)}
+                onKeyUp={(e) => this._handleChangePassword(e.target.value)}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>
@@ -91,11 +101,13 @@ class SignIn extends React.PureComponent {
 SignIn.propTypes = {
   userError: PropTypes.string,
   loginUser: PropTypes.func.isRequired,
+  isLogged: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool,
 };
 
 const mapStateToProps = (state, ownProps) =>
   Object.assign({}, ownProps, {
+    isLogged: getLoggedStatus(state),
     userError: getUserError(state),
     isLoading: getLoadingStatus(state),
   });

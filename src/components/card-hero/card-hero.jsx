@@ -1,6 +1,7 @@
 import React from "react";
 import {Switch, Route, NavLink, Link} from "react-router-dom";
 import PropTypes from "prop-types";
+import {dataItemShape, reviewItemShape} from "../../models";
 
 import Header from "../header/header";
 import AddReview from "../add-review/add-review";
@@ -9,6 +10,7 @@ import {connect} from "react-redux";
 import {getDataItemCurrent} from "../../reducer/data/selectors";
 import {Operations} from "../../reducer/data/data";
 import {getLoggedStatus} from "../../reducer/user/selectors";
+import Heading from "../heading/heading";
 
 const Overview = (data) => {
   const {
@@ -19,13 +21,30 @@ const Overview = (data) => {
     description,
   } = data;
 
+  const getRatingText = (ratingItem) => {
+    switch (true) {
+      case (ratingItem === 10):
+        return `Awesome`;
+      case (ratingItem >= 8 && ratingItem < 10):
+        return `Very good`;
+      case (ratingItem >= 5 && ratingItem < 8):
+        return `Good`;
+      case (ratingItem >= 3 && ratingItem < 5):
+        return `Normal`;
+      case (ratingItem >= 0 && ratingItem < 3):
+        return `Bad`;
+      default:
+        return `Sorry no rating`;
+    }
+  };
+
   return (
     <div className="movie-card__text">
       <div className="movie-rating">
         <div className="movie-rating__score">{rating}</div>
         <p className="movie-rating__meta">
           <span className="movie-rating__level">
-            {[`Bad`, `Bad`, `Normal`, `Normal`, `Good`, `Good`, `Good`, `Very good`, `Very good`, `Awesome`][Math.floor(rating)] || `Unknown`}
+            {getRatingText(rating)}
           </span>
           <span className="movie-rating__count">{scoresCount} ratings</span>
         </p>
@@ -183,93 +202,34 @@ class CardHero extends React.PureComponent {
       isLogged,
     } = this.props;
 
-    return (
-      <section className={`movie-card ${fullMode ? `movie-card--full` : ``}`}>
-        <div
-          className={`${fullMode ? `movie-card__header` : ``} ${fullMode && !this.state.isInReviewMode ? `movie-card__hero` : ``}`}>
-          <div className="movie-card__bg">
-            <img src={backgroundImage} alt={name}/>
-          </div>
+    if (id) {
+      return (
+        <section className={`movie-card ${fullMode ? `movie-card--full` : ``}`}>
+          <div
+            className={`${fullMode ? `movie-card__header` : ``} ${fullMode && !this.state.isInReviewMode ? `movie-card__hero` : ``}`}>
+            <div className="movie-card__bg">
+              <img src={backgroundImage} alt={name}/>
+            </div>
 
-          <h1 className="visually-hidden">WTW</h1>
+            <h1 className="visually-hidden">WTW</h1>
 
-          {this.state.isInReviewMode ?
-            <Header
-              breadcrumbsId={id}
-              breadcrumbsName={name}
-              breadcrumbsGenre={genre}
-            />
-            :
-            <Header/>}
-
-          <div className="movie-card__wrap">
             {this.state.isInReviewMode ?
-              <div className="movie-card__poster movie-card__poster--small">
-                <img src={posterImage} alt={name} width="218" height="327"/>
-              </div>
+              <Header
+                breadcrumbsId={id}
+                breadcrumbsName={name}
+                breadcrumbsGenre={genre}
+              />
               :
-              <React.Fragment>
-                {fullMode ?
-                  <div className="movie-card__desc">
-                    <h2 className="movie-card__title">{name}</h2>
-                    <p className="movie-card__meta">
-                      <span className="movie-card__genre">{genre}</span>
-                      <span className="movie-card__year">{released}</span>
-                    </p>
+              <Header/>}
 
-                    <div className="movie-card__buttons">
-                      <Link to={{
-                        pathname: `/player`,
-                        state: {
-                          data: this.props.data,
-                        },
-                      }} className="btn btn--play movie-card__button">
-                        <svg viewBox="0 0 19 19" width="19" height="19">
-                          <use xlinkHref="#play-s"/>
-                        </svg>
-                        <span>Play</span>
-                      </Link>
-
-                      {isLogged ?
-                        <React.Fragment>
-                          <Link
-                            to={`/mylist`}
-                            className="btn btn--list movie-card__button"
-                            onClick={() => this.props.setToFavorites(this.props.data)}>
-                            <svg viewBox="0 0 18 14" width="18" height="14">
-                              {isFavorite ? <use xlinkHref="#in-list"/> : <use xlinkHref="#add"/>}
-                            </svg>
-                            <span>My list</span>
-                          </Link>
-                          <Link
-                            to={{
-                              pathname: `/film/${id}/review`,
-                              state: {
-                                currentDataItemId: id,
-                              },
-                            }}
-                            onClick={() => this.setState({isInReviewMode: true})}
-                            className="btn movie-card__button">
-                            Add review
-                          </Link>
-                        </React.Fragment>
-                        :
-                        <React.Fragment>
-                          <Link to="/login" className="btn btn--list movie-card__button">
-                            <svg viewBox="0 0 18 14" width="18" height="14">
-                              <use xlinkHref="#add"/>
-                            </svg>
-                            <span>My list</span>
-                          </Link>
-                          <Link to={`/login`} className="btn movie-card__button">Add review</Link>
-                        </React.Fragment>}
-                    </div>
-                  </div>
-                  :
-                  <div className="movie-card__info">
-                    <div className="movie-card__poster">
-                      <img src={posterImage} alt={`${name} poster`} width="218" height="327"/>
-                    </div>
+            <div className="movie-card__wrap">
+              {this.state.isInReviewMode ?
+                <div className="movie-card__poster movie-card__poster--small">
+                  <img src={posterImage} alt={name} width="218" height="327"/>
+                </div>
+                :
+                <React.Fragment>
+                  {fullMode ?
                     <div className="movie-card__desc">
                       <h2 className="movie-card__title">{name}</h2>
                       <p className="movie-card__meta">
@@ -291,107 +251,171 @@ class CardHero extends React.PureComponent {
                         </Link>
 
                         {isLogged ?
-                          <Link
-                            to={`/mylist`}
-                            className="btn btn--list movie-card__button"
-                            onClick={() => this.props.setToFavorites(this.props.data)}>
-                            <svg viewBox="0 0 18 14" width="18" height="14">
-                              {isFavorite ? <use xlinkHref="#in-list"/> : <use xlinkHref="#add"/>}
-                            </svg>
-                            <span>My list</span>
-                          </Link>
+                          <React.Fragment>
+                            <Link
+                              to={`/mylist`}
+                              className="btn btn--list movie-card__button"
+                              onClick={() => this.props.setToFavorites(this.props.data)}>
+                              <svg viewBox="0 0 18 14" width="18" height="14">
+                                {isFavorite ? <use xlinkHref="#in-list"/> : <use xlinkHref="#add"/>}
+                              </svg>
+                              <span>My list</span>
+                            </Link>
+                            <Link
+                              to={{
+                                pathname: `/film/${id}/review`,
+                                state: {
+                                  currentDataItemId: id,
+                                  currentDataFilter: genre,
+                                },
+                              }}
+                              onClick={() => this.setState({isInReviewMode: true})}
+                              className="btn btn--review movie-card__button">
+                              Add review
+                            </Link>
+                          </React.Fragment>
                           :
-                          <Link
-                            to={`/login`}
-                            className="btn btn--list movie-card__button">
-                            <svg viewBox="0 0 18 14" width="18" height="14">
-                              <use xlinkHref="#add"/>
-                            </svg>
-                            <span>My list</span>
-                          </Link>}
+                          <React.Fragment>
+                            <Link to="/login" className="btn btn--list movie-card__button">
+                              <svg viewBox="0 0 18 14" width="18" height="14">
+                                <use xlinkHref="#add"/>
+                              </svg>
+                              <span>My list</span>
+                            </Link>
+                            <Link to={`/login`} className="btn btn--review movie-card__button">Add review</Link>
+                          </React.Fragment>}
                       </div>
                     </div>
-                  </div>}
-              </React.Fragment>}
-          </div>
-        </div>
+                    :
+                    <div className="movie-card__info">
+                      <div className="movie-card__poster">
+                        <img src={posterImage} alt={`${name} poster`} width="218" height="327"/>
+                      </div>
+                      <div className="movie-card__desc">
+                        <h2 className="movie-card__title">{name}</h2>
+                        <p className="movie-card__meta">
+                          <span className="movie-card__genre">{genre}</span>
+                          <span className="movie-card__year">{released}</span>
+                        </p>
 
-        {this.state.isInReviewMode && <AddReview id={id}/>}
+                        <div className="movie-card__buttons">
+                          <Link to={{
+                            pathname: `/player`,
+                            state: {
+                              data: this.props.data,
+                            },
+                          }} className="btn btn--play movie-card__button">
+                            <svg viewBox="0 0 19 19" width="19" height="19">
+                              <use xlinkHref="#play-s"/>
+                            </svg>
+                            <span>Play</span>
+                          </Link>
 
-        {fullMode && !this.state.isInReviewMode &&
-        <div className="movie-card__wrap movie-card__translate-top">
-          <div className="movie-card__info">
-            <div className="movie-card__poster movie-card__poster--big">
-              <img src={posterImage} alt={`${name} poster`} width="218" height="327"/>
-            </div>
-
-            <div className="movie-card__desc">
-              <nav className="movie-nav movie-card__nav">
-                <ul className="movie-nav__list">
-                  <li
-                    className={`movie-nav__item ${this.state.activeTab === `Overview` ? `movie-nav__item--active` : ``}`}>
-                    <NavLink
-                      to={{
-                        pathname: `/film/${id}`,
-                        state: {
-                          currentDataItemId: id,
-                          currentDataFilter: genre,
-                        },
-                      }}
-                      exact
-                      onClick={() => this.setState({activeTab: `Overview`})}
-                      className="movie-nav__link">Overview</NavLink>
-                  </li>
-
-                  <li
-                    className={`movie-nav__item ${this.state.activeTab === `Details` ? `movie-nav__item--active` : ``}`}>
-                    <NavLink
-                      to={{
-                        pathname: `/film/${id}/details`,
-                        state: {
-                          currentDataItemId: id,
-                          currentDataFilter: genre,
-                        },
-                      }}
-                      exact
-                      onClick={() => this.setState({activeTab: `Details`})}
-                      className="movie-nav__link">Details</NavLink>
-                  </li>
-
-                  <li
-                    className={`movie-nav__item ${this.state.activeTab === `Reviews` ? `movie-nav__item--active` : ``}`}>
-                    <NavLink
-                      to={{
-                        pathname: `/film/${id}/reviews`,
-                        state: {
-                          currentDataItemId: id,
-                          currentDataFilter: genre,
-                        },
-                      }}
-                      exact
-                      onClick={() => this.setState({activeTab: `Reviews`})}
-                      className="movie-nav__link">Reviews</NavLink>
-                  </li>
-                </ul>
-              </nav>
-
-              <Switch>
-                <Route path={`/film/${id}`} exact render={() => (<Overview {...this.props.data}/>)}/>
-                <Route path={`/film/${id}/details`} exact render={() => (<Details {...this.props.data}/>)}/>
-                <Route path={`/film/${id}/reviews`} exact render={() => (<Reviews {...this.props.reviews}/>)}/>
-              </Switch>
+                          {isLogged ?
+                            <Link
+                              to={`/mylist`}
+                              className="btn btn--list movie-card__button"
+                              onClick={() => this.props.setToFavorites(this.props.data)}>
+                              <svg viewBox="0 0 18 14" width="18" height="14">
+                                {isFavorite ? <use xlinkHref="#in-list"/> : <use xlinkHref="#add"/>}
+                              </svg>
+                              <span>My list</span>
+                            </Link>
+                            :
+                            <Link
+                              to={`/login`}
+                              className="btn btn--list movie-card__button">
+                              <svg viewBox="0 0 18 14" width="18" height="14">
+                                <use xlinkHref="#add"/>
+                              </svg>
+                              <span>My list</span>
+                            </Link>}
+                        </div>
+                      </div>
+                    </div>}
+                </React.Fragment>}
             </div>
           </div>
-        </div>
-        }
-      </section>
-    );
+
+          {this.state.isInReviewMode && <AddReview id={id} genre={genre}/>}
+
+          {fullMode && !this.state.isInReviewMode &&
+          <div className="movie-card__wrap movie-card__translate-top">
+            <div className="movie-card__info">
+              <div className="movie-card__poster movie-card__poster--big">
+                <img src={posterImage} alt={`${name} poster`} width="218" height="327"/>
+              </div>
+
+              <div className="movie-card__desc">
+                <nav className="movie-nav movie-card__nav">
+                  <ul className="movie-nav__list">
+                    <li
+                      className={`movie-nav__item ${this.state.activeTab === `Overview` ? `movie-nav__item--active` : ``}`}>
+                      <NavLink
+                        to={{
+                          pathname: `/film/${id}`,
+                          state: {
+                            currentDataItemId: id,
+                            currentDataFilter: genre,
+                          },
+                        }}
+                        exact
+                        onClick={() => this.setState({activeTab: `Overview`})}
+                        className="movie-nav__link">Overview</NavLink>
+                    </li>
+
+                    <li
+                      className={`movie-nav__item ${this.state.activeTab === `Details` ? `movie-nav__item--active` : ``}`}>
+                      <NavLink
+                        to={{
+                          pathname: `/film/${id}/details`,
+                          state: {
+                            currentDataItemId: id,
+                            currentDataFilter: genre,
+                          },
+                        }}
+                        exact
+                        onClick={() => this.setState({activeTab: `Details`})}
+                        className="movie-nav__link">Details</NavLink>
+                    </li>
+
+                    <li
+                      className={`movie-nav__item ${this.state.activeTab === `Reviews` ? `movie-nav__item--active` : ``}`}>
+                      <NavLink
+                        to={{
+                          pathname: `/film/${id}/reviews`,
+                          state: {
+                            currentDataItemId: id,
+                            currentDataFilter: genre,
+                          },
+                        }}
+                        exact
+                        onClick={() => this.setState({activeTab: `Reviews`})}
+                        className="movie-nav__link">Reviews</NavLink>
+                    </li>
+                  </ul>
+                </nav>
+
+                <Switch>
+                  <Route path={`/film/${id}`} exact render={() => (<Overview {...this.props.data}/>)}/>
+                  <Route path={`/film/${id}/details`} exact render={() => (<Details {...this.props.data}/>)}/>
+                  <Route path={`/film/${id}/reviews`} exact render={() => (<Reviews {...this.props.reviews}/>)}/>
+                </Switch>
+              </div>
+            </div>
+          </div>
+          }
+        </section>
+      );
+    } else {
+      return <Heading title={`No data`} isSimplified={true}/>;
+    }
   }
 }
 
 CardHero.propTypes = {
-  data: PropTypes.object.isRequired,
-  reviews: PropTypes.array,
+  data: dataItemShape,
+  reviews: PropTypes.arrayOf(reviewItemShape),
   setToFavorites: PropTypes.func.isRequired,
   fullMode: PropTypes.bool,
   isLogged: PropTypes.bool.isRequired,

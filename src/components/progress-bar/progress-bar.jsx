@@ -5,10 +5,10 @@ class ProgressBar extends React.Component {
   constructor(props) {
     super(props);
 
-    this._handleOnClick = this._handleOnClick.bind(this);
+    this._onClick = this._onClick.bind(this);
   }
 
-  _handleOnClick(event) {
+  _onClick(event) {
     const nodeBar = event.currentTarget;
     const progress = (event.clientX - nodeBar.getBoundingClientRect().left) / nodeBar.offsetWidth;
 
@@ -23,7 +23,7 @@ class ProgressBar extends React.Component {
         className="player__progress"
         value={progress}
         max="100"
-        onClick={this._handleOnClick}/>
+        onClick={this._onClick}/>
     );
   }
 }

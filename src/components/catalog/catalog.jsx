@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {dataItemShape} from "../../models";
 
 import Filters from "../filters/filters";
 import CardList from "../card-list/card-list";
@@ -16,7 +17,7 @@ class Catalog extends React.PureComponent {
       filters,
       currentFilter,
       changeCurrentFilter,
-      maxCardsNumber = 40,
+      maxCardsNumber = 20,
       catalogTitle = `Catalog`,
       showCatalogTitle = false,
       showFilters = false,
@@ -51,8 +52,8 @@ class Catalog extends React.PureComponent {
 }
 
 Catalog.propTypes = {
-  data: PropTypes.array.isRequired,
-  filters: PropTypes.array.isRequired,
+  data: PropTypes.arrayOf(dataItemShape),
+  filters: PropTypes.arrayOf(PropTypes.string),
   currentFilter: PropTypes.string.isRequired,
   changeCurrentFilter: PropTypes.func.isRequired,
   maxCardsNumber: PropTypes.number,

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {dataItemShape, reviewItemShape} from "../../../models";
 
 import CardHero from "../../card-hero/card-hero";
 import Catalog from "../../catalog/catalog";
@@ -18,18 +19,13 @@ import {Operations} from "../../../reducer/data/data";
 
 class Film extends React.PureComponent {
   componentDidMount() {
-    // eslint-disable-next-line react/prop-types
     this.props.changeCurrentFilter(this.props.location.state.currentDataFilter);
-    // eslint-disable-next-line react/prop-types
     this.props.changeDataItemCurrent(this.props.location.state.currentDataItemId);
-    // eslint-disable-next-line react/prop-types
     this.props.loadDataItemReviews(this.props.location.state.currentDataItemId);
   }
 
   componentDidUpdate(prevProps) {
-    // eslint-disable-next-line react/prop-types
     const currentId = this.props.location.state.currentDataItemId;
-    // eslint-disable-next-line react/prop-types
     const previousId = prevProps.location.state.currentDataItemId;
 
     if (currentId !== previousId) {
@@ -74,14 +70,20 @@ class Film extends React.PureComponent {
 }
 
 Film.propTypes = {
-  data: PropTypes.array.isRequired,
-  dataItemCurrent: PropTypes.object.isRequired,
-  dataItemReviews: PropTypes.array.isRequired,
-  filters: PropTypes.array.isRequired,
+  data: PropTypes.arrayOf(dataItemShape),
+  dataItemCurrent: dataItemShape,
+  dataItemReviews: PropTypes.arrayOf(reviewItemShape),
+  filters: PropTypes.arrayOf(PropTypes.string),
   currentFilter: PropTypes.string.isRequired,
   changeCurrentFilter: PropTypes.func.isRequired,
   changeDataItemCurrent: PropTypes.func.isRequired,
   loadDataItemReviews: PropTypes.func.isRequired,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      currentDataItemId: PropTypes.number.isRequired,
+      currentDataFilter: PropTypes.string,
+    }),
+  }),
 };
 
 const mapStateToProps = (state) => {

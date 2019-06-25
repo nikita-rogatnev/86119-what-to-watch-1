@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {dataItemShape} from "../../../models";
 
 import Header from "../../header/header";
 import Heading from "../../heading/heading";
@@ -11,10 +12,17 @@ import {Operations, ActionCreators} from "../../../reducer/data/data";
 import {getFilterCurrent, getFilters, getDataFavorites} from "../../../reducer/data/selectors";
 
 class Mylist extends React.PureComponent {
-  componentWillMount() {
-    const {loadDataFavorites} = this.props;
+  componentDidMount() {
+    this.props.loadDataFavorites();
+  }
 
-    loadDataFavorites();
+  componentDidUpdate(prevProps) {
+    const prevDataFavorites = JSON.stringify(prevProps.dataFavorites.map(({id}) => id));
+    const newDataFavorites = JSON.stringify(this.props.dataFavorites.map(({id}) => id));
+
+    if (prevDataFavorites !== newDataFavorites) {
+      this.props.loadDataFavorites();
+    }
   }
 
   render() {
@@ -47,9 +55,9 @@ class Mylist extends React.PureComponent {
 }
 
 Mylist.propTypes = {
-  dataFavorites: PropTypes.array.isRequired,
+  dataFavorites: PropTypes.arrayOf(dataItemShape),
   loadDataFavorites: PropTypes.func.isRequired,
-  filters: PropTypes.array.isRequired,
+  filters: PropTypes.arrayOf(PropTypes.string),
   currentFilter: PropTypes.string.isRequired,
   changeCurrentFilter: PropTypes.func.isRequired,
 };

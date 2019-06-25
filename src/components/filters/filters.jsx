@@ -23,7 +23,7 @@ const Filters = (props) => {
 };
 
 Filters.propTypes = {
-  filters: PropTypes.array.isRequired,
+  filters: PropTypes.arrayOf(PropTypes.string),
   currentFilter: PropTypes.string.isRequired,
   changeCurrentFilter: PropTypes.func.isRequired,
 };

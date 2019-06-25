@@ -21,7 +21,7 @@ exports[`CardList renders correctly 1`] = `
     released={1999}
     runTime={136}
     scoresCount={1503092}
-    showPlayButton={false}
+    showPlayButton={true}
     starring={
       Array [
         "Keanu Reeves",
@@ -48,7 +48,7 @@ exports[`CardList renders correctly 1`] = `
     released={2003}
     runTime={88}
     scoresCount={136843}
-    showPlayButton={false}
+    showPlayButton={true}
     starring={
       Array [
         "Rowan Atkinson",

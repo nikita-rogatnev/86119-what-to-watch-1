@@ -13,7 +13,10 @@ const store = mockStore({});
 
 it(`AddReview renders correctly`, () => {
   const tree = renderer.create(<Provider store={store}>
-    <AddReview id={mockData[0].id}/>
+    <AddReview
+      id={mockData[0].id}
+      genre={mockData[0].genre}
+    />
   </Provider>).toJSON();
 
   expect(tree).toMatchSnapshot();

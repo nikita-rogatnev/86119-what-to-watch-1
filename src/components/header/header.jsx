@@ -1,6 +1,7 @@
 import React from "react";
 import {Link, withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
+import {userShape} from "../../models";
 
 import Logo from "../logo/logo";
 
@@ -9,7 +10,7 @@ import {getAuthorizationStatus, getLoggedStatus, getUserData} from "../../reduce
 import {ActionCreator} from "../../reducer/user/user";
 
 class Header extends React.PureComponent {
-  _onClick() {
+  _handleClick() {
     this.props.requireAuthorization(true);
   }
 
@@ -66,7 +67,7 @@ class Header extends React.PureComponent {
           </div>}
 
           {!isLogged && !isAuthorizationRequired &&
-          <Link to="/login" className="user-block__link" onClick={() => this._onClick()}>
+          <Link to="/login" className="user-block__link" onClick={() => this._handleClick()}>
             Sign in
           </Link>}
         </div>}
@@ -90,7 +91,7 @@ Header.propTypes = {
   isAuthorizationRequired: PropTypes.bool.isRequired,
   isLogged: PropTypes.bool.isRequired,
   requireAuthorization: PropTypes.func.isRequired,
-  user: PropTypes.object,
+  user: userShape,
   title: PropTypes.string,
   breadcrumbsId: PropTypes.number,
   breadcrumbsName: PropTypes.string,
