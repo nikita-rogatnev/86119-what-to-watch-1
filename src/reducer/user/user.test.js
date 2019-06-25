@@ -6,7 +6,7 @@ describe(`User reducer`, () => {
       isAuthorizationRequired: false,
     }, {
       type: `REQUIRED_AUTHORIZATION`,
-      payload: true
+      payload: true,
     })).toEqual({
       isAuthorizationRequired: true,
     });

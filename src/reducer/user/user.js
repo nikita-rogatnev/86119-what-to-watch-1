@@ -9,34 +9,34 @@ export const ActionType = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   LOGIN_START: `LOGIN_START`,
   LOGIN_USER: `LOGIN_USER`,
-  LOGIN_ERROR: `LOGIN_ERROR`
+  LOGIN_ERROR: `LOGIN_ERROR`,
 };
 
 export const ActionCreator = {
   requireAuthorization: (status) => {
     return {
       type: ActionType.REQUIRED_AUTHORIZATION,
-      payload: status
+      payload: status,
     };
   },
   loginUser: (status) => {
     return {
       type: ActionType.LOGIN_USER,
-      payload: status
+      payload: status,
     };
   },
   loginError: (error) => {
     return {
       type: ActionType.LOGIN_ERROR,
-      payload: error
+      payload: error,
     };
   },
   loginStart: () => {
     return {
       type: ActionType.LOGIN_START,
-      payload: null
+      payload: null,
     };
-  }
+  },
 };
 
 export const Operations = {
@@ -44,7 +44,7 @@ export const Operations = {
     dispatch(ActionCreator.loginStart());
     return api.post(`/login`, {
       email,
-      password
+      password,
     })
       .then((response) => {
         dispatch(ActionCreator.loginUser(response));
@@ -52,20 +52,20 @@ export const Operations = {
       .catch((err) => {
         dispatch(ActionCreator.loginError(err.response.data.error));
       });
-  }
+  },
 };
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.REQUIRED_AUTHORIZATION:
       return Object.assign({}, state, {
-        isAuthorizationRequired: action.payload
+        isAuthorizationRequired: action.payload,
       });
 
     case ActionType.LOGIN_START:
       return Object.assign({}, state, {
         userError: null,
-        isLoading: true
+        isLoading: true,
       });
 
     case ActionType.LOGIN_USER:
@@ -87,7 +87,7 @@ export const reducer = (state = initialState, action) => {
         userError: action.payload,
         isAuthorizationRequired: true,
         isLogged: false,
-        isLoading: false
+        isLoading: false,
       });
   }
 
