@@ -12,10 +12,17 @@ import {Operations, ActionCreators} from "../../../reducer/data/data";
 import {getFilterCurrent, getFilters, getDataFavorites} from "../../../reducer/data/selectors";
 
 class Mylist extends React.PureComponent {
-  componentWillMount() {
-    const {loadDataFavorites} = this.props;
+  componentDidMount() {
+    this.props.loadDataFavorites();
+  }
 
-    loadDataFavorites();
+  componentDidUpdate(prevProps) {
+    const prevDataFavorites = JSON.stringify(prevProps.dataFavorites.map(({id}) => id));
+    const newDataFavorites = JSON.stringify(this.props.dataFavorites.map(({id}) => id));
+
+    if (prevDataFavorites !== newDataFavorites) {
+      this.props.loadDataFavorites();
+    }
   }
 
   render() {
