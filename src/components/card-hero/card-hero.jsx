@@ -269,7 +269,7 @@ class CardHero extends React.PureComponent {
                               },
                             }}
                             onClick={() => this.setState({isInReviewMode: true})}
-                            className="btn movie-card__button">
+                            className="btn btn--review movie-card__button">
                             Add review
                           </Link>
                         </React.Fragment>
@@ -281,7 +281,7 @@ class CardHero extends React.PureComponent {
                             </svg>
                             <span>My list</span>
                           </Link>
-                          <Link to={`/login`} className="btn movie-card__button">Add review</Link>
+                          <Link to={`/login`} className="btn btn--review movie-card__button">Add review</Link>
                         </React.Fragment>}
                     </div>
                   </div>
