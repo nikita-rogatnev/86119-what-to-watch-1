@@ -62,7 +62,6 @@ class VideoPlayer extends React.PureComponent {
   }
 
   render() {
-    // eslint-disable-next-line react/prop-types
     const {data} = this.props.location.state;
 
     const {
@@ -85,7 +84,6 @@ class VideoPlayer extends React.PureComponent {
           <source src={videoLink} type="video/mp4"/>
         </video>
 
-        {/* eslint-disable-next-line react/prop-types */}
         <button type="button" className="player__exit" onClick={() => this.props.history.goBack()}>Exit</button>
 
         <div className="player__controls">
@@ -135,6 +133,14 @@ VideoPlayer.propTypes = {
   backgroundImage: PropTypes.string,
   videoLink: PropTypes.string,
   runTime: PropTypes.string,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      data: PropTypes.array.isRequired,
+    }),
+  }),
+  history: PropTypes.shape({
+    goBack: PropTypes.func.isRequired,
+  }),
 };
 
 export default withRouter(VideoPlayer);

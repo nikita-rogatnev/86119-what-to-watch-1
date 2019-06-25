@@ -18,18 +18,13 @@ import {Operations} from "../../../reducer/data/data";
 
 class Film extends React.PureComponent {
   componentDidMount() {
-    // eslint-disable-next-line react/prop-types
     this.props.changeCurrentFilter(this.props.location.state.currentDataFilter);
-    // eslint-disable-next-line react/prop-types
     this.props.changeDataItemCurrent(this.props.location.state.currentDataItemId);
-    // eslint-disable-next-line react/prop-types
     this.props.loadDataItemReviews(this.props.location.state.currentDataItemId);
   }
 
   componentDidUpdate(prevProps) {
-    // eslint-disable-next-line react/prop-types
     const currentId = this.props.location.state.currentDataItemId;
-    // eslint-disable-next-line react/prop-types
     const previousId = prevProps.location.state.currentDataItemId;
 
     if (currentId !== previousId) {
@@ -82,6 +77,12 @@ Film.propTypes = {
   changeCurrentFilter: PropTypes.func.isRequired,
   changeDataItemCurrent: PropTypes.func.isRequired,
   loadDataItemReviews: PropTypes.func.isRequired,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      currentDataItemId: PropTypes.number.isRequired,
+      currentDataFilter: PropTypes.string.isRequired,
+    }),
+  }),
 };
 
 const mapStateToProps = (state) => {

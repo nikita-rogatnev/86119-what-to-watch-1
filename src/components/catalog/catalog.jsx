@@ -16,7 +16,7 @@ class Catalog extends React.PureComponent {
       filters,
       currentFilter,
       changeCurrentFilter,
-      maxCardsNumber = 40,
+      maxCardsNumber = 20,
       catalogTitle = `Catalog`,
       showCatalogTitle = false,
       showFilters = false,
