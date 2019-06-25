@@ -32,11 +32,17 @@ class AddReview extends React.PureComponent {
   }
 
   render() {
-    const {id} = this.props;
+    const {id, genre} = this.props;
     const {redirect} = this.state;
 
     if (redirect) {
-      return <Redirect to={{pathname: `/film/${id}`}}/>;
+      return <Redirect to={{
+        pathname: `/film/${id}`,
+        state: {
+          currentDataItemId: id,
+          currentDataFilter: genre,
+        },
+      }}/>;
     }
 
     return (
@@ -95,6 +101,7 @@ class AddReview extends React.PureComponent {
 
 AddReview.propTypes = {
   id: PropTypes.number.isRequired,
+  genre: PropTypes.string.isRequired,
   postReview: PropTypes.func.isRequired,
 };
 

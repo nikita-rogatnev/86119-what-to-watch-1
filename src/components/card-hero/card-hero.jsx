@@ -21,7 +21,6 @@ const Overview = (data) => {
     description,
   } = data;
 
-  // TODO
   const getRatingText = (ratingItem) => {
     switch (true) {
       case (ratingItem === 10):
@@ -337,7 +336,7 @@ class CardHero extends React.PureComponent {
           </div>
         </div>
 
-        {this.state.isInReviewMode && <AddReview id={id}/>}
+        {this.state.isInReviewMode && <AddReview id={id} genre={genre}/>}
 
         {fullMode && !this.state.isInReviewMode &&
         <div className="movie-card__wrap movie-card__translate-top">

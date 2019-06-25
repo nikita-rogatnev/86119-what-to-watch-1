@@ -20,7 +20,6 @@ export const ActionCreator = {
     };
   },
   loginUser: (status) => {
-    console.log(status);
     return {
       type: ActionType.LOGIN_USER,
       payload: status,
