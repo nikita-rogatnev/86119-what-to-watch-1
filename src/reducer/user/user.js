@@ -20,6 +20,7 @@ export const ActionCreator = {
     };
   },
   loginUser: (status) => {
+    console.log(status);
     return {
       type: ActionType.LOGIN_USER,
       payload: status,
@@ -78,7 +79,7 @@ export const reducer = (state = initialState, action) => {
           id: action.payload.data[`id`],
           email: action.payload.data[`email`],
           name: action.payload.data[`name`],
-          avatar: `https://es31-server.appspot.com/` + action.payload.data[`avatar_url`],
+          avatar: `https://es31-server.appspot.com` + action.payload.data[`avatar_url`],
         },
       });
 
