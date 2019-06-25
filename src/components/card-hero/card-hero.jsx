@@ -265,6 +265,7 @@ class CardHero extends React.PureComponent {
                               pathname: `/film/${id}/review`,
                               state: {
                                 currentDataItemId: id,
+                                currentDataFilter: genre,
                               },
                             }}
                             onClick={() => this.setState({isInReviewMode: true})}

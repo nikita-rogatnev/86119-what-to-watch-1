@@ -11,7 +11,7 @@ class AddReview extends React.PureComponent {
 
     this.state = {
       redirect: false,
-      isBlocked: false,
+      isBlocked: true,
       rating: 3,
       text: null,
     };
@@ -24,9 +24,11 @@ class AddReview extends React.PureComponent {
   }
 
   _onChangeText(value) {
-    this.setState({
-      text: value,
-    });
+    if (value.length > 50 && value.length < 400) {
+      this.setState({isBlocked: false, text: value});
+    } else {
+      this.setState({isBlocked: true});
+    }
   }
 
   render() {
@@ -43,9 +45,12 @@ class AddReview extends React.PureComponent {
           className="add-review__form"
           onSubmit={(e) => {
             e.preventDefault();
-            this.setState({isBlocked: true});
-            this.props.postReview(id, this.state.rating, this.state.text);
-            this.setState({redirect: true});
+
+            if (!this.state.isBlocked) {
+              this.setState({isBlocked: true});
+              this.props.postReview(id, this.state.rating, this.state.text);
+              this.setState({redirect: true});
+            }
           }}>
           <div className="rating">
             <div className="rating__stars">
@@ -59,7 +64,7 @@ class AddReview extends React.PureComponent {
                       name="rating"
                       value={index + 1}
                       onChange={(e) => this._onChangeRating(e.target.value)}
-                      checked={this.state.rating === index + 1}
+                      defaultChecked={this.state.rating === index + 1}
                     />
                     <label className="rating__label" htmlFor={`star-${index + 1}`}>Rating {index + 1}</label>
                   </React.Fragment>
@@ -79,7 +84,7 @@ class AddReview extends React.PureComponent {
               onKeyUp={(e) => this._onChangeText(e.target.value)}
             />
             <div className="add-review__submit">
-              <button className="add-review__btn" type="submit" disabled={this.state.isBlocked}>Post</button>
+              <button className="add-review__btn" type="submit">Post</button>
             </div>
           </div>
         </form>

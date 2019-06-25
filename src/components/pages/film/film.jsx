@@ -81,7 +81,7 @@ Film.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
       currentDataItemId: PropTypes.number.isRequired,
-      currentDataFilter: PropTypes.string.isRequired,
+      currentDataFilter: PropTypes.string,
     }),
   }),
 };
