@@ -375,8 +375,8 @@ class CardHero extends React.PureComponent {
 
               <Switch>
                 <Route path={`/film/${id}`} exact render={() => (<Overview {...this.props.data}/>)}/>
-                <Route path={`/film/${id}/details`} render={() => (<Details {...this.props.data}/>)}/>
-                <Route path={`/film/${id}/reviews`} render={() => (<Reviews {...this.props.reviews}/>)}/>
+                <Route path={`/film/${id}/details`} exact render={() => (<Details {...this.props.data}/>)}/>
+                <Route path={`/film/${id}/reviews`} exact render={() => (<Reviews {...this.props.reviews}/>)}/>
               </Switch>
             </div>
           </div>

@@ -32,6 +32,8 @@ class App extends React.PureComponent {
           )}
         />
         <Route path="/film/:id" exact component={Film}/>
+        <Route path="/film/:id/details" component={Film}/>
+        <Route path="/film/:id/reviews" component={Film}/>
         <Route path="/film/:id/review" exact component={Review}/>
         <Route path="/player" component={Player}/>
         <PrivateRoute path="/mylist" exact component={Mylist}/>
