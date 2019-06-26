@@ -21,6 +21,7 @@ class VideoPlayer extends React.PureComponent {
   }
 
   componentWillUnmount() {
+    clearInterval(this.videoInterval);
     const video = this.videoRef.current;
 
     video.pause();
@@ -34,7 +35,7 @@ class VideoPlayer extends React.PureComponent {
       video.play();
       this.setState({isVideoPlaying: true});
 
-      setInterval(() => {
+      this.videoInterval = setInterval(() => {
         this.setState({
           progress: parseInt((video.currentTime / video.duration * 100).toFixed(1), 10),
         });

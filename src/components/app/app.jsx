@@ -31,7 +31,7 @@ class App extends React.PureComponent {
           )}
         />
         <Route path="/player" component={Player}/>
-        <Route path="/film/:id" exact component={Film}/>
+        <Route path="/film/:id" component={Film}/>
         <PrivateRoute path="/mylist" exact component={Mylist}/>
         <Route render={() => <Heading title={`Error 404`}/>}/>
       </Switch>

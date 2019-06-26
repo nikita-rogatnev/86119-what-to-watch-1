@@ -18,7 +18,8 @@ class Card extends React.PureComponent {
   }
 
   componentWillUnmount() {
-    this.timeoutId = null;
+    clearTimeout(this.timeoutId);
+    this.setState({isPreviewPlaying: false});
     this._onHoverEnter = null;
     this._onHoverLeave = null;
   }
