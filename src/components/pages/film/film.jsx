@@ -60,7 +60,7 @@ class Film extends React.PureComponent {
             maxCardsNumber={4}
             catalogTitle={`More like this`}
             showCatalogTitle={true}
-            showPlayButton={true}
+            showPlayButton={false}
           />
           <Footer/>
         </main>
