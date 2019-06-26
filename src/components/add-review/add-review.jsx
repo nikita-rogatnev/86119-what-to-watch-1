@@ -5,8 +5,6 @@ import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import {Operations} from "../../reducer/data/data";
 
-import Heading from "../heading/heading";
-
 class AddReview extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -47,61 +45,57 @@ class AddReview extends React.PureComponent {
       }}/>;
     }
 
-    if (id) {
-      return (
-        <div className="add-review">
-          <form
-            className="add-review__form"
-            onSubmit={(e) => {
-              e.preventDefault();
+    return (
+      <div className="add-review">
+        <form
+          className="add-review__form"
+          onSubmit={(e) => {
+            e.preventDefault();
 
-              if (!this.state.isBlocked) {
-                this.setState({isBlocked: true});
-                this.props.postReview(id, this.state.rating, this.state.text);
-                this.setState({redirect: true});
+            if (!this.state.isBlocked) {
+              this.setState({isBlocked: true});
+              this.props.postReview(id, this.state.rating, this.state.text);
+              this.setState({redirect: true});
+            }
+          }}>
+          <div className="rating">
+            <div className="rating__stars">
+              {
+                new Array(5).fill(1).map((el, index) => (
+                  <React.Fragment key={index}>
+                    <input
+                      className="rating__input"
+                      id={`star-${index + 1}`}
+                      type="radio"
+                      name="rating"
+                      value={index + 1}
+                      onChange={(e) => this._handleChangeRating(e.target.value)}
+                      defaultChecked={this.state.rating === index + 1}
+                    />
+                    <label className="rating__label" htmlFor={`star-${index + 1}`}>Rating {index + 1}</label>
+                  </React.Fragment>
+                ))
               }
-            }}>
-            <div className="rating">
-              <div className="rating__stars">
-                {
-                  new Array(5).fill(1).map((el, index) => (
-                    <React.Fragment key={index}>
-                      <input
-                        className="rating__input"
-                        id={`star-${index + 1}`}
-                        type="radio"
-                        name="rating"
-                        value={index + 1}
-                        onChange={(e) => this._handleChangeRating(e.target.value)}
-                        defaultChecked={this.state.rating === index + 1}
-                      />
-                      <label className="rating__label" htmlFor={`star-${index + 1}`}>Rating {index + 1}</label>
-                    </React.Fragment>
-                  ))
-                }
-              </div>
             </div>
+          </div>
 
-            <div className="add-review__text">
-              <textarea
-                className="add-review__textarea"
-                name="review-text"
-                id="review-text"
-                placeholder="Review text"
-                minLength={50}
-                maxLength={400}
-                onKeyUp={(e) => this._handleChangeText(e.target.value)}
-              />
-              <div className="add-review__submit">
-                <button className="add-review__btn" type="submit">Post</button>
-              </div>
+          <div className="add-review__text">
+            <textarea
+              className="add-review__textarea"
+              name="review-text"
+              id="review-text"
+              placeholder="Review text"
+              minLength={50}
+              maxLength={400}
+              onKeyUp={(e) => this._handleChangeText(e.target.value)}
+            />
+            <div className="add-review__submit">
+              <button className="add-review__btn" type="submit">Post</button>
             </div>
-          </form>
-        </div>
-      );
-    } else {
-      return <Heading title={`Some error`} isSimplified={true}/>;
-    }
+          </div>
+        </form>
+      </div>
+    );
   }
 }
 

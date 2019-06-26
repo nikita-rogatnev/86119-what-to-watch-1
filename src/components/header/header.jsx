@@ -28,8 +28,7 @@ class Header extends React.PureComponent {
     const pathname = window.location.pathname;
 
     return (
-      <header
-        className={`page-header ${pathname === `/login` || `/mylist` ? `user-page__head` : `movie-card__head`}`}>
+      <header className={`page-header ${pathname === `/login` || `/mylist` ? `user-page__head` : `movie-card__head`}`}>
 
         <Logo/>
 
@@ -45,7 +44,6 @@ class Header extends React.PureComponent {
                     currentDataFilter: breadcrumbsGenre,
                   },
                 }}
-                onClick={() => this.setState({isInReviewMode: false})}
                 className="breadcrumbs__link">
                 {breadcrumbsName}
               </Link>

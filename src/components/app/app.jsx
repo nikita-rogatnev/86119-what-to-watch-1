@@ -4,6 +4,7 @@ import {Switch, Route} from "react-router-dom";
 import Home from "../pages/home/home";
 import Film from "../pages/film/film";
 import Mylist from "../pages/mylist/mylist";
+import Review from "../pages/review/review";
 
 import Header from "../header/header";
 import SignIn from "../sign-in/sign-in";
@@ -30,8 +31,9 @@ class App extends React.PureComponent {
             </div>
           )}
         />
+        <Route path="/film/:id" exact component={Film}/>
+        <Route path="/film/:id/review" exact component={Review}/>
         <Route path="/player" component={Player}/>
-        <Route path="/film/:id" component={Film}/>
         <PrivateRoute path="/mylist" exact component={Mylist}/>
         <Route render={() => <Heading title={`Error 404`}/>}/>
       </Switch>

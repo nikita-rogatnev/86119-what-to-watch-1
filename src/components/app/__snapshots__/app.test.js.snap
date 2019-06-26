@@ -20,10 +20,6 @@ exports[`App renders correctly 1`] = `
     render={[Function]}
   />
   <Route
-    component={[Function]}
-    path="/player"
-  />
-  <Route
     component={
       Object {
         "$$typeof": Symbol(react.memo),
@@ -33,7 +29,25 @@ exports[`App renders correctly 1`] = `
         "type": [Function],
       }
     }
+    exact={true}
     path="/film/:id"
+  />
+  <Route
+    component={
+      Object {
+        "$$typeof": Symbol(react.memo),
+        "WrappedComponent": [Function],
+        "compare": null,
+        "displayName": "Connect(Review)",
+        "type": [Function],
+      }
+    }
+    exact={true}
+    path="/film/:id/review"
+  />
+  <Route
+    component={[Function]}
+    path="/player"
   />
   <ConnectFunction
     component={
